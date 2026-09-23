@@ -755,28 +755,6 @@ body {
   user-select: none;
 }
 
-.card-slider-track {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-
-.card-slide {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #03060a;
-}
-
-.card-slide img,
-.card-slide video,
 .card-media img,
 .card-media video {
   width: 100%;
@@ -785,104 +763,9 @@ body {
   transition: transform var(--transition-slow);
 }
 
-.project-card:hover .card-slide img,
-.project-card:hover .card-slide video {
+.project-card:hover .card-media img,
+.project-card:hover .card-media video {
   transform: scale(1.04);
-}
-
-/* Card Slider Navigation Arrows */
-.card-slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(6, 10, 18, 0.82);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--text-white);
-  font-size: 1.35rem;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 5;
-  transition: all var(--transition-fast);
-  opacity: 0;
-}
-
-.card-slider-btn.prev-btn {
-  left: 8px;
-  padding-right: 2px;
-}
-
-.card-slider-btn.next-btn {
-  right: 8px;
-  padding-left: 2px;
-}
-
-.project-card:hover .card-slider-btn,
-.card-media:focus-within .card-slider-btn {
-  opacity: 1;
-}
-
-.card-slider-btn:hover {
-  background: var(--accent-cyan);
-  color: #06090e;
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 14px rgba(0, 242, 254, 0.6);
-  transform: translateY(-50%) scale(1.12);
-}
-
-/* Card Slider Dots Indicator */
-.card-slider-dots {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  z-index: 5;
-  background: rgba(4, 7, 12, 0.7);
-  backdrop-filter: blur(6px);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.card-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.card-dot.active {
-  background: var(--accent-cyan);
-  width: 18px;
-  border-radius: 4px;
-  box-shadow: 0 0 8px var(--accent-cyan);
-}
-
-/* Card Slider Slide Counter Pill */
-.card-slider-counter {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(6, 10, 18, 0.8);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e2e8f0;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  z-index: 4;
 }
 
 .media-badge {

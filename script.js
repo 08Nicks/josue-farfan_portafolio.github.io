@@ -97,7 +97,7 @@ const projectsData = [
     categoryLabel: "Sistemas Embebidos & Control",
     tag: "Instrumentación & Control",
     mediaType: "image",
-    mediaUrl: "control_velocidad_ventilador_mcu.jpg",
+    mediaUrl: "control_velocidad_ventilador_mcu.jpg?v=2",
     secondaryMedia: [],
     tags: ["Arduino Mega", "Sensor Efecto Hall", "Ventilador de Servidor", "Control PWM", "Display LCD 16x2", "Teclado Matricial 4x4", "Consola Portátil Modular"],
     shortDesc: "Consola portátil modular gobernada por Arduino Mega para el control de velocidad en lazo cerrado y calibración de ventilador de alto flujo mediante sensor Hall.",
@@ -459,8 +459,30 @@ const modalTagsBox = document.getElementById("modalTagsBox");
  */
 function safeMediaUrl(url) {
   if (!url) return "";
-  const encoded = encodeURI(url);
-  return encoded.includes("?") ? `${encoded}&v=2` : `${encoded}?v=2`;
+  return encodeURI(url);
+}
+
+/**
+ * Obtiene la lista completa y unificada de medios de un proyecto
+ */
+function getProjectAllMedia(project) {
+  if (!project) return [];
+  const media = [
+    { type: project.mediaType, url: project.mediaUrl, poster: project.posterUrl }
+  ];
+
+  if (project.secondaryMedia && project.secondaryMedia.length > 0) {
+    project.secondaryMedia.forEach(secUrl => {
+      const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
+      media.push({
+        type: isSecVideo ? "video" : "image",
+        url: secUrl,
+        poster: ""
+      });
+    });
+  }
+
+  return media;
 }
 
 /**
@@ -502,157 +524,25 @@ function renderProjects() {
     return;
   }
 
-/**
- * Obtiene la lista completa y unificada de medios de un proyecto
- */
-function getProjectAllMedia(project) {
-  if (!project) return [];
-  const media = [
-    { type: project.mediaType, url: project.mediaUrl, poster: project.posterUrl }
-  ];
-
-  if (project.secondaryMedia && project.secondaryMedia.length > 0) {
-    project.secondaryMedia.forEach(secUrl => {
-      const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
-      media.push({
-        type: isSecVideo ? "video" : "image",
-        url: secUrl,
-        poster: ""
-      });
-    });
-  }
-
-  return media;
-}
-
-// Registro del índice de diapositiva activo en cada tarjeta
-const cardActiveIndexes = {};
-
-/**
- * Desplaza las diapositivas de una tarjeta de proyecto hacia adelante o atrás
- */
-function slideCard(event, projectId, dir) {
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-  const project = projectsData.find(p => p.id === projectId);
-  if (!project) return;
-  const allMedia = getProjectAllMedia(project);
-  if (allMedia.length <= 1) return;
-
-  const currentIdx = cardActiveIndexes[projectId] || 0;
-  const nextIdx = (currentIdx + dir + allMedia.length) % allMedia.length;
-  cardActiveIndexes[projectId] = nextIdx;
-
-  const track = document.getElementById(`card-track-${projectId}`);
-  if (track) {
-    track.style.transform = `translateX(-${nextIdx * 100}%)`;
-  }
-
-  // Actualizar dots
-  const dotsContainer = document.getElementById(`card-dots-${projectId}`);
-  if (dotsContainer) {
-    const dots = dotsContainer.querySelectorAll('.card-dot');
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === nextIdx);
-    });
-  }
-
-  // Actualizar contador
-  const counter = document.getElementById(`card-counter-${projectId}`);
-  if (counter) {
-    counter.innerHTML = `<span class="curr-idx">${nextIdx + 1}</span>/${allMedia.length}`;
-  }
-}
-
-/**
- * Salta directamente a una diapositiva específica desde los puntos indicadores
- */
-function jumpCardSlide(event, projectId, targetIdx) {
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-  const project = projectsData.find(p => p.id === projectId);
-  if (!project) return;
-  const allMedia = getProjectAllMedia(project);
-  if (targetIdx < 0 || targetIdx >= allMedia.length) return;
-
-  cardActiveIndexes[projectId] = targetIdx;
-
-  const track = document.getElementById(`card-track-${projectId}`);
-  if (track) {
-    track.style.transform = `translateX(-${targetIdx * 100}%)`;
-  }
-
-  const dotsContainer = document.getElementById(`card-dots-${projectId}`);
-  if (dotsContainer) {
-    const dots = dotsContainer.querySelectorAll('.card-dot');
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === targetIdx);
-    });
-  }
-
-  const counter = document.getElementById(`card-counter-${projectId}`);
-  if (counter) {
-    counter.innerHTML = `<span class="curr-idx">${targetIdx + 1}</span>/${allMedia.length}`;
-  }
-}
-
-/**
- * Maneja el clic en el área multimedia de la tarjeta para abrir el modal
- */
-function handleCardMediaClick(event, projectId) {
-  if (event.target.closest('.card-slider-btn') || event.target.closest('.card-slider-dots')) {
-    return;
-  }
-  const currentIdx = cardActiveIndexes[projectId] || 0;
-  openProjectModal(projectId, currentIdx);
-}
-
-  // Generar tarjetas
+  // Generar tarjetas limpias y directas (la navegación con flechas es exclusiva del modal)
   projectsGrid.innerHTML = filtered.map(project => {
     const allMedia = getProjectAllMedia(project);
     const hasMultiple = allMedia.length > 1;
-    const currentSlide = cardActiveIndexes[project.id] || 0;
 
     return `
-      <article class="project-card" data-id="${project.id}">
-        <div class="card-media" onclick="handleCardMediaClick(event, '${project.id}')" id="card-media-${project.id}">
-          
-          <div class="card-slider-track" id="card-track-${project.id}" style="transform: translateX(-${currentSlide * 100}%);">
-            ${allMedia.map((m, idx) => `
-              <div class="card-slide">
-                ${m.type === 'video' ? `
-                  <img src="${m.poster ? safeMediaUrl(m.poster) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title} - Vista ${idx + 1}" loading="lazy" />
-                  <div class="media-play-overlay">
-                    <div class="play-circle">▶</div>
-                  </div>
-                ` : `
-                  <img src="${safeMediaUrl(m.url)}" alt="${project.title} - Vista ${idx + 1}" loading="lazy" />
-                `}
-              </div>
-            `).join('')}
-          </div>
-
-          ${hasMultiple ? `
-            <button class="card-slider-btn prev-btn" onclick="slideCard(event, '${project.id}', -1)" aria-label="Anterior">‹</button>
-            <button class="card-slider-btn next-btn" onclick="slideCard(event, '${project.id}', 1)" aria-label="Siguiente">›</button>
-
-            <div class="card-slider-dots" id="card-dots-${project.id}">
-              ${allMedia.map((_, idx) => `
-                <span class="card-dot ${idx === currentSlide ? 'active' : ''}" onclick="jumpCardSlide(event, '${project.id}', ${idx})"></span>
-              `).join('')}
+      <article class="project-card" data-id="${project.id}" onclick="openProjectModal('${project.id}')">
+        <div class="card-media" id="card-media-${project.id}">
+          ${project.mediaType === 'video' ? `
+            <img src="${project.posterUrl ? safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
+            <div class="media-play-overlay">
+              <div class="play-circle">▶</div>
             </div>
-
-            <div class="card-slider-counter" id="card-counter-${project.id}">
-              <span class="curr-idx">${currentSlide + 1}</span>/${allMedia.length}
-            </div>
-          ` : ''}
+          ` : `
+            <img src="${safeMediaUrl(project.mediaUrl)}" alt="${project.title}" loading="lazy" />
+          `}
 
           <div class="media-badge">
-            <span>${project.mediaType === 'video' ? '🎥 Video Demostrativo' : (hasMultiple ? `📷 ${allMedia.length} Vistas` : '📷 Evidencia')}</span>
+            <span>${project.mediaType === 'video' ? '🎥 Video Demostrativo' : (hasMultiple ? `📷 ${allMedia.length} Fotos` : '📷 Evidencia')}</span>
           </div>
           <div class="tag-badge">${project.tag}</div>
         </div>
@@ -667,48 +557,17 @@ function handleCardMediaClick(event, projectId) {
           </div>
 
           <div class="card-actions">
-            <button class="btn-details" onclick="openProjectModal('${project.id}', ${currentSlide})">
+            <button class="btn-details" onclick="event.stopPropagation(); openProjectModal('${project.id}')">
               Ver Ficha Técnica <span>→</span>
             </button>
             <div class="evidence-badge">
-              <span>●</span> ${allMedia.length > 1 ? `${allMedia.length} archivos deslizables` : '1 archivo'}
+              <span>●</span> ${hasMultiple ? `${allMedia.length} evidencias` : '1 archivo'}
             </div>
           </div>
         </div>
       </article>
     `;
   }).join("");
-
-  // Inicializar gestos táctiles (swipe) en cada tarjeta
-  initCardTouchGestures();
-}
-
-/**
- * Soporte de deslizamiento táctil (swipe) para pantallas touch en tarjetas
- */
-function initCardTouchGestures() {
-  projectsData.forEach(project => {
-    const cardMedia = document.getElementById(`card-media-${project.id}`);
-    if (!cardMedia) return;
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    cardMedia.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    cardMedia.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diffX = touchEndX - touchStartX;
-      if (Math.abs(diffX) > 40) {
-        if (diffX < 0) {
-          slideCard(null, project.id, 1);
-        } else {
-          slideCard(null, project.id, -1);
-        }
-      }
-    }, { passive: true });
-  });
 }
 
 /**
@@ -822,14 +681,32 @@ function renderModalMedia(allMedia, index) {
 
   if (current.type === "video") {
     modalMediaStage.innerHTML = `
-      <div class="modal-media-viewport">
-        <video controls autoplay playsinline style="width: 100%; max-height: 480px; outline: none; background: #000;" poster="${current.poster ? safeMediaUrl(current.poster) : ''}">
+      <div class="modal-media-viewport" style="background: #000; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+        <video id="activeModalVideo" 
+               src="${safeUrl}" 
+               controls 
+               playsinline 
+               preload="auto" 
+               poster="${current.poster ? safeMediaUrl(current.poster) : ''}" 
+               style="width: 100%; max-height: 480px; outline: none; background: #000; border-radius: var(--radius-md); display: block;">
           <source src="${safeUrl}" type="video/mp4">
           Tu navegador no soporta reproducción de video HTML5.
         </video>
       </div>
       ${navControlsHtml}
     `;
+    const v = document.getElementById("activeModalVideo");
+    if (v) {
+      v.load();
+      const p = v.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          // Si el navegador bloquea la reproducción automática con audio, iniciar silenciado
+          v.muted = true;
+          v.play().catch(() => {});
+        });
+      }
+    }
   } else {
     modalMediaStage.innerHTML = `
       <div class="modal-media-viewport">
@@ -848,6 +725,12 @@ function navigateModalMedia(dir) {
   const allMedia = getProjectAllMedia(currentModalProject);
   if (allMedia.length <= 1) return;
 
+  // Pausar video anterior si existía
+  const prevVideo = modalMediaStage.querySelector("video");
+  if (prevVideo) {
+    prevVideo.pause();
+  }
+
   currentModalMediaIndex = (currentModalMediaIndex + dir + allMedia.length) % allMedia.length;
   renderModalMedia(allMedia, currentModalMediaIndex);
 
@@ -864,6 +747,14 @@ function navigateModalMedia(dir) {
 function switchModalMedia(index) {
   if (!currentModalProject) return;
   const allMedia = getProjectAllMedia(currentModalProject);
+  if (index < 0 || index >= allMedia.length) return;
+
+  // Pausar video anterior si existía
+  const prevVideo = modalMediaStage.querySelector("video");
+  if (prevVideo) {
+    prevVideo.pause();
+  }
+
   currentModalMediaIndex = index;
   renderModalMedia(allMedia, index);
 
@@ -880,11 +771,12 @@ function switchModalMedia(index) {
 function closeProjectModal() {
   modalOverlay.classList.remove("open");
   document.body.style.overflow = "auto";
-  // Pausar cualquier video que estuviera reproduciéndose
+  // Pausar y descargar cualquier video que estuviera reproduciéndose
   const videoElem = modalMediaStage.querySelector("video");
   if (videoElem) {
     videoElem.pause();
-    videoElem.src = "";
+    videoElem.removeAttribute("src");
+    videoElem.load();
   }
 }
 
@@ -971,9 +863,11 @@ function initEventListeners() {
     let modalTouchStartX = 0;
     let modalTouchEndX = 0;
     modalMediaStage.addEventListener('touchstart', (e) => {
+      if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
       modalTouchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
     modalMediaStage.addEventListener('touchend', (e) => {
+      if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
       modalTouchEndX = e.changedTouches[0].screenX;
       const diff = modalTouchEndX - modalTouchStartX;
       if (Math.abs(diff) > 40) {
