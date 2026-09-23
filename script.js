@@ -157,21 +157,21 @@ const projectsData = [
   },
   {
     id: "fpga-spartan6-ultrasonico",
-    title: "Sistema de Telemetría Ultrasónica en FPGA Spartan-6 (Nexys 3) con Arduino",
+    title: "Telemetría Ultrasónica y Procesamiento Digital en FPGA Spartan-6 (Nexys 3)",
     category: "fpga",
     categoryLabel: "FPGAs & Lógica Digital",
-    tag: "Procesamiento Digital",
+    tag: "Lógica Digital & VHDL",
     mediaType: "image",
     mediaUrl: "WhatsApp Image 2026-09-22 at 4.26.35 PM.jpeg",
     secondaryMedia: [],
-    tags: ["Spartan-6 Nexys 3", "HC-SR04", "Display 7 Segmentos", "Arduino Mega", "VHDL/Verilog", "Temporización Digital"],
-    shortDesc: "Contador digital de tiempo de vuelo ultrasónico sintetizado en FPGA Spartan-6 con multiplexado a 7 segmentos y puente de comunicación con Arduino.",
-    whatIs: "Sistema de medición de distancia de alta resolución utilizando pulsos ultrasónicos de 40 kHz medidos por hardware dedicado en FPGA y desplegados en display de 7 segmentos de 4 dígitos.",
-    whatIDid: "Implementación en hardware reconfigurable de un contador síncrono que mide con resolución de microsegundos el ancho del pulso de eco del sensor HC-SR04. Decodificador BCD a 7 segmentos multiplexado en tiempo para la tarjeta Nexys 3 y línea de sincronización con microcontrolador Arduino Mega para procesamiento y telemetría complementaria.",
+    tags: ["Xilinx Spartan-6", "Digilent Nexys 3", "VHDL", "Sensor HC-SR04", "Arduino Mega", "Displays 7 Segmentos", "Puertos PMOD"],
+    shortDesc: "Integración híbrida entre Arduino Mega y FPGA Spartan-6 para adquisición ultrasónica HC-SR04, procesamiento concurrente y visualización en tiempo real.",
+    whatIs: "Sistema embebido híbrido de instrumentación y procesamiento digital. Combina un microcontrolador Arduino Mega para la gestión y transmisión de señales del sensor ultrasónico HC-SR04 con la velocidad de procesamiento concurrente de una FPGA Xilinx Spartan-6 (Digilent Nexys 3), la cual recibe los datos, calcula la distancia y comanda la visualización en hardware.",
+    whatIDid: "Implementación del enlace de comunicación y temporización entre el Arduino Mega y la tarjeta Digilent Nexys 3 conectada a través de sus puertos PMOD. El Arduino se encargaba de comandar los trenes de pulso y la lectura del sensor HC-SR04 para transferir la información hacia la FPGA. En la Spartan-6, se diseñó la lógica digital en VHDL para la captura de las señales, la conversión a unidades métricas y la multiplexación de los displays de 7 segmentos para desplegar instantáneamente la distancia medida.",
     highlights: [
-      "Medición de tiempo de vuelo ultraprecisa sin sobrecarga de CPU",
-      "Control multiplexado de displays de 7 segmentos a alta tasa de refresco",
-      "Comunicación síncrona entre plataforma FPGA y microcontrolador"
+      "Arquitectura cooperativa MCU-FPGA comunicando Arduino Mega y Xilinx Spartan-6 mediante pines PMOD",
+      "Procesamiento y decodificación de datos de distancia en hardware digital VHDL sin sobrecarga computacional",
+      "Control y multiplexado dinámico de visualizadores para despliegue numérico en tiempo real"
     ]
   },
   {
