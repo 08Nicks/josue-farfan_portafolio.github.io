@@ -1619,6 +1619,114 @@ body {
   background: #0f172a;
 }
 
+/* Dual Showcase: Photo + Embedded Code Viewer side by side */
+.dual-code-pane {
+  display: flex;
+  flex-direction: column;
+  background: #040711;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  overflow: hidden;
+  min-height: 460px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.code-pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(13, 20, 36, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--text-white);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.code-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.code-window-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.code-window-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.code-pane-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.code-pane-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.code-action-btn {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  color: var(--accent-cyan);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.code-action-btn:hover {
+  background: var(--accent-cyan);
+  color: #06090e;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+}
+
+.code-viewer-container {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  max-height: 480px;
+  padding: 1.25rem 1rem;
+  background: #02050b;
+}
+
+.code-viewer-container pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.81rem;
+  line-height: 1.65;
+  color: #e2e8f0;
+  white-space: pre;
+  tab-size: 2;
+  user-select: text;
+}
+
 /* Secondary Thumbnails Strip inside Modal */
 .modal-gallery-strip {
   display: flex;

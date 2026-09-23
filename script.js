@@ -34,6 +34,73 @@ const projectsData = [
     mediaUrl: "launcher.jpg",
     downloadUrl: "virtuoso_launcher.bat",
     downloadName: "virtuoso_launcher.bat (Script CLI)",
+    codeFilename: "virtuoso_launcher.bat",
+    codeSnippet: `@echo off
+setlocal enabledelayedexpansion
+
+:: Habilitar colores ANSI en Windows generando el caracter ESCAPE
+for /f %%a in ('echo prompt $E^| cmd') do set "ESC=%%a"
+set "cyan=%ESC%[36m"
+set "green=%ESC%[32m"
+set "white=%ESC%[97m"
+set "yellow=%ESC%[33m"
+set "red=%ESC%[31m"
+set "reset=%ESC%[0m"
+
+cls
+:INICIO
+echo.
+echo %cyan%==================================================%reset%
+echo %white%         CADENCE EDA - WORKSTATION LAUNCHER       %reset%
+echo %cyan%==================================================%reset%
+echo.
+echo %green%Ingresa tus credenciales para conectar al servidor EDA.%reset%
+set /p usuario="%yellow%Usuario: %reset%"
+if "%usuario%"=="" goto INICIO
+set /p contrasena="%yellow%Contrasena: %reset%"
+
+:MENU_ENTORNO
+cls
+echo.
+echo %cyan%==================================================%reset%
+echo %white%              SELECCION DE ENTORNO                %reset%
+echo %cyan%==================================================%reset%
+echo %green%1)%reset% %white%Lanzar Virtuoso (TSMC 28nm)%reset%
+echo %green%2)%reset% %white%Usar entorno Verilog/VHDL (RTL_simulation)%reset%
+echo %green%3)%reset% %white%Sintesis (Genus - Synthesis)%reset%
+echo %green%4)%reset% %white%Solo terminal (Directo en carpeta tsmc28nm)%reset%
+echo %cyan%==================================================%reset%
+set /p opcion="%yellow%Elige una opcion (1-4): %reset%"
+
+if "%opcion%"=="1" goto OP_VIRTUOSO
+if "%opcion%"=="2" goto OP_VHDL
+if "%opcion%"=="3" goto OP_SINTESIS
+if "%opcion%"=="4" goto OP_TERMINAL
+goto MENU_ENTORNO
+
+:OP_VIRTUOSO
+call :VERIFICAR_XMING
+echo %green%Preparando entorno automatizado para: %white%%usuario%%green%...%reset%
+:: Purgar candados .cdslck huerfanos y lanzar Virtuoso con tunel X11
+echo pkill -9 -u $USER -x virtuoso > "%TEMP%\\cmd_remote.txt"
+echo find /home/$USER/eda/ -name "*.cdslck" -type f -delete >> "%TEMP%\\cmd_remote.txt"
+echo cd /home/$USER/tsmc28nm ^&^& source .cds28nm ^&^& virtuoso ^& >> "%TEMP%\\cmd_remote.txt"
+start "" "%PUTTY_EXE%" -ssh %usuario%@192.168.1.100 -pw "%contrasena%" -X -m "%TEMP%\\cmd_remote.txt"
+goto FIN
+
+:VERIFICAR_XMING
+tasklist /fi "imagename eq xming.exe" 2>nul | find /i "xming.exe" >nul
+if not errorlevel 1 (
+    echo %green%[OK] Servidor grafico Xming activo.%reset%
+) else (
+    echo %yellow%[INFO] Iniciando servidor grafico Xming en modo multi-pantalla...%reset%
+    start "" "C:\\Program Files (x86)\\Xming\\Xming.exe" :0 -clipboard -multiwindow
+)
+exit /b
+
+:FIN
+echo %green%Sesion iniciada exitosamente.%reset%
+pause`,
     secondaryMedia: [
       "inversor_cmos_tsmc28nm_layout.jpg",
       "riscv_core_tsmc28nm_layout.jpg"
@@ -82,6 +149,105 @@ const projectsData = [
     secondaryMedia: [],
     downloadUrl: "tft_touch_pizarra_esp32_pinout.ino",
     downloadName: "tft_touch_pizarra_esp32_pinout.ino",
+    codeFilename: "tft_touch_pizarra_esp32_pinout.ino",
+    codeSnippet: `// ==============================================================================
+// Plantilla Base: Configuracion de Pines Pantalla TFT ILI9341 con ESP32
+// Bus paralelo de 8 bits + Panel Tactil Resistivo (LovyanGFX)
+// ==============================================================================
+
+#include <Arduino.h>
+#include <LovyanGFX.hpp>
+#include "TouchScreen.h"
+
+// 1. PINES DEL TOUCHSCREEN RESISTIVO
+#define YP 32   // Pin analogico (Y+)
+#define XM 33   // Pin analogico (X-)
+#define YM 13   // Pin digital (Y-)
+#define XP 14   // Pin digital (X+)
+
+TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
+
+#define TS_MINX 160
+#define TS_MAXX 940
+#define TS_MINY 170
+#define TS_MAXY 910
+
+// 2. CONFIGURACION DEL BUS PARALELO DE 8 BITS (LovyanGFX)
+class LGFX : public lgfx::LGFX_Device {
+  lgfx::Panel_ILI9341 _panel_instance;
+  lgfx::Bus_Parallel8 _bus_instance;
+
+public:
+  LGFX(void) {
+    // Configuracion de lineas de control y bus de datos
+    {
+      auto cfg = _bus_instance.config();
+      cfg.pin_wr = 27;  // Write
+      cfg.pin_rd = 26;  // Read
+      cfg.pin_rs = 32;  // Register Select (DC)
+      
+      // Pines de datos (D0 - D7)
+      cfg.pin_d0 = 13; cfg.pin_d1 = 14; cfg.pin_d2 = 16; cfg.pin_d3 = 17;
+      cfg.pin_d4 = 18; cfg.pin_d5 = 19; cfg.pin_d6 = 23; cfg.pin_d7 = 25;
+      
+      _bus_instance.config(cfg);
+      _panel_instance.setBus(&_bus_instance);
+    }
+
+    // Parametros fisicos del panel
+    {
+      auto cfg = _panel_instance.config();
+      cfg.pin_cs   = 33; // Chip Select
+      cfg.pin_rst  = 4;  // Reset
+      cfg.panel_width  = 240;
+      cfg.panel_height = 320;
+      cfg.invert = false;
+      cfg.rgb_order = false;
+      _panel_instance.config(cfg);
+    }
+
+    setPanel(&_panel_instance);
+  }
+
+  void restoreBus() {
+    _bus_instance.init();
+  }
+};
+
+LGFX lcd;
+
+// 3. SETUP Y DEMOSTRACION DE LIENZO TACTIL BASICO
+void setup() {
+  Serial.begin(115200);
+  
+  lcd.init();
+  lcd.setRotation(1); // Modo horizontal (Landscape)
+  lcd.fillScreen(TFT_BLACK);
+  
+  lcd.setTextColor(TFT_WHITE);
+  lcd.setTextSize(2);
+  lcd.drawString("Pizarra TFT - ESP32", 20, 20);
+  lcd.drawFastHLine(20, 45, 280, TFT_CYAN);
+  
+  lcd.setTextSize(1);
+  lcd.setTextColor(TFT_GREEN);
+  lcd.drawString("Toca la pantalla para interactuar...", 20, 60);
+}
+
+void loop() {
+  TSPoint p = ts.getPoint();
+  lcd.restoreBus();
+
+  if (p.z > 200 && p.z < 1000) {
+    int x = map(p.x, TS_MINX, TS_MAXX, 0, lcd.width());
+    int y = map(p.y, TS_MINY, TS_MAXY, 0, lcd.height());
+
+    if (x >= 0 && x < lcd.width() && y >= 0 && y < lcd.height()) {
+      lcd.fillCircle(x, y, 2, TFT_WHITE);
+    }
+  }
+  delay(10);
+}`,
     tags: ["ESP32", "Pantalla TFT ILI9341", "LovyanGFX", "TouchScreen Resistivo", "Bus Paralelo 8-bit", "Diseño de Interfaces GUI", "Pizarra Digital"],
     shortDesc: "Desarrollo de interfaces gráficas interactivas y pizarra táctil sobre pantallas TFT a color gobernadas por microcontrolador ESP32 mediante bus paralelo.",
     whatIs: "Proyecto enfocado en la concepción, renderizado y optimización de interfaces gráficas de usuario (GUI) en tiempo real para pantallas TFT color con controlador ILI9341 y panel táctil resistivo. Abarca el manejo de controladores gráficos de alta velocidad y la creación de componentes interactivos como lienzos de dibujo, menús táctiles y paneles de visualización digital.",
@@ -251,6 +417,61 @@ const projectsData = [
     mediaType: "image",
     mediaUrl: "analiis imagen ia.jpg",
     secondaryMedia: [],
+    downloadUrl: "base_apnr.py",
+    downloadName: "base_apnr.py",
+    codeFilename: "base_apnr.py",
+    codeSnippet: `import cv2
+from fast_alpr import ALPR
+
+# ============================================================
+# CONFIGURACION DEL PIPELINE DE VISION ARTIFICIAL
+# ============================================================
+CAMARA_INDEX = 0  # Ajustar indice segun camara conectada
+
+print("Cargando modelos neuronales (YOLOv9 + OCR)...", flush=True)
+alpr = ALPR(
+    detector_model="yolo-v9-t-384-license-plate-end2end",
+    ocr_model="cct-xs-v2-global-model",
+)
+
+# Inicializacion de captura de video con backend DirectShow
+cap = None
+for idx in [0, 1, 2]:
+    print(f"Probando conexion con camara {idx}...", flush=True)
+    cap_test = cv2.VideoCapture(idx, cv2.CAP_DSHOW)
+    if cap_test.isOpened():
+        cap = cap_test
+        print(f"Camara {idx} abierta exitosamente.", flush=True)
+        break
+    cap_test.release()
+
+if cap is None or not cap.isOpened():
+    raise SystemExit("Error: No se pudo abrir ninguna camara conectada.")
+
+cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+print("Pipeline activo. Presiona 'q' para salir de la visualizacion.", flush=True)
+
+try:
+    while True:
+        ok, frame = cap.read()
+        if not ok:
+            continue
+
+        # Inferencia en tiempo real sobre frame capturado
+        results = alpr.predict(frame)
+        for r in results:
+            x1, y1, x2, y2 = r.detection.box
+            # Dibujar caja delimitadora (Bounding Box)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 242, 254), 2)
+            cv2.putText(frame, f"{r.ocr.text} ({r.ocr.confidence:.2f})", 
+                        (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 242, 254), 2)
+
+        cv2.imshow("Inferencia en Tiempo Real - FastALPR", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+finally:
+    cap.release()
+    cv2.destroyAllWindows()`,
     tags: ["Python", "OpenCV", "Deep Learning", "FastAPI", "Inferencia en Tiempo Real", "Detección de Objetos"],
     shortDesc: "Sistema de visión artificial en tiempo real desarrollado en Python para detección multiobjeto y extracción de características sobre video en vivo.",
     whatIs: "Arquitectura de procesamiento digital de imágenes y visión computacional que procesa flujos de video en vivo provenientes de cámara, aplicando modelos de redes neuronales convolucionales para detección espacial, delimitación por bounding boxes y reconocimiento óptico de caracteres.",
@@ -289,6 +510,49 @@ const projectsData = [
     mediaType: "image",
     mediaUrl: "WhatsApp Image 2026-09-22 at 4.43.02 PM.jpeg",
     secondaryMedia: [],
+    downloadUrl: "maeto_copy_20260922172351/maeto_copy_20260922172351.ino",
+    downloadName: "esp32_softap_server.ino",
+    codeFilename: "esp32_softap_server.ino",
+    codeSnippet: `#include "WiFi.h"
+#include "ESPAsyncWebServer.h"
+
+// 1. CONFIGURACION DE RED LOCAL AUTONOMA (SoftAP)
+const char* ssid = "ESP32-Access-Point";
+const char* password = "ClaveSegura123";
+
+const int buttonPin = 4;
+AsyncWebServer server(80);
+
+String readButtonState() {
+  int buttonState = digitalRead(buttonPin);
+  return (buttonState == HIGH) ? "PRESIONADO" : "NO PRESIONADO";
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(buttonPin, INPUT);
+
+  // Iniciar punto de acceso autonomo
+  Serial.print("Iniciando SoftAP...");
+  WiFi.softAP(ssid, password);
+
+  IPAddress IP = WiFi.softAPIP();
+  Serial.print("IP del Servidor ESP32: ");
+  Serial.println(IP);
+
+  // 2. ENDPOINTS REST PARA NODOS CLIENTES
+  server.on("/button", HTTP_GET, [](AsyncWebServerRequest *request) {
+    String message = readButtonState();
+    request->send(200, "text/plain", message);
+  });
+
+  server.begin();
+  Serial.println("Servidor HTTP asincrono listo.");
+}
+
+void loop() {
+  // Manejo de eventos asincrono en background
+}`,
     tags: ["ESP32 SoftAP", "ESPAsyncWebServer", "HTTPClient REST", "C++", "Red Autónoma", "Firmware"],
     shortDesc: "Red inalámbrica punto a punto ad-hoc entre microcontroladores ESP32 sin requerir router externo, comunicando estados de sensores y actuadores.",
     whatIs: "Arquitectura de comunicación inalámbrica local y descentralizada donde un nodo ESP32 actúa como Access Point autónomo y servidor HTTP asíncrono, mientras nodos esclavos se asocian como clientes para intercambiar telemetría y comandos de acción en milisegundos.",
@@ -585,6 +849,16 @@ class PortfolioView {
     this.modalTagsBox = document.getElementById("modalTagsBox");
   }
 
+  escapeHtml(text) {
+    if (!text) return "";
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   safeMediaUrl(url) {
     if (!url) return "";
     return encodeURI(url);
@@ -672,10 +946,11 @@ class PortfolioView {
       this.modalHighlights.innerHTML = project.highlights.map(h => `<li>${h}</li>`).join('');
     }
 
-    // Badges de tecnologías y botón de descarga opcional
+    // Badges de tecnologías y botón de descarga condicional
     if (this.modalTagsBox) {
       this.modalTagsBox.innerHTML = project.tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
-      if (project.downloadUrl) {
+      // Solo mostrar botón inferior si el proyecto NO tiene visor embebido de código (en el visor embebido ya existe botón en la cabecera)
+      if (project.downloadUrl && !project.codeSnippet) {
         this.modalTagsBox.innerHTML += `
           <div style="width: 100%; margin-top: 1.25rem;">
             <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
@@ -686,9 +961,9 @@ class PortfolioView {
       }
     }
 
-    // Escenario Multimedia
+    // RENDERIZADO DEL ESCENARIO MULTIMEDIA
     if (project.pdfUrl) {
-      // Vista dual interactiva (Foto + PDF embebido lado a lado)
+      // 1. Vista dual interactiva: Fotografía + PDF embebido lado a lado
       this.modalMediaStage.classList.add("dual-showcase");
       this.modalMediaStage.innerHTML = `
         <div class="dual-stage-container">
@@ -721,8 +996,53 @@ class PortfolioView {
         </div>
       `;
       if (this.modalGalleryStrip) this.modalGalleryStrip.style.display = "none";
+    } else if (project.codeSnippet) {
+      // 2. Vista dual interactiva: Fotografía + Visor de Código embebido lado a lado (apilado en móvil)
+      this.modalMediaStage.classList.add("dual-showcase");
+      this.modalMediaStage.innerHTML = `
+        <div class="dual-stage-container">
+          <div class="dual-photo-pane">
+            <div class="modal-media-viewport">
+              <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
+            </div>
+            <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span>📸 Evidencia de Hardware</span>
+              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(0,242,254,0.3); padding: 2px 8px; border-radius: 12px;" title="Ver imagen original en alta resolución">🔍 Ver completa</a>
+            </div>
+          </div>
+
+          <div class="dual-code-pane">
+            <div class="code-pane-header">
+              <div class="code-header-left">
+                <div class="code-window-dots">
+                  <span class="dot-red"></span>
+                  <span class="dot-yellow"></span>
+                  <span class="dot-green"></span>
+                </div>
+                <div class="code-pane-title">
+                  <span>💻</span> ${project.codeFilename || 'script'}
+                </div>
+              </div>
+              <div class="code-pane-actions">
+                <button class="code-action-btn" data-action="copy-code" title="Copiar código al portapapeles">
+                  <span>📋</span> Copiar Código
+                </button>
+                ${project.downloadUrl ? `
+                  <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="code-action-btn" title="Descargar archivo">
+                    <span>⬇</span> Descargar
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+            <div class="code-viewer-container">
+              <pre><code>${this.escapeHtml(project.codeSnippet)}</code></pre>
+            </div>
+          </div>
+        </div>
+      `;
+      if (this.modalGalleryStrip) this.modalGalleryStrip.style.display = "none";
     } else {
-      // Escenario de medios regular
+      // 3. Escenario fotográfico/video estándar
       this.modalMediaStage.classList.remove("dual-showcase");
       this.renderModalMediaStage(allMedia, initialIndex);
 
@@ -931,9 +1251,42 @@ class PortfolioController {
       });
     }
 
-    // 7. Delegación de eventos en el escenario del modal (flechas prev/next)
+    // 7. Delegación de eventos en el escenario del modal (copiar código / flechas prev/next)
     if (this.view.modalMediaStage) {
       this.view.modalMediaStage.addEventListener("click", (e) => {
+        // Copiar código al portapapeles
+        const copyBtn = e.target.closest('[data-action="copy-code"]');
+        if (copyBtn) {
+          const codeEl = this.view.modalMediaStage.querySelector('.code-viewer-container code');
+          if (codeEl) {
+            const copyText = codeEl.innerText;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(copyText).then(() => {
+                const prev = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<span>✓</span> ¡Copiado!';
+                copyBtn.style.color = '#27c93f';
+                copyBtn.style.borderColor = '#27c93f';
+                setTimeout(() => {
+                  copyBtn.innerHTML = prev;
+                  copyBtn.style.color = '';
+                  copyBtn.style.borderColor = '';
+                }, 2000);
+              }).catch(() => {});
+            } else {
+              const ta = document.createElement('textarea');
+              ta.value = copyText;
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand('copy');
+              document.body.removeChild(ta);
+              const prev = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<span>✓</span> ¡Copiado!';
+              setTimeout(() => { copyBtn.innerHTML = prev; }, 2000);
+            }
+          }
+          return;
+        }
+
         const prevBtn = e.target.closest('[data-action="prev-media"]');
         if (prevBtn) {
           this.navigateMedia(-1);
