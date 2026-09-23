@@ -6,25 +6,6 @@
 // Dataset exhaustivo de proyectos con categorización y detalles de ingeniería
 const projectsData = [
   {
-    id: "cleanroom-semiconductores-inaoe",
-    title: "Procesamiento de Obleas de Silicio en Cuarto Limpio — Semana de Semiconductores INAOE",
-    category: "vlsi",
-    categoryLabel: "Microelectrónica & Semiconductores",
-    tag: "INAOE Cleanroom",
-    mediaType: "image",
-    mediaUrl: "WhatsApp Image 2026-09-22 at 4.38.59 PM.jpeg",
-    secondaryMedia: [],
-    tags: ["INAOE", "Semana de Semiconductores", "Cuarto Limpio (Cleanroom)", "Obleas de Silicio", "Fotolitografía", "Microfabricación"],
-    shortDesc: "Participación en la Semana de Semiconductores del INAOE, experimentando en sala limpia los procesos de fotolitografía, grabado químico y manejo de obleas de silicio.",
-    whatIs: "Estancia académica y formativa en la infraestructura de investigación de microtecnologías del INAOE durante la Semana de Semiconductores. Inmersión en cuartos limpios con control riguroso de partículas en suspensión para el procesamiento y fabricación física de dispositivos semiconductores.",
-    whatIDid: "Entrenamiento y operación en cuartos limpios utilizando traje estéril especializado (bunny suit) y protección en áreas con luz amarilla inactínica para fotolitografía. Manipulación de obleas de silicio monocristalino mediante pinzas de precisión, estudio de las técnicas de deposición, recubrimiento de fotoresina, exposición UV y etapas de grabado para la integración de microestructuras sólidas.",
-    highlights: [
-      "Estancia práctica en las instalaciones de sala limpia del INAOE durante la Semana de Semiconductores",
-      "Manipulación física de obleas de silicio monocristalino bajo estándares de control de partículas",
-      "Comprensión in-situ de los procesos de fotolitografía, aplicación de fotoresina y caracterización física"
-    ]
-  },
-  {
     id: "cadence-virtuoso-launcher-vlsi",
     title: "Entorno Automatizado para Cadence Virtuoso (TSMC 28nm) & Síntesis Genus",
     category: "vlsi",
