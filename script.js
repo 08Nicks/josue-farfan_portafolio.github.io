@@ -833,6 +833,154 @@ void loop() {
 // ==========================================================================
 // ARQUITECTURA MVC (MODELO - VISTA - CONTROLADOR)
 // ==========================================================================
+// DATASET DE CERTIFICACIONES Y RECONOCIMIENTOS OFICIALES
+// ==========================================================================
+const certificatesData = [
+  {
+    id: "cert-cadence-virtuoso",
+    title: "Virtuoso Schematic Editor S1: Creating Design Schematics vIC25.1",
+    issuer: "Cadence Design Systems",
+    issuerBadge: "Cadence",
+    category: "eda",
+    categoryLabel: "Semiconductores & EDA",
+    date: "23 de Junio de 2026",
+    hours: "Certificación Oficial",
+    description: "Certificación oficial internacional otorgada por Cadence Training Services en el entorno de diseño Virtuoso Schematic Editor para la creación y verificación de esquemáticos integrados en flujos EDA avanzados.",
+    signatories: "Cadence Training Services (Online)",
+    fileUrl: "certificados/cadence-virtuoso-schematic-editor-2026.pdf",
+    previewUrl: "certificados/thumbs/cadence-virtuoso-schematic-editor-2026.jpg",
+    mediaType: "pdf",
+    tags: ["Cadence Virtuoso", "Schematic Editor", "IC Design", "EDA", "VLSI"]
+  },
+  {
+    id: "cert-bootcamp-eda-buap",
+    title: "Bootcamp EDA, call from industry: Reclutamiento y entrenamiento hacia la industria del diseño electrónico",
+    issuer: "BUAP • Facultad de Ciencias de la Electrónica",
+    issuerBadge: "BUAP FCE",
+    category: "eda",
+    categoryLabel: "Semiconductores & EDA",
+    date: "15 de Junio al 17 de Julio de 2026",
+    hours: "100 Horas Curriculares",
+    description: "Formación profesional intensiva de 100 horas acreditada ante la FCE-BUAP, enfocada en la formación de talento técnico para la industria de semiconductores, herramientas EDA y diseño de circuitos integrados.",
+    signatories: "Dr. Víctor Rodolfo González Díaz (Lab. de Diseño y Caracterización FCE-BUAP) & M.C. José Francisco Portillo Robledo (Director FCE-BUAP)",
+    fileUrl: "certificados/bootcamp-eda-buap-100h-2026.pdf",
+    previewUrl: "certificados/thumbs/bootcamp-eda-buap-100h-2026.jpg",
+    mediaType: "pdf",
+    tags: ["Bootcamp EDA", "Industria Semiconductores", "100 Horas", "FCE-BUAP", "Diseño Electrónico"]
+  },
+  {
+    id: "cert-inaoe-semiconductores",
+    title: "2ª Semana de Semiconductores en INAOE",
+    issuer: "Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE)",
+    issuerBadge: "INAOE",
+    category: "eda",
+    categoryLabel: "Semiconductores & EDA",
+    date: "6 al 10 de Abril de 2026",
+    hours: "Semana Académica Especializada",
+    description: "Reconocimiento otorgado por el INAOE por la participación activa en conferencias, talleres y sesiones técnicas sobre fabricación, tecnologías de sala limpia y tendencias en microelectrónica de semiconductores.",
+    signatories: "Dr. Luis Hernández Martínez (Coordinador de Electrónica) & Dr. Alfredo Morales Sánchez (Comité Organizador)",
+    fileUrl: "certificados/inaoe-semana-semiconductores-2026.pdf",
+    previewUrl: "certificados/thumbs/inaoe-semana-semiconductores-2026.jpg",
+    mediaType: "pdf",
+    tags: ["INAOE", "Semiconductores", "Microelectrónica", "Sala Limpia", "Investigación"]
+  },
+  {
+    id: "cert-electrohack-electromovilidad",
+    title: "Segunda Edición Electrohack: Categoría Electromovilidad",
+    issuer: "Secretaría de Economía & Agencia de Energía del Estado de Puebla",
+    issuerBadge: "Electrohack",
+    category: "innovation",
+    categoryLabel: "Innovación & Hackathones",
+    date: "25 y 26 de Octubre de 2023",
+    hours: "Concurso de Innovación Tecnológica",
+    description: "Diploma por destacada participación como integrante de equipo en el hackathon estatal de innovación tecnológica y electromovilidad, desarrollando soluciones aplicadas a movilidad sostenible.",
+    signatories: "Jorge Ermilo Barrera Novelo (Secretario de Economía) & Gabriela Carvajal Rubilar (Encargada de Despacho Agencia de Energía)",
+    fileUrl: "certificados/electrohack-electromovilidad-2023.pdf",
+    previewUrl: "certificados/thumbs/electrohack-electromovilidad-2023.jpg",
+    mediaType: "pdf",
+    tags: ["Electrohack", "Electromovilidad", "Innovación", "Trabajo en Equipo", "Gobierno de Puebla"]
+  },
+  {
+    id: "cert-electrohack-energia",
+    title: "Tercera Edición Electrohack: Categoría Energía",
+    issuer: "Secretaría de Economía & Agencia de Energía del Estado de Puebla",
+    issuerBadge: "Electrohack",
+    category: "innovation",
+    categoryLabel: "Innovación & Hackathones",
+    date: "24 de Octubre de 2024",
+    hours: "Concurso Universitario de Innovación",
+    description: "Reconocimiento por participación en el Concurso Universitario de Innovación Electrohack 2024, enfocado en el desarrollo de prototipos y tecnologías de eficiencia energética y transición renovable.",
+    signatories: "C. Gabriela Carvajal Rubilar (Dirección General Agencia de Energía) & C. Iván de la Fuente Amador (Director de Vinculación Institucional)",
+    fileUrl: "certificados/electrohack-energia.pdf",
+    previewUrl: "certificados/thumbs/electrohack-energia-2024.jpg",
+    mediaType: "pdf",
+    tags: ["Electrohack 2024", "Energía", "Prototipado", "Transición Energética", "Innovación Universitaria"]
+  },
+  {
+    id: "cert-intel-embedded",
+    title: "Sistemas Embebidos y su uso en plataformas de validación",
+    issuer: "Intel México",
+    issuerBadge: "Intel",
+    category: "tech",
+    categoryLabel: "Industria & Sistemas Embebidos",
+    date: "21 de Octubre de 2021",
+    hours: "Capacitación Técnica Especializada",
+    description: "Reconocimiento otorgado por Intel México por asistencia y participación en la sesión técnica sobre arquitecturas de sistemas embebidos aplicados al testing y validación de hardware industrial.",
+    signatories: "Intel México",
+    fileUrl: "certificados/intel-sistemas-embebidos-2021.jpg",
+    previewUrl: "certificados/thumbs/intel-sistemas-embebidos-2021.jpg",
+    mediaType: "image",
+    tags: ["Intel México", "Sistemas Embebidos", "Validación de Hardware", "Arquitectura", "Testing"]
+  },
+  {
+    id: "cert-intel-iot",
+    title: "Intel en el mundo del IoT, Cloud Computing y Big Data",
+    issuer: "Intel México",
+    issuerBadge: "Intel",
+    category: "tech",
+    categoryLabel: "Industria & Sistemas Embebidos",
+    date: "19 de Agosto de 2021",
+    hours: "Capacitación Técnica Especializada",
+    description: "Reconocimiento otorgado por Intel México por asistencia técnica especializada sobre ecosistemas de Internet de las Cosas (IoT), procesamiento en la nube y manejo de flujos de datos.",
+    signatories: "Intel México",
+    fileUrl: "certificados/intel-iot-cloud-bigdata-2021.jpg",
+    previewUrl: "certificados/thumbs/intel-iot-cloud-bigdata-2021.jpg",
+    mediaType: "image",
+    tags: ["Intel México", "IoT", "Cloud Computing", "Big Data", "Conectividad"]
+  },
+  {
+    id: "cert-buap-noche-estrellas",
+    title: "Tallerista en Noche de las Estrellas BUAP 2024",
+    issuer: "BUAP • Comité Noche de las Estrellas",
+    issuerBadge: "Divulgación BUAP",
+    category: "outreach",
+    categoryLabel: "Divulgación & Comunidad",
+    date: "9 de Noviembre de 2024",
+    hours: "Divulgación Científica y Tecnológica",
+    description: "Reconocimiento otorgado por la sede Puebla BUAP por participación como instructor tallerista, acercando conceptos científicos y tecnológicos de manera didáctica al público general.",
+    signatories: "Dr. Gabriel Kantún Montiel (Director FCFM BUAP), Dr. José Eduardo Espinosa Rosales & Comité Organizador",
+    fileUrl: "certificados/buap-noche-estrellas-tallerista-2024.pdf",
+    previewUrl: "certificados/thumbs/buap-noche-estrellas-tallerista-2024.jpg",
+    mediaType: "pdf",
+    tags: ["Noche de las Estrellas", "Tallerista", "FCFM BUAP", "Divulgación Científica", "Comunidad"]
+  },
+  {
+    id: "cert-buap-accion-ambiental",
+    title: "Acción Ambiental Universitaria",
+    issuer: "BUAP • Coordinación General de Desarrollo Sustentable",
+    issuerBadge: "BUAP Sustentable",
+    category: "outreach",
+    categoryLabel: "Divulgación & Comunidad",
+    date: "30 de Junio de 2023",
+    hours: "4 Horas Acreditadas",
+    description: "Constancia de acreditación en gestión y buenas prácticas de sustentabilidad y responsabilidad ambiental universitaria.",
+    signatories: "Dr. Manuel Sandoval Delgado & Mtro. Diego Ariel Riva",
+    fileUrl: "certificados/buap-accion-ambiental-2023.pdf",
+    previewUrl: "certificados/thumbs/buap-accion-ambiental-2023.jpg",
+    mediaType: "pdf",
+    tags: ["BUAP", "Desarrollo Sustentable", "Responsabilidad Universitaria"]
+  }
+];
 
 /**
  * --------------------------------------------------------------------------
@@ -841,12 +989,22 @@ void loop() {
  * --------------------------------------------------------------------------
  */
 class PortfolioModel {
-  constructor(projects = []) {
+  constructor(projects = [], certificates = []) {
     this.projects = projects;
+    this.certificates = certificates;
     this.currentCategory = "all";
     this.currentSearchQuery = "";
     this.activeProject = null;
     this.activeMediaIndex = 0;
+  }
+
+  getFilteredCertificates(category = "all") {
+    if (!category || category === "all") return this.certificates;
+    return this.certificates.filter(c => c.category === category);
+  }
+
+  getCertificateById(id) {
+    return this.certificates.find(c => c.id === id) || null;
   }
 
   setCategory(category) {
@@ -975,7 +1133,9 @@ class PortfolioView {
   constructor() {
     // Referencias principales del DOM
     this.projectsGrid = document.getElementById("projectsGrid");
-    this.filterTabs = document.querySelectorAll(".filter-tab");
+    this.certificatesGrid = document.getElementById("certificatesGrid");
+    this.filterTabs = document.querySelectorAll(".filter-tab:not([data-cert-filter])");
+    this.certFilterTabs = document.querySelectorAll("[data-cert-filter]");
     this.searchInput = document.getElementById("searchInput");
     this.searchClearBtn = document.getElementById("searchClear");
     this.resultsCountBar = document.getElementById("resultsCount");
@@ -1125,6 +1285,121 @@ class PortfolioView {
         if (sk) sk.style.display = "none";
       }
     });
+  }
+
+  renderCertificatesGrid(certs) {
+    if (!this.certificatesGrid) return;
+
+    if (!certs || certs.length === 0) {
+      this.certificatesGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
+          <p style="color: var(--text-muted); font-size: 0.95rem;">No hay certificados en esta categoría.</p>
+        </div>
+      `;
+      return;
+    }
+
+    this.certificatesGrid.innerHTML = certs.map(cert => `
+      <article class="cert-card" data-action="open-cert-modal" data-cert-id="${cert.id}" title="Clic para abrir constancia y documento oficial">
+        <div class="cert-media">
+          <div class="cert-issuer-badge">${cert.issuerBadge}</div>
+          ${cert.hours ? `<div class="cert-hours-badge">${cert.hours}</div>` : ''}
+          <img src="${cert.previewUrl}" alt="${cert.title}" loading="lazy" />
+        </div>
+        <div class="cert-content">
+          <div class="cert-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>${cert.date}</span>
+          </div>
+          <h3 class="cert-title">${cert.title}</h3>
+          <p class="cert-desc">${cert.description}</p>
+          <div class="cert-signatories">
+            <strong>Firmas / Aval:</strong> ${cert.signatories}
+          </div>
+          <div class="cert-actions">
+            <span class="btn-cert-view">
+              Ver Documento <span>↗</span>
+            </span>
+            <span class="cert-type-indicator">${cert.mediaType.toUpperCase()} Oficial</span>
+          </div>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  renderCertificateModal(cert) {
+    if (!this.modalOverlay || !cert) return;
+
+    if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = cert.categoryLabel;
+    if (this.modalTagBadge) this.modalTagBadge.textContent = cert.issuerBadge;
+    if (this.modalTitle) this.modalTitle.textContent = cert.title;
+    if (this.modalWhatIs) this.modalWhatIs.textContent = cert.description;
+    if (this.modalWhatIDid) this.modalWhatIDid.textContent = `Acreditación oficial emitida por ${cert.issuer}. Fecha: ${cert.date}. Modalidad: ${cert.hours || 'Participación oficial'}. Acreditado por: ${cert.signatories}.`;
+
+    if (this.modalHighlights) {
+      this.modalHighlights.innerHTML = `
+        <li><strong>Institución Emisora:</strong> ${cert.issuer}</li>
+        <li><strong>Fecha de Emisión:</strong> ${cert.date}</li>
+        <li><strong>Acreditación Curricular:</strong> ${cert.hours || 'Constancia Oficial'}</li>
+        <li><strong>Firmas & Autoridades:</strong> ${cert.signatories}</li>
+      `;
+    }
+
+    if (this.modalTagsBox) {
+      this.modalTagsBox.innerHTML = cert.tags.map(t => `<span class="tech-tag">${t}</span>`).join("");
+    }
+
+    if (cert.mediaType === "pdf") {
+      this.modalMediaStage.classList.add("dual-showcase");
+      this.modalMediaStage.innerHTML = `
+        <div class="dual-stage-container">
+          <div class="dual-photo-pane">
+            <div class="modal-media-viewport">
+              <img src="${cert.previewUrl}" alt="${cert.title}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para abrir documento oficial completo" />
+            </div>
+            <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir documento original en resolución completa">
+              <span>Ver PDF completo</span>
+            </a>
+            <div class="dual-pane-footer">
+              <span class="dual-pane-tag">${cert.issuerBadge}</span>
+              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pane-action-link">Abrir en Nueva Pestaña ↗</a>
+            </div>
+          </div>
+          <div class="dual-pdf-pane">
+            <div class="pdf-pane-header">
+              <div class="pdf-title">${cert.title}</div>
+              <div class="pdf-pane-actions">
+                <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn">
+                  <span>↗</span> Pantalla Completa
+                </a>
+                <a href="${cert.fileUrl}" download class="pdf-action-btn">
+                  <span>⬇</span> Descargar
+                </a>
+              </div>
+            </div>
+            <iframe src="${cert.fileUrl}#toolbar=0&navpanes=0&view=FitH" class="embedded-pdf-frame" title="${cert.title}"></iframe>
+          </div>
+        </div>
+      `;
+    } else {
+      this.modalMediaStage.classList.remove("dual-showcase");
+      this.modalMediaStage.innerHTML = `
+        <div class="modal-media-viewport">
+          <img src="${cert.fileUrl}" alt="${cert.title}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
+        </div>
+        <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original">
+          <span>Ver imagen completa</span>
+        </a>
+      `;
+    }
+
+    if (this.modalGalleryStrip) {
+      this.modalGalleryStrip.style.display = "none";
+      this.modalGalleryStrip.innerHTML = "";
+    }
+
+    this.modalOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
   }
 
   renderModal(project, allMedia, initialIndex = 0) {
@@ -1484,6 +1759,7 @@ class PortfolioController {
 
   init() {
     this.refreshGrid();
+    this.refreshCertificatesGrid();
     this.bindEvents();
   }
 
@@ -1492,8 +1768,13 @@ class PortfolioController {
     this.view.renderProjectsGrid(filtered, this.model.projects.length);
   }
 
+  refreshCertificatesGrid(category = "all") {
+    const certs = this.model.getFilteredCertificates(category);
+    this.view.renderCertificatesGrid(certs);
+  }
+
   bindEvents() {
-    // 1. Filtrado por categorías (Pills / Botones)
+    // 1. Filtrado por categorías de proyectos
     this.view.filterTabs.forEach(tab => {
       tab.addEventListener("click", () => {
         const category = tab.getAttribute("data-filter");
@@ -1502,6 +1783,32 @@ class PortfolioController {
         this.refreshGrid();
       });
     });
+
+    // 1.1 Filtrado por categorías de certificados
+    if (this.view.certFilterTabs) {
+      this.view.certFilterTabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          this.view.certFilterTabs.forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          const category = tab.getAttribute("data-cert-filter");
+          this.refreshCertificatesGrid(category);
+        });
+      });
+    }
+
+    // 1.2 Delegación de eventos para abrir modal de certificado
+    if (this.view.certificatesGrid) {
+      this.view.certificatesGrid.addEventListener("click", (e) => {
+        const card = e.target.closest('[data-action="open-cert-modal"]');
+        if (card) {
+          const certId = card.getAttribute("data-cert-id");
+          const cert = this.model.getCertificateById(certId);
+          if (cert) {
+            this.view.renderCertificateModal(cert);
+          }
+        }
+      });
+    }
 
     // 2. Búsqueda en tiempo real
     if (this.view.searchInput) {
@@ -1735,7 +2042,7 @@ let portfolioView;
 let portfolioController;
 
 document.addEventListener("DOMContentLoaded", () => {
-  portfolioModel = new PortfolioModel(projectsData);
+  portfolioModel = new PortfolioModel(projectsData, certificatesData);
   portfolioView = new PortfolioView();
   portfolioController = new PortfolioController(portfolioModel, portfolioView);
   portfolioController.init();

@@ -54,7 +54,8 @@
         <ul class="nav-menu" id="navMenu">
           <li><a href="#inicio" class="nav-link active">Inicio</a></li>
           <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
-          <li><a href="#especialidades" class="nav-link">Especialidades</a></li>
+          <li><a href="#especialidades" class="nav-link">Áreas</a></li>
+          <li><a href="#certificaciones" class="nav-link">Reconocimientos</a></li>
           <li><a href="#sobre-mi" class="nav-link">Trayectoria</a></li>
           <li><a href="#instrumentacion" class="nav-link">Instrumentación</a></li>
           <li><a href="#contacto" class="nav-link">Contacto</a></li>
@@ -427,6 +428,46 @@
               <li>Modelado 3D CAD y manufactura aditiva Creality Ender</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificaciones & Reconocimientos Section -->
+    <section class="section" id="certificaciones" style="background: rgba(10, 14, 23, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Acreditaciones & Logros</span>
+          <h2 class="section-title">Certificaciones & Reconocimientos</h2>
+          <p class="section-sub">
+            Evidencias oficiales de cursos intensivos en EDA, certificaciones de industria, participación en hackathones de innovación y divulgación científica.
+          </p>
+        </div>
+
+        <!-- Controls: Category Tabs for Certificates -->
+        <div class="controls-container">
+          <div class="filter-tabs" id="certFilterTabs">
+            <button class="filter-tab active" data-cert-filter="all">
+              <span>Todos</span>
+              <span class="tab-badge">9</span>
+            </button>
+            <button class="filter-tab" data-cert-filter="eda">
+              <span>Semiconductores & EDA</span>
+            </button>
+            <button class="filter-tab" data-cert-filter="innovation">
+              <span>Innovación & Hackathones</span>
+            </button>
+            <button class="filter-tab" data-cert-filter="tech">
+              <span>Industria & Embebidos</span>
+            </button>
+            <button class="filter-tab" data-cert-filter="outreach">
+              <span>Divulgación & BUAP</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Certificates Grid -->
+        <div class="certificates-grid" id="certificatesGrid">
+          <!-- Generado dinámicamente con soporte modal y barritas skeleton -->
         </div>
       </div>
     </section>
