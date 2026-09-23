@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#06090e" />
+  <meta name="theme-color" content="#0d0f12" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Ing. Josué Farfán González | Portafolio de Ingeniería Electrónica, Mecatrónica & Sistemas Embebidos</title>
@@ -17,27 +17,20 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ing. Josué Farfán González | Portafolio de Ingeniería" />
   <meta property="og:description" content="Evidencia técnica y proyectos de ingeniería: Silicio, FPGAs, Sistemas Embebidos, Motores Industriales y Visión Artificial." />
-  <meta property="og:image" content="WhatsApp Image 2026-09-22 at 4.38.59 PM.jpeg" />
+  <meta property="og:image" content="oblea_silicio_cleanroom.jpg" />
 
   <!-- Favicon SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%230a0e17'/%3E%3Cpath d='M25 35 L45 35 L45 65 C45 72 38 75 30 75' stroke='%2300f2fe' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M55 35 L80 35 M55 52 L75 52 M55 35 L55 75' stroke='%233b82f6' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d0f12'/%3E%3Ctext x='50' y='64' font-size='42' font-family='sans-serif' font-weight='800' fill='%233d9be9' text-anchor='middle'%3EJF%3C/text%3E%3C/svg%3E" />
 
-  <!-- Google Fonts Preconnect & Styles -->
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans (CV Aesthetic) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- Ambient Animated Glow Orbs -->
-  <div class="ambient-glow" aria-hidden="true">
-    <div class="glow-orb glow-orb-1"></div>
-    <div class="glow-orb glow-orb-2"></div>
-    <div class="glow-orb glow-orb-3"></div>
-  </div>
 
   <!-- Navigation Bar -->
   <header class="navbar" id="navbar">
@@ -69,7 +62,7 @@
           <span>GitHub</span>
         </a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú de navegación">
-          ☰
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
       </div>
     </div>
@@ -86,7 +79,7 @@
           </div>
 
           <h1 class="hero-title">
-            Transformando ideas en <span class="gradient-text">silicio, hardware</span> y sistemas embebidos de alta precisión.
+            Transformando ideas en <span class="accent-text">silicio, hardware</span> y sistemas embebidos de alta precisión.
           </h1>
 
           <p class="hero-description">
@@ -96,7 +89,7 @@
           <div class="hero-cta">
             <a href="#proyectos" class="btn-primary">
               <span>Explorar Proyectos</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
             <a href="#contacto" class="btn-secondary">
               <span>Contactar / Colaborar</span>
@@ -104,15 +97,15 @@
           </div>
 
           <div class="hero-stats">
-            <div class="stat-item">
+            <div class="stat-item metric-card-black">
               <div class="stat-number">15<span>+</span></div>
               <div class="stat-label">Proyectos Documentados</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-item metric-card-blue">
               <div class="stat-number">6<span>/6</span></div>
               <div class="stat-label">Áreas de Especialidad</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-item metric-card-white">
               <div class="stat-number">100<span>%</span></div>
               <div class="stat-label">Evidencia Real en Laboratorio</div>
             </div>
@@ -123,20 +116,22 @@
           <div class="visual-card">
             <!-- Chip flotante 1 -->
             <div class="floating-chip chip-1">
-              <span style="color: #00f2fe;">◈</span> TSMC 28nm • Cadence
+              <span class="chip-dot"></span> TSMC 28nm • Cadence
             </div>
 
             <div class="card-image-wrap">
-              <img src="WhatsApp%20Image%202026-09-22%20at%204.38.59%20PM.jpeg" alt="Ing. Josué Farfán en sala limpia de semiconductores con oblea de silicio" />
+              <img src="oblea_silicio_cleanroom.jpg" alt="Procesamiento de obleas de silicio en sala limpia" />
             </div>
 
             <!-- Chip flotante 2 -->
             <div class="floating-chip chip-2">
-              <span style="color: #8b5cf6;">⚡</span> FPGA Spartan & ESP32
+              <span class="chip-dot"></span> FPGA Spartan & ESP32
             </div>
 
             <div class="card-overlay-badge">
-              <div class="overlay-icon">🔬</div>
+              <div class="overlay-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+              </div>
               <div class="overlay-text">
                 <strong>Ing. Josué Farfán González</strong>
                 <span>Fabricación en Cuarto Limpio & Nodos Nanométricos</span>
@@ -161,9 +156,11 @@
         <!-- Controls: Search & Category Tabs -->
         <div class="controls-container">
           <div class="search-wrap">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
             <input type="text" id="searchInput" class="search-input" placeholder="Buscar por palabra clave: ESP32, FPGA, SCR, Cadence, Proteus, Antena..." aria-label="Buscar proyectos" />
-            <button id="searchClear" class="search-clear" title="Limpiar búsqueda">✕</button>
+            <button id="searchClear" class="search-clear" title="Limpiar búsqueda">&times;</button>
           </div>
 
           <div class="filter-tabs">
@@ -220,7 +217,9 @@
         <div class="specs-grid">
           <!-- Card 1 -->
           <div class="spec-card">
-            <div class="spec-icon-wrap">🔬</div>
+            <div class="spec-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+            </div>
             <h3 class="spec-title">Microelectrónica & Diseño VLSI</h3>
             <p class="spec-desc">
               Flujo completo en herramientas de grado industrial EDA para nodos nanométricos (TSMC 28nm) y experiencia de sala limpia.
@@ -235,7 +234,9 @@
 
           <!-- Card 2 -->
           <div class="spec-card">
-            <div class="spec-icon-wrap">⚡</div>
+            <div class="spec-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
             <h3 class="spec-title">Electrónica de Potencia & Motores</h3>
             <p class="spec-desc">
               Control de máquinas eléctricas rotativas y modulación de energía en corriente alterna y directa de alta potencia.
@@ -250,7 +251,9 @@
 
           <!-- Card 3 -->
           <div class="spec-card">
-            <div class="spec-icon-wrap">📟</div>
+            <div class="spec-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"></rect><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"></path></svg>
+            </div>
             <h3 class="spec-title">FPGAs & Lógica Reconfigurable</h3>
             <p class="spec-desc">
               Diseño de arquitecturas paralelas en silicio sin latencia de CPU para procesamiento de señales y temporización digital.
@@ -265,7 +268,9 @@
 
           <!-- Card 4 -->
           <div class="spec-card">
-            <div class="spec-icon-wrap">🌐</div>
+            <div class="spec-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+            </div>
             <h3 class="spec-title">Sistemas Embebidos & IoT</h3>
             <p class="spec-desc">
               Desarrollo de firmware en C/C++ bare-metal y RTOS para telemetría distribuida, pantallas táctiles y sensores industriales.
@@ -280,13 +285,15 @@
 
           <!-- Card 5 -->
           <div class="spec-card">
-            <div class="spec-icon-wrap">📡</div>
+            <div class="spec-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path></svg>
+            </div>
             <h3 class="spec-title">RF & Telecomunicaciones</h3>
             <p class="spec-desc">
               Diseño electromagnético, acoplamiento de impedancias y caracterización instrumental en frecuencias de microondas.
             </p>
             <ul class="spec-skills">
-              <li>Antenas planas Microstrip Patch a 2.45 GHz</li>
+              <li>Antenas planas Microstrip Patch a 1.9 GHz / 2.45 GHz</li>
               <li>Líneas de transmisión y matching a 50 Ohmios</li>
               <li>Medición en analizador de espectro de RF</li>
               <li>Generación de ruido físico para criptografía (TRNG)</li>
@@ -295,7 +302,9 @@
 
           <!-- Card 6 -->
           <div class="spec-card">
-            <div class="spec-icon-wrap">👁️</div>
+            <div class="spec-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </div>
             <h3 class="spec-title">IA, Visión & Robótica</h3>
             <p class="spec-desc">
               Procesamiento de imágenes por computadora, modelos de deep learning para OCR y cinemática de mecanismos impresos en 3D.
@@ -339,7 +348,7 @@
 
           <div class="trajectory-list">
             <div class="trajectory-item">
-              <div class="item-bullet">🏛️</div>
+              <div class="item-bullet"><span class="bullet-square">■</span></div>
               <div class="item-content">
                 <h4>Investigación & Desarrollo • INAOE</h4>
                 <p>Desarrollo de tacómetro de calibración industrial bajo supervisión del Dr. Alfredo Benítez Lara e implementación de estaciones de telemetría táctil con ESP32 y sensores de potencia.</p>
@@ -347,7 +356,7 @@
             </div>
 
             <div class="trajectory-item">
-              <div class="item-bullet">🎓</div>
+              <div class="item-bullet"><span class="bullet-square">■</span></div>
               <div class="item-content">
                 <h4>Formación en Ingeniería • BUAP</h4>
                 <p>Especialización en electrónica de potencia, diseño con FPGAs Xilinx en VHDL, control de motores industriales y banco de automatización con PLC.</p>
@@ -355,7 +364,7 @@
             </div>
 
             <div class="trajectory-item">
-              <div class="item-bullet">⚙️</div>
+              <div class="item-bullet"><span class="bullet-square">■</span></div>
               <div class="item-content">
                 <h4>Laboratorio & Sala Limpia de Semiconductores</h4>
                 <p>Experiencia práctica en cuarto limpio clase 100/1000 en procesos de fotolitografía para obleas de silicio, así como flujo RTL-to-GDSII en nodo TSMC de 28nm con Cadence Virtuoso.</p>
@@ -380,7 +389,9 @@
         <div class="matrix-grid">
           <div class="matrix-card">
             <div class="matrix-header">
-              <span class="matrix-icon">📊</span>
+              <span class="matrix-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </span>
               <h4>Instrumentación de Laboratorio</h4>
             </div>
             <div class="matrix-tags">
@@ -395,7 +406,9 @@
 
           <div class="matrix-card">
             <div class="matrix-header">
-              <span class="matrix-icon">💻</span>
+              <span class="matrix-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </span>
               <h4>Software & Suites EDA</h4>
             </div>
             <div class="matrix-tags">
@@ -411,7 +424,9 @@
 
           <div class="matrix-card">
             <div class="matrix-header">
-              <span class="matrix-icon">🧩</span>
+              <span class="matrix-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+              </span>
               <h4>Hardware, MCUs & FPGAs</h4>
             </div>
             <div class="matrix-tags">
@@ -428,7 +443,9 @@
 
           <div class="matrix-card">
             <div class="matrix-header">
-              <span class="matrix-icon">⚙️</span>
+              <span class="matrix-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </span>
               <h4>Lenguajes & Protocolos</h4>
             </div>
             <div class="matrix-tags">
@@ -449,7 +466,7 @@
     <section class="section" id="contacto">
       <div class="container">
         <div class="contact-card">
-          <span class="section-tag" style="background: rgba(0, 242, 254, 0.1);">¿Interesado en colaborar?</span>
+          <span class="section-tag">¿Interesado en colaborar?</span>
           <h2 class="contact-title">Iniciemos un Proyecto Juntos</h2>
           <p class="contact-sub">
             Disponible para desarrollo de sistemas embebidos, diseño digital en FPGAs, electrónica de potencia, asesoría en microelectrónica y proyectos de visión computacional.
@@ -464,11 +481,13 @@
             </a>
 
             <a href="https://wa.me/5212220000000" target="_blank" rel="noopener noreferrer" class="contact-btn btn-whatsapp" title="Enviar mensaje por WhatsApp">
-              <span>💬 Contactar por WhatsApp</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              <span>Contactar por WhatsApp</span>
             </a>
 
             <a href="mailto:josue.farfan@example.com" class="contact-btn btn-email">
-              <span>✉ Enviar Correo Directo</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>Enviar Correo Directo</span>
             </a>
           </div>
         </div>
@@ -495,9 +514,9 @@
       <div class="modal-header">
         <div class="modal-header-info">
           <span class="modal-badge" id="modalCategoryBadge">Categoría</span>
-          <span class="modal-badge" id="modalTagBadge" style="background: rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.4); color: #c4b5fd;">Institución</span>
+          <span class="modal-badge" id="modalTagBadge" style="background: rgba(61, 155, 233, 0.15); border-color: rgba(61, 155, 233, 0.4); color: #3d9be9;">Institución</span>
         </div>
-        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Cerrar modal">✕</button>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Cerrar modal">&times;</button>
       </div>
 
       <div class="modal-body">
@@ -517,18 +536,18 @@
 
           <div class="modal-sections">
             <div class="modal-col">
-              <h4><span>💡</span> ¿Qué es este sistema?</h4>
+              <h4>¿Qué es este sistema?</h4>
               <p id="modalWhatIs">Descripción conceptual y funcional del proyecto.</p>
             </div>
 
             <div class="modal-col">
-              <h4><span>🛠️</span> ¿Qué se hizo & Reto superado?</h4>
+              <h4>¿Qué se hizo & Reto superado?</h4>
               <p id="modalWhatIDid">Detalles del desarrollo técnico, programación y montaje físico.</p>
             </div>
           </div>
 
           <div class="modal-col" style="margin-bottom: 1.5rem;">
-            <h4><span>⭐</span> Puntos Clave de Ingeniería</h4>
+            <h4>Puntos Clave de Ingeniería</h4>
             <ul class="modal-highlights" id="modalHighlights">
               <!-- Lista de viñetas con logros técnicos -->
             </ul>
