@@ -1,7 +1,16 @@
 # ==============================================================================
 # ROBOTS.TXT - JOSUÉ FARFÁN GONZÁLEZ PORTFOLIO
-# Permite indexación legítima por motores de búsqueda y bloquea scrapers agresivos
+# Permite indexación legítima por Google, Bing y motores de búsqueda
 # ==============================================================================
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 User-agent: *
 Allow: /
@@ -12,15 +21,12 @@ Disallow: /*.config$
 Disallow: /node_modules/
 Disallow: /.git/
 
-# Bloquear bots de scraping agresivo y escáneres de vulnerabilidades
+# Bloquear bots de scraping no deseado y escáneres agresivos
 User-agent: MJ12bot
 Disallow: /
 
 User-agent: DotBot
 Disallow: /
 
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
+# Sitemap oficial para indexación rápida en Google Search Console
+Sitemap: https://08nicks.github.io/josue-farfan_portafolio.github.io/sitemap.xml
