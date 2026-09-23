@@ -91,22 +91,22 @@ const projectsData = [
     ]
   },
   {
-    id: "inaoe-tacometro-calibracion",
-    title: "Banco Portátil de Calibración y Tacómetro Digital Industrial",
+    id: "control-velocidad-ventilador-mcu",
+    title: "Consola Modular de Control de Velocidad y Tacómetro para Ventilador de Alto Rendimiento",
     category: "embedded",
-    categoryLabel: "Sistemas Embebidos & IoT",
-    tag: "INAOE - Investigación",
+    categoryLabel: "Sistemas Embebidos & Control",
+    tag: "Instrumentación & Control",
     mediaType: "image",
     mediaUrl: "WhatsApp Image 2026-09-22 at 4.40.52 PM.jpeg",
     secondaryMedia: [],
-    tags: ["INAOE", "Arduino / MCU", "LCD 16x2 I2C", "Teclado Matricial 4x4", "Sensor Óptico", "Metrología"],
-    shortDesc: "Instrumento portátil desarrollado en INAOE para calibración y caracterización dinámica de motores y ventiladores con interfaz de usuario guiada.",
-    whatIs: "Sistema de medición e instrumentación electrónica desarrollado en conjunto con el Dr. Alfredo Benítez Lara en el INAOE. Diseñado para pruebas metrológicas de velocidad de giro en ventiladores de disipación y motores industriales.",
-    whatIDid: "Diseño e integración de un gabinete portátil con pantalla LCD retroiluminada y teclado matricial de 16 teclas. Programación de menú interactivo («Calibrar motor? A:Si B:Omitir») para rutinas de auto-cero, muestreo de pulsos ópticos por tacómetro infrarrojo y cálculo estequiométrico de RPM con mínimo margen de error.",
+    tags: ["Arduino Mega", "Sensor Efecto Hall", "Ventilador de Servidor", "Control PWM", "Display LCD 16x2", "Teclado Matricial 4x4", "Consola Portátil Modular"],
+    shortDesc: "Consola portátil modular gobernada por Arduino Mega para el control de velocidad en lazo cerrado y calibración de ventilador de alto flujo mediante sensor Hall.",
+    whatIs: "Instrumento electrónico modular diseñado para el accionamiento, calibración de velocidad y monitoreo en tiempo real de RPM en ventiladores de alta velocidad y alto flujo (servidor / cómputo). Su arquitectura compacta permite operar como una unidad autónoma con interfaz de usuario integrada para ajuste de consigna, perfiles de giro y rutinas de calibración.",
+    whatIDid: "Desarrollo del hardware y programación del firmware en microcontrolador Arduino Mega montado en un gabinete portátil con asa. Integración de la etapa de modulación PWM y lectura de los trenes de pulsos provenientes del sensor de efecto Hall interno del ventilador para el cálculo de RPM instantáneas mediante interrupciones de hardware. Programación de un menú interactivo en pantalla LCD 16x2 comandado por teclado matricial 4x4 («Calibrar motor? A:Si B:Omitir») para ejecución de pruebas dinámicas, auto-cero y control de revoluciones.",
     highlights: [
-      "Interfaz HMI autónoma que no requiere computadora externa para operar en campo",
-      "Filtro digital contra rebotes ópticos y compensación de ruido electromagnético",
-      "Desarrollado y acreditado bajo el sello de investigación de INAOE"
+      "Lectura precisa de frecuencia y RPM en tiempo real aprovechando el sensor de efecto Hall integrado",
+      "Consola portátil autónoma con interfaz de operación basada en display LCD 16x2 y teclado matricial 4x4",
+      "Rutina interactiva de calibración y control de modulación PWM desarrollado en Arduino Mega"
     ]
   },
   {
