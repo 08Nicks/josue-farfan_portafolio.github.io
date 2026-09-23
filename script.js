@@ -1,5 +1,5 @@
 /**
- * PORTAFOLIO DE INGENIERÍA - ING. JOSUÉ FARFÁN GONZÁLEZ
+ * PORTAFOLIO DE ELECTRÓNICA & SISTEMAS EMBEBIDOS - JOSUÉ FARFÁN GONZÁLEZ
  * Base de datos de proyectos, renderizado reactivo, filtros, búsqueda y visor modal técnico.
  */
 
@@ -771,13 +771,13 @@ void loop() {
     title: "Modelado CAD 3D de Brazo Robótico (3 GDL) & Actuador Lineal Piñón-Cremallera",
     category: "robotics",
     categoryLabel: "Robótica & CAD 3D",
-    tag: "Robótica & Diseño Mecatrónico",
+    tag: "Robótica & Diseño Mecánico CAD",
     mediaType: "image",
     mediaUrl: "robot 3gdl.png",
     secondaryMedia: [
       "robot catesiano.png"
     ],
-    tags: ["Brazo Robótico 3 GDL", "Mecanismo Cremallera-Piñón", "CAD 3D Paramétrico", "Servomotores", "Arduino", "Cinemática Directa", "Diseño Mecatrónico"],
+    tags: ["Brazo Robótico 3 GDL", "Mecanismo Cremallera-Piñón", "CAD 3D Paramétrico", "Servomotores", "Arduino", "Cinemática Directa", "Diseño Mecánico CAD"],
     shortDesc: "Modelado CAD 3D paramétrico y análisis cinemático de manipulador robótico de 3 GDL y actuador cartesiano de cremallera y piñón para servomotores.",
     whatIs: "Diseño de sistemas mecánicos y robóticos articulados concebidos en software CAD 3D. Abarca la estructura de un brazo robótico de 3 Grados de Libertad (3 GDL) con base giratoria y eslabones de posicionamiento, así como un mecanismo lineal cartesiano impulsado por cremallera y piñón de precisión accionado por servomotores de alto torque.",
     whatIDid: "Diseño de ensamble paramétrico 3D considerando tolerancias mecánicas, distribución de masas y centros de gravedad para minimizar esfuerzos en los servomotores. Integración de la base de control para placa Arduino y cálculo de la relación de transmisión en el módulo de piñón y cremallera para lograr desplazamiento lineal suave y repetible en los ejes de prueba.",

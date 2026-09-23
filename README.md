@@ -1,6 +1,6 @@
-# Portafolio Web Profesional - Ing. Josué Farfán González
+# Portafolio Web - Josué Farfán González
 
-Sitio web estático de ingeniería y portafolio de proyectos de hardware, microelectrónica (TSMC 28nm, Cleanroom), FPGAs Spartan, sistemas embebidos IoT (ESP32), electrónica de potencia, radiofrecuencia (2.45 GHz) y visión artificial con Deep Learning.
+Sitio web estático y portafolio de proyectos de hardware, microelectrónica (TSMC 28nm, Cleanroom), FPGAs Spartan, sistemas embebidos IoT (ESP32), electrónica de potencia, radiofrecuencia (2.45 GHz) y visión artificial.
 
 Diseñado con **HTML5 semántico, CSS3 moderno (Dark Theme Cyber-Engineering con Glassmorphism) y JavaScript reactivo**, optimizado para ejecutarse directamente en **GitHub Pages** sin necesidad de Node.js ni compilación previa.
 
