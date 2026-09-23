@@ -1039,13 +1039,21 @@ class PortfolioModel {
 
       if (!query) return matchesCategory;
 
+      const locProj = (window.i18n && window.i18n.getProject(project.id)) || {};
+
       const matchesSearch =
         project.title.toLowerCase().includes(query) ||
+        (locProj.title && locProj.title.toLowerCase().includes(query)) ||
         project.shortDesc.toLowerCase().includes(query) ||
+        (locProj.shortDesc && locProj.shortDesc.toLowerCase().includes(query)) ||
         project.whatIs.toLowerCase().includes(query) ||
+        (locProj.whatIs && locProj.whatIs.toLowerCase().includes(query)) ||
         project.whatIDid.toLowerCase().includes(query) ||
+        (locProj.whatIDid && locProj.whatIDid.toLowerCase().includes(query)) ||
         (project.tags && project.tags.some(tag => tag.toLowerCase().includes(query))) ||
-        (project.tag && project.tag.toLowerCase().includes(query));
+        (locProj.tags && locProj.tags.some(tag => tag.toLowerCase().includes(query))) ||
+        (project.tag && project.tag.toLowerCase().includes(query)) ||
+        (locProj.tag && locProj.tag.toLowerCase().includes(query));
 
       return matchesCategory && matchesSearch;
     });
@@ -1203,12 +1211,16 @@ class PortfolioView {
 
   renderProjectsGrid(filteredProjects, totalCount, onResetFilters) {
     if (this.resultsCountBar) {
-      this.resultsCountBar.textContent = `Mostrando ${filteredProjects.length} de ${totalCount} proyectos`;
+      this.resultsCountBar.textContent = window.i18n ? window.i18n.t("results_showing", filteredProjects.length, totalCount) : `Mostrando ${filteredProjects.length} de ${totalCount} proyectos`;
     }
 
     if (!this.projectsGrid) return;
 
     if (filteredProjects.length === 0) {
+      const noTitle = window.i18n ? window.i18n.t("no_projects_title") : "No se encontraron proyectos";
+      const noSub = window.i18n ? window.i18n.t("no_projects_sub") : 'Intenta con otra palabra clave como "ESP32", "FPGA", "Tiristor", "Cadence" o "Antena".';
+      const resetBtnText = window.i18n ? window.i18n.t("btn_reset_filters") : "Restablecer filtros";
+
       this.projectsGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
           <div style="margin-bottom: 1rem; color: var(--text-muted);">
@@ -1217,20 +1229,35 @@ class PortfolioView {
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </div>
-          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-white);">No se encontraron proyectos</h3>
-          <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Intenta con otra palabra clave como "ESP32", "FPGA", "Tiristor", "Cadence" o "Antena".</p>
-          <button class="btn-primary" data-action="reset-filters" style="padding: 8px 20px; font-size: 0.85rem; cursor: pointer;">Restablecer filtros</button>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-white);">${noTitle}</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">${noSub}</p>
+          <button class="btn-primary" data-action="reset-filters" style="padding: 8px 20px; font-size: 0.85rem; cursor: pointer;">${resetBtnText}</button>
         </div>
       `;
       return;
     }
 
     this.projectsGrid.innerHTML = filteredProjects.map(project => {
+      const locProj = (window.i18n && window.i18n.getProject(project.id)) || project;
+      const title = locProj.title || project.title;
+      const tag = locProj.tag || project.tag;
+      const shortDesc = locProj.shortDesc || project.shortDesc;
+      const tags = locProj.tags || project.tags;
+
       const allMedia = [
         { type: project.mediaType, url: project.mediaUrl },
         ...(project.secondaryMedia || []).map(url => ({ type: url.endsWith('.mp4') ? 'video' : 'image', url }))
       ];
       const hasMultiple = allMedia.length > 1;
+
+      const mediaBadgeText = project.mediaType === 'video'
+        ? (window.i18n ? window.i18n.t("card_media_video") : 'Video Demostrativo')
+        : (hasMultiple ? (window.i18n ? window.i18n.t("card_media_photos", allMedia.length) : `${allMedia.length} Fotos`) : (window.i18n ? window.i18n.t("card_media_evidence") : 'Evidencia'));
+
+      const detailsBtnText = window.i18n ? window.i18n.t("card_view_details") : 'Ver Ficha Técnica';
+      const evidenceCountText = hasMultiple
+        ? (window.i18n ? window.i18n.t("card_evidences_count", allMedia.length) : `${allMedia.length} evidencias`)
+        : (window.i18n ? window.i18n.t("card_file_count") : '1 archivo');
 
       return `
         <article class="project-card" data-id="${project.id}">
@@ -1252,7 +1279,7 @@ class PortfolioView {
 
             ${project.mediaType === 'video' ? `
               <img src="${project.posterUrl ? this.safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" 
-                alt="${project.title}" 
+                alt="${title}" 
                 loading="lazy" 
                 onload="this.classList.add('is-loaded'); const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.style.display='none';" 
                 onerror="this.style.display='none'; const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.classList.add('is-failed');" />
@@ -1261,33 +1288,33 @@ class PortfolioView {
               </div>
             ` : `
               <img src="${this.safeMediaUrl(project.mediaUrl)}" 
-                alt="${project.title}" 
+                alt="${title}" 
                 loading="lazy" 
                 onload="this.classList.add('is-loaded'); const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.style.display='none';" 
                 onerror="this.style.display='none'; const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.classList.add('is-failed');" />
             `}
 
             <div class="media-badge">
-              <span>${project.mediaType === 'video' ? 'Video Demostrativo' : (hasMultiple ? `${allMedia.length} Fotos` : 'Evidencia')}</span>
+              <span>${mediaBadgeText}</span>
             </div>
-            <div class="tag-badge">${project.tag}</div>
+            <div class="tag-badge">${tag}</div>
           </div>
 
           <div class="card-content">
-            <h3 class="card-title">${project.title}</h3>
-            <p class="card-desc">${project.shortDesc}</p>
+            <h3 class="card-title">${title}</h3>
+            <p class="card-desc">${shortDesc}</p>
             
             <div class="card-tech-list">
-              ${project.tags.slice(0, 4).map(t => `<span class="tech-tag">${t}</span>`).join('')}
-              ${project.tags.length > 4 ? `<span class="tech-tag">+${project.tags.length - 4}</span>` : ''}
+              ${tags.slice(0, 4).map(t => `<span class="tech-tag">${t}</span>`).join('')}
+              ${tags.length > 4 ? `<span class="tech-tag">+${tags.length - 4}</span>` : ''}
             </div>
 
             <div class="card-actions">
               <button class="btn-details" data-action="open-modal" data-id="${project.id}">
-                Ver Ficha Técnica <span>→</span>
+                ${detailsBtnText} <span>→</span>
               </button>
               <div class="evidence-badge">
-                <span>●</span> ${hasMultiple ? `${allMedia.length} evidencias` : '1 archivo'}
+                <span>●</span> ${evidenceCountText}
               </div>
             </div>
           </div>
@@ -1309,92 +1336,126 @@ class PortfolioView {
     if (!this.certificatesGrid) return;
 
     if (!certs || certs.length === 0) {
+      const emptyText = window.i18n && window.i18n.getLanguage() === 'en'
+        ? "No certificates in this category."
+        : "No hay certificados en esta categoría.";
       this.certificatesGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
-          <p style="color: var(--text-muted); font-size: 0.95rem;">No hay certificados en esta categoría.</p>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">${emptyText}</p>
         </div>
       `;
       return;
     }
 
-    this.certificatesGrid.innerHTML = certs.map(cert => `
+    const viewDocText = window.i18n ? window.i18n.t("cert_btn_view") : "Ver Documento";
+    const officialText = window.i18n ? window.i18n.t("cert_official_suffix") : "Oficial";
+    const sigLabel = window.i18n ? window.i18n.t("cert_signatories_prefix") : "Firmas / Aval:";
+
+    this.certificatesGrid.innerHTML = certs.map(cert => {
+      const locCert = (window.i18n && window.i18n.getCert(cert.id)) || cert;
+      const title = locCert.title || cert.title;
+      const issuerBadge = locCert.issuerBadge || cert.issuerBadge;
+      const hours = locCert.hours || cert.hours;
+      const date = locCert.date || cert.date;
+      const description = locCert.description || cert.description;
+      const signatories = locCert.signatories || cert.signatories;
+
+      return `
       <article class="cert-card" data-action="open-cert-modal" data-cert-id="${cert.id}" title="Clic para abrir constancia y documento oficial">
         <div class="cert-card-topbar">
-          <span class="cert-issuer-badge">${cert.issuerBadge}</span>
-          ${cert.hours ? `<span class="cert-hours-badge">${cert.hours}</span>` : ''}
+          <span class="cert-issuer-badge">${issuerBadge}</span>
+          ${hours ? `<span class="cert-hours-badge">${hours}</span>` : ''}
         </div>
         <div class="cert-media">
-          <img src="${cert.previewUrl}" alt="${cert.title}" loading="lazy" />
+          <img src="${cert.previewUrl}" alt="${title}" loading="lazy" />
         </div>
         <div class="cert-content">
           <div class="cert-date">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            <span>${cert.date}</span>
+            <span>${date}</span>
           </div>
-          <h3 class="cert-title">${cert.title}</h3>
-          <p class="cert-desc">${cert.description}</p>
+          <h3 class="cert-title">${title}</h3>
+          <p class="cert-desc">${description}</p>
           <div class="cert-signatories">
-            <strong>Firmas / Aval:</strong> ${cert.signatories}
+            <strong>${sigLabel}</strong> ${signatories}
           </div>
           <div class="cert-actions">
             <span class="btn-cert-view">
-              Ver Documento <span>↗</span>
+              ${viewDocText} <span>↗</span>
             </span>
-            <span class="cert-type-indicator">${cert.mediaType.toUpperCase()} Oficial</span>
+            <span class="cert-type-indicator">${cert.mediaType.toUpperCase()} ${officialText}</span>
           </div>
         </div>
       </article>
-    `).join("");
+      `;
+    }).join("");
   }
 
   renderCertificateModal(cert) {
     if (!this.modalOverlay || !cert) return;
 
+    const locCert = (window.i18n && window.i18n.getCert(cert.id)) || cert;
+
     if (this.modalMediaStage) {
       this.modalMediaStage.classList.add("cert-stage-active");
     }
 
-    if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = cert.categoryLabel;
-    if (this.modalTagBadge) this.modalTagBadge.textContent = cert.issuerBadge;
-    if (this.modalTitle) this.modalTitle.textContent = cert.title;
-    if (this.modalWhatIs) this.modalWhatIs.textContent = cert.description;
-    if (this.modalWhatIDid) this.modalWhatIDid.textContent = `Acreditación oficial emitida por ${cert.issuer}. Fecha: ${cert.date}. Modalidad: ${cert.hours || 'Participación oficial'}. Acreditado por: ${cert.signatories}.`;
+    if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = locCert.categoryLabel || cert.categoryLabel;
+    if (this.modalTagBadge) this.modalTagBadge.textContent = locCert.issuerBadge || cert.issuerBadge;
+    if (this.modalTitle) this.modalTitle.textContent = locCert.title || cert.title;
+    if (this.modalWhatIs) this.modalWhatIs.textContent = locCert.description || cert.description;
+    if (this.modalWhatIDid) {
+      this.modalWhatIDid.textContent = window.i18n
+        ? window.i18n.t("modal_cert_summary_text", locCert.issuer, locCert.date, locCert.hours || (window.i18n.getLanguage() === 'en' ? 'Official Credential' : 'Constancia Oficial'), locCert.signatories)
+        : `Acreditación oficial emitida por ${locCert.issuer}. Fecha: ${locCert.date}. Modalidad: ${locCert.hours || 'Participación oficial'}. Acreditado por: ${locCert.signatories}.`;
+    }
+
+    const emitterLabel = window.i18n ? window.i18n.t("modal_cert_emitter_label") : "Institución Emisora:";
+    const dateLabel = window.i18n ? window.i18n.t("modal_cert_date_label") : "Fecha de Emisión:";
+    const accredLabel = window.i18n ? window.i18n.t("modal_cert_accreditation_label") : "Acreditación Curricular:";
+    const sigLabel = window.i18n ? window.i18n.t("modal_cert_signatories_label") : "Firmas & Autoridades:";
 
     if (this.modalHighlights) {
       this.modalHighlights.innerHTML = `
-        <li><strong>Institución Emisora:</strong> ${cert.issuer}</li>
-        <li><strong>Fecha de Emisión:</strong> ${cert.date}</li>
-        <li><strong>Acreditación Curricular:</strong> ${cert.hours || 'Constancia Oficial'}</li>
-        <li><strong>Firmas & Autoridades:</strong> ${cert.signatories}</li>
+        <li><strong>${emitterLabel}</strong> ${locCert.issuer}</li>
+        <li><strong>${dateLabel}</strong> ${locCert.date}</li>
+        <li><strong>${accredLabel}</strong> ${locCert.hours || (window.i18n && window.i18n.getLanguage() === 'en' ? 'Official Credential' : 'Constancia Oficial')}</li>
+        <li><strong>${sigLabel}</strong> ${locCert.signatories}</li>
       `;
     }
 
     if (this.modalTagsBox) {
-      this.modalTagsBox.innerHTML = cert.tags.map(t => `<span class="tech-tag">${t}</span>`).join("");
+      const tags = locCert.tags || cert.tags || [];
+      this.modalTagsBox.innerHTML = tags.map(t => `<span class="tech-tag">${t}</span>`).join("");
     }
 
     this.modalMediaStage.classList.remove("dual-showcase");
 
+    const accreditedBannerTitle = window.i18n ? window.i18n.t("modal_doc_accredited_title") : "Documento Oficial Acreditado (Vista Completa)";
+    const openOriginalPdfText = window.i18n ? window.i18n.t("modal_open_original_pdf") : "Abrir PDF Original ↗";
+    const pdfViewerTitle = window.i18n ? window.i18n.t("modal_pdf_viewer_title") : "Visor PDF Interactivo Oficial · Descargar e Imprimir";
+    const fullScreenText = window.i18n ? window.i18n.t("modal_fullscreen") : "Pantalla Completa";
+    const downloadPdfText = window.i18n ? window.i18n.t("modal_download_pdf") : "Descargar PDF";
+    const viewFullImgText = window.i18n ? window.i18n.t("modal_view_full_image") : "Ver imagen completa ↗";
+
     if (cert.mediaType === "pdf") {
-      // 1. Imagen Oficial en Alta Definición en el media stage principal arriba
       this.modalMediaStage.innerHTML = `
         <div class="cert-image-pane">
           <div class="cert-pane-banner">
             <div class="cert-pane-banner-title">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-              <span>Documento Oficial Acreditado (Vista Completa)</span>
+              <span>${accreditedBannerTitle}</span>
             </div>
             <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Abrir archivo original en nueva pestaña">
-              Abrir PDF Original ↗
+              ${openOriginalPdfText}
             </a>
           </div>
           <div class="cert-image-viewport">
-            <img src="${cert.previewUrl}" alt="${this.escapeHtml(cert.title)}" class="cert-stacked-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver o abrir PDF original" />
+            <img src="${cert.previewUrl}" alt="${this.escapeHtml(locCert.title)}" class="cert-stacked-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver o abrir PDF original" />
           </div>
         </div>
       `;
 
-      // 2. Visor PDF Oficial hasta abajo de la Ficha Técnica
       if (this.modalBottomPdfStage) {
         this.modalBottomPdfStage.style.display = "block";
         this.modalBottomPdfStage.innerHTML = `
@@ -1402,19 +1463,19 @@ class PortfolioView {
             <div class="pdf-pane-header">
               <div class="pdf-title">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                <span>Visor PDF Interactivo Oficial · Descargar e Imprimir</span>
+                <span>${pdfViewerTitle}</span>
               </div>
               <div class="pdf-pane-actions">
                 <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir archivo PDF oficial en pestaña completa">
-                  <span>↗</span> Pantalla Completa
+                  <span>↗</span> ${fullScreenText}
                 </a>
                 <a href="${cert.fileUrl}" download class="pdf-action-btn" title="Descargar documento oficial original">
-                  <span>⬇</span> Descargar PDF
+                  <span>⬇</span> ${downloadPdfText}
                 </a>
               </div>
             </div>
             <div class="cert-pdf-frame-wrap">
-              <iframe src="${cert.fileUrl}#toolbar=1&navpanes=0&view=FitH" class="cert-full-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
+              <iframe src="${cert.fileUrl}#toolbar=1&navpanes=0&view=FitH" class="cert-full-pdf-frame" title="${this.escapeHtml(locCert.title)}"></iframe>
             </div>
           </div>
         `;
@@ -1422,10 +1483,10 @@ class PortfolioView {
     } else {
       this.modalMediaStage.innerHTML = `
         <div class="modal-media-viewport">
-          <img src="${cert.fileUrl}" alt="${this.escapeHtml(cert.title)}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
+          <img src="${cert.fileUrl}" alt="${this.escapeHtml(locCert.title)}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
         </div>
         <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original">
-          <span>Ver imagen completa ↗</span>
+          <span>${viewFullImgText}</span>
         </a>
       `;
       if (this.modalBottomPdfStage) {
@@ -1446,6 +1507,8 @@ class PortfolioView {
   renderModal(project, allMedia, initialIndex = 0) {
     if (!this.modalOverlay || !project) return;
 
+    const locProj = (window.i18n && window.i18n.getProject(project.id)) || project;
+
     if (this.modalMediaStage) {
       this.modalMediaStage.classList.remove("cert-stage-active");
     }
@@ -1456,20 +1519,22 @@ class PortfolioView {
     }
 
     // Metadatos
-    if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = project.categoryLabel;
-    if (this.modalTagBadge) this.modalTagBadge.textContent = project.tag;
-    if (this.modalTitle) this.modalTitle.textContent = project.title;
-    if (this.modalWhatIs) this.modalWhatIs.textContent = project.whatIs;
-    if (this.modalWhatIDid) this.modalWhatIDid.textContent = project.whatIDid;
+    if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = locProj.categoryLabel || project.categoryLabel;
+    if (this.modalTagBadge) this.modalTagBadge.textContent = locProj.tag || project.tag;
+    if (this.modalTitle) this.modalTitle.textContent = locProj.title || project.title;
+    if (this.modalWhatIs) this.modalWhatIs.textContent = locProj.whatIs || project.whatIs;
+    if (this.modalWhatIDid) this.modalWhatIDid.textContent = locProj.whatIDid || project.whatIDid;
 
     // Puntos destacados
+    const highlights = locProj.highlights || project.highlights || [];
     if (this.modalHighlights) {
-      let highlightsHtml = project.highlights.map(h => `<li>${h}</li>`).join('');
+      let highlightsHtml = highlights.map(h => `<li>${h}</li>`).join('');
       if (project.team && project.team.length > 0) {
+        const teamLabel = window.i18n ? window.i18n.t("modal_team_label", project.institution || 'BUAP') : `Coautoría & Equipo de Proyecto (${project.institution || 'BUAP'}):`;
         highlightsHtml += `
           <li class="team-credit-item">
             <div style="font-weight: 700; color: var(--accent-cyan); font-family: var(--font-heading); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
-              Coautoría & Equipo de Proyecto (${project.institution || 'BUAP'}):
+              ${teamLabel}
             </div>
             <div style="font-size: 0.85rem; line-height: 1.6; color: #f1f5f9;">
               ${project.team.map(member => `<span style="display: inline-block; background: rgba(255,255,255,0.06); padding: 2px 10px; border-radius: 12px; margin: 3px 4px 3px 0; border: 1px solid rgba(255,255,255,0.1);">${member}</span>`).join('')}
@@ -1481,19 +1546,27 @@ class PortfolioView {
     }
 
     // Badges de tecnologías y botón de descarga condicional
+    const tags = locProj.tags || project.tags || [];
     if (this.modalTagsBox) {
-      this.modalTagsBox.innerHTML = project.tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
-      // Solo mostrar botón inferior si el proyecto NO tiene visor embebido de código (en el visor embebido ya existe botón en la cabecera)
+      this.modalTagsBox.innerHTML = tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
       if (project.downloadUrl && !project.codeSnippet) {
+        const downloadLabel = window.i18n ? window.i18n.t("modal_download") : "Descargar";
         this.modalTagsBox.innerHTML += `
           <div style="width: 100%; margin-top: 1.25rem;">
             <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
-              <span>Descargar Script: ${project.downloadName || project.downloadUrl}</span>
+              <span>${downloadLabel}: ${project.downloadName || project.downloadUrl}</span>
             </a>
           </div>
         `;
       }
     }
+
+    const viewFullText = window.i18n ? window.i18n.t("modal_view_full") : "Ver completa";
+    const viewFull100Text = window.i18n ? window.i18n.t("modal_view_full_100") : "Ver completa (100%)";
+    const viewBelowText = window.i18n ? window.i18n.t("modal_view_below") : "Ver Abajo";
+    const fullScreenText = window.i18n ? window.i18n.t("modal_fullscreen") : "Pantalla Completa";
+    const downloadText = window.i18n ? window.i18n.t("modal_download") : "Descargar";
+    const copyCodeText = window.i18n ? window.i18n.t("modal_copy_code") : "Copiar Código";
 
     // RENDERIZADO DEL ESCENARIO MULTIMEDIA
     if (project.pdfUrl) {
@@ -1598,15 +1671,15 @@ class PortfolioView {
                 <span class="code-line-count-badge">${lineCount} líneas</span>
               </div>
               <div class="code-pane-actions">
-                <button class="code-action-btn layout-toggle-btn" data-action="toggle-dual-layout" title="Alternar entre ver al lado o abajo para ampliar la imagen">
-                  <span class="layout-toggle-icon">⬍</span> <span class="layout-toggle-text">Ver Abajo</span>
+                <button class="code-action-btn layout-toggle-btn" data-action="toggle-dual-layout" title="${window.i18n && window.i18n.getLanguage() === 'en' ? 'Toggle between side-by-side or stacked view' : 'Alternar entre ver al lado o abajo para ampliar la imagen'}">
+                  <span class="layout-toggle-icon">⬍</span> <span class="layout-toggle-text">${viewBelowText}</span>
                 </button>
-                <button class="code-action-btn" data-action="copy-code" title="Copiar código al portapapeles">
-                  <span>Copiar Código</span>
+                <button class="code-action-btn" data-action="copy-code" title="${window.i18n && window.i18n.getLanguage() === 'en' ? 'Copy code to clipboard' : 'Copiar código al portapapeles'}">
+                  <span>${copyCodeText}</span>
                 </button>
                 ${project.downloadUrl ? `
-                  <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="code-action-btn" title="Descargar archivo">
-                    <span>⬇</span> Descargar
+                  <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="code-action-btn" title="${window.i18n && window.i18n.getLanguage() === 'en' ? 'Download file' : 'Descargar archivo'}">
+                    <span>⬇</span> ${downloadText}
                   </a>
                 ` : ''}
               </div>
@@ -1678,7 +1751,7 @@ class PortfolioView {
     const navControlsHtml = total > 1 ? `
       <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
       <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
-      <div class="modal-slide-counter" id="modalSlideCounter">${index + 1} / ${total} Evidencias</div>
+      <div class="modal-slide-counter" id="modalSlideCounter">${window.i18n ? window.i18n.t("modal_evidences_counter", index + 1, total) : `${index + 1} / ${total} Evidencias`}</div>
     ` : '';
 
     if (current.type === "video") {
@@ -1724,8 +1797,8 @@ class PortfolioView {
             onclick="window.open('${safeUrl}', '_blank')" 
             title="Clic para ver en tamaño original completo" />
         </div>
-        <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
-          <span>Ver completa</span>
+        <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="${window.i18n && window.i18n.getLanguage() === 'en' ? 'Open image in full original resolution' : 'Abrir imagen en resolución original completa'}">
+          <span>${window.i18n ? window.i18n.t("modal_view_full") : 'Ver completa'}</span>
         </a>
         ${navControlsHtml}
       `;
@@ -1758,10 +1831,10 @@ class PortfolioView {
     // Pausar y liberar memoria del reproductor de video
     if (this.modalMediaStage) {
       const videoElem = this.modalMediaStage.querySelector("video");
-      if (videoElem) {
+      if (videoElem && typeof videoElem.pause === "function") {
         videoElem.pause();
         videoElem.removeAttribute("src");
-        videoElem.load();
+        if (typeof videoElem.load === "function") videoElem.load();
       }
     }
   }
@@ -1833,6 +1906,32 @@ class PortfolioController {
   }
 
   bindEvents() {
+    // 0. Listener de Internacionalización (i18n): re-renderiza tarjetas y modal al cambiar de idioma
+    document.addEventListener("i18n:languageChange", () => {
+      this.refreshGrid();
+      const activeCertTab = document.querySelector("[data-cert-filter].active");
+      const certCat = activeCertTab ? activeCertTab.getAttribute("data-cert-filter") : "all";
+      this.refreshCertificatesGrid(certCat);
+
+      // Si el modal está activo para un proyecto, refrescarlo en el nuevo idioma
+      if (this.model.activeProject) {
+        this.openModal(this.model.activeProject.id, this.model.activeMediaIndex);
+      }
+    });
+
+    // 0. Listener de Internacionalización (i18n): re-renderiza tarjetas y modal al cambiar de idioma
+    document.addEventListener("i18n:languageChange", () => {
+      this.refreshGrid();
+      const activeCertTab = document.querySelector("[data-cert-filter].active");
+      const certCat = activeCertTab ? activeCertTab.getAttribute("data-cert-filter") : "all";
+      this.refreshCertificatesGrid(certCat);
+
+      // Si el modal está activo para un proyecto, refrescarlo en el nuevo idioma
+      if (this.model.activeProject) {
+        this.openModal(this.model.activeProject.id, this.model.activeMediaIndex);
+      }
+    });
+
     // 1. Filtrado por categorías de proyectos
     this.view.filterTabs.forEach(tab => {
       tab.addEventListener("click", () => {
@@ -1863,6 +1962,7 @@ class PortfolioController {
           const certId = card.getAttribute("data-cert-id");
           const cert = this.model.getCertificateById(certId);
           if (cert) {
+            this.currentCertId = certId;
             this.view.renderCertificateModal(cert);
           }
         }
@@ -1939,11 +2039,11 @@ class PortfolioController {
             const textEl = toggleLayoutBtn.querySelector('.layout-toggle-text');
             if (isStacked) {
               if (iconEl) iconEl.textContent = '◫';
-              if (textEl) textEl.textContent = 'Ver Lado a Lado';
+              if (textEl) textEl.textContent = window.i18n ? window.i18n.t("modal_view_side") : 'Ver Lado a Lado';
               toggleLayoutBtn.setAttribute('title', 'Cambiar a vista lado a lado');
             } else {
               if (iconEl) iconEl.textContent = '⬍';
-              if (textEl) textEl.textContent = 'Ver Abajo';
+              if (textEl) textEl.textContent = window.i18n ? window.i18n.t("modal_view_below") : 'Ver Abajo';
               toggleLayoutBtn.setAttribute('title', 'Colocar código abajo y ampliar imagen al 100%');
             }
           }
@@ -1958,7 +2058,7 @@ class PortfolioController {
           if (copyText) {
             const handleSuccess = () => {
               const prev = copyBtn.innerHTML;
-              copyBtn.innerHTML = '<span>✓</span> ¡Copiado!';
+              copyBtn.innerHTML = '<span>✓</span> ' + (window.i18n ? window.i18n.t("modal_copied") : '¡Copiado!');
               copyBtn.style.color = '#27c93f';
               copyBtn.style.borderColor = '#27c93f';
               setTimeout(() => {
@@ -2062,9 +2162,12 @@ class PortfolioController {
         pcbBtnHw.classList.add("active");
         pcbBtnArt.classList.remove("active");
         pcbImg.src = "assets/branding/pcb-banner-dragon.png";
-        pcbImg.alt = "Arte conceptual generado con IA estilo PCB con dragón medieval enrutado en cobre - Forging the Digital Reality";
+        pcbImg.alt = window.i18n && window.i18n.getLanguage() === 'en'
+          ? "AI Concept Art PCB style with medieval dragon routed in copper - Forging the Digital Reality"
+          : "Arte conceptual generado con IA estilo PCB con dragón medieval enrutado en cobre - Forging the Digital Reality";
         if (pcbHint) {
-          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Arte Conceptual con IA • Estética de circuito impreso, trazas de cobre y dragón medieval`;
+          const hint = window.i18n ? window.i18n.t("pcb_hint_hw") : "Arte Conceptual con IA • Estética de circuito impreso, trazas de cobre y dragón medieval";
+          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> ${hint}`;
         }
       });
 
@@ -2072,9 +2175,12 @@ class PortfolioController {
         pcbBtnArt.classList.add("active");
         pcbBtnHw.classList.remove("active");
         pcbImg.src = "assets/branding/dragon-fire-banner.jpg";
-        pcbImg.alt = "Concept Art con IA con dragón nórdico/celta y fuego entre glifos prehispánicos - Forging the Digital Reality";
+        pcbImg.alt = window.i18n && window.i18n.getLanguage() === 'en'
+          ? "AI Concept Art with Nordic/Celtic dragon and fire among Pre-Hispanic glyphs - Forging the Digital Reality"
+          : "Concept Art con IA con dragón nórdico/celta y fuego entre glifos prehispánicos - Forging the Digital Reality";
         if (pcbHint) {
-          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Concept Art con IA • Dragón nórdico/celta exhalando fuego entre glifos prehispánicos`;
+          const hint = window.i18n ? window.i18n.t("pcb_hint_art") : "Concept Art con IA • Dragón nórdico/celta exhalando fuego entre glifos prehispánicos";
+          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> ${hint}`;
         }
       });
     }

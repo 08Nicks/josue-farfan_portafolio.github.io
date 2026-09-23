@@ -336,6 +336,50 @@ body::before {
   transform: translateY(-2px);
 }
 
+/* Language Toggle Button (Cyber-Forge Aesthetic) */
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-full);
+  background: rgba(18, 25, 41, 0.85);
+  border: 1px solid rgba(212, 155, 87, 0.35);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  position: relative;
+  user-select: none;
+  margin-right: 4px;
+}
+
+.lang-toggle-btn:hover {
+  border-color: #f5c278;
+  box-shadow: 0 0 14px rgba(245, 194, 120, 0.35);
+  transform: translateY(-1px);
+}
+
+.lang-opt {
+  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+  color: var(--text-muted);
+}
+
+.lang-opt.active {
+  color: #f5c278;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(245, 194, 120, 0.5);
+}
+
+.lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.72rem;
+}
 
 .mobile-toggle {
   display: none;
