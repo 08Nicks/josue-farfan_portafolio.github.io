@@ -21,3 +21,6 @@ $RECYCLE.BIN/
 # Documentos locales no publicables segun instruccion de usuario
 Antena_Patch*.pdf
 extracted_pdf_text.txt
+.env
+**/.env
+CV/
