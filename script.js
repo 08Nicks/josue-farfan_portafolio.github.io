@@ -210,26 +210,25 @@ const projectsData = [
     ]
   },
   {
-    id: "invernadero-climatizacion-mq",
-    title: "Control Térmico de Invernadero en Lazo Cerrado y Monitoreo de Gases MQ",
-    category: "power",
-    categoryLabel: "Electrónica de Potencia",
-    tag: "Agrotecnología & Automatización",
+    id: "incubadora-biogas-termica",
+    title: "Incubadora para Producción de Biogás con Control Térmico y Sensor de Gas",
+    category: "embedded",
+    categoryLabel: "Sistemas Embebidos & Control",
+    tag: "Servicio Social / Bioprocesos",
     mediaType: "image",
     mediaUrl: "WhatsApp Image 2026-09-22 at 4.33.22 PM.jpeg",
     secondaryMedia: [
       "Control de invernadero por temepratura.png",
-      "Imagen de WhatsApp 2025-06-15 a las 21.50.13_9232f2a1.jpg",
-      "WhatsApp Image 2026-09-22 at 4.38.24 PM.jpeg"
+      "Imagen de WhatsApp 2025-06-15 a las 21.50.13_9232f2a1.jpg"
     ],
-    tags: ["Arduino", "DS18B20 1-Wire", "Sensor MQ", "Relés 127V", "Proteus", "Ladrillo Refractario Nicrom"],
-    shortDesc: "Cámara bioclimática con control termostático digital de calefacción e inyección de aire, complementada con celda sensora de gases en tubería.",
-    whatIs: "Sistema de acondicionamiento climático automatizado para cultivo protegido que mantiene la temperatura dentro de una banda de histéresis óptima y monitorea concentraciones de gases en conductos cerrados.",
-    whatIDid: "Diseño del circuito de control con sensor de precisión digital DS18B20 (protocolo 1-Wire) y conmutación de potencia para lámpara/resistor y extractor de aire. Adaptación de un sensor de gas de la serie MQ dentro de un compartimento sellado impreso en 3D conectado a la tubería de gas/aire. Pruebas de alta temperatura con elemento calefactor de nicrom al rojo vivo en matriz refractaria.",
+    tags: ["Servicio Social", "Incubadora Biogás", "Arduino", "Sensor DS18B20", "Sensor MQ Gas", "Relevadores 127V", "Proteus", "Control en Lazo Cerrado"],
+    shortDesc: "Sistema de control térmico en lazo cerrado y monitoreo de gas desarrollado durante el servicio social para una incubadora de muestras generadoras de biogás.",
+    whatIs: "Cámara de incubación automatizada desarrollada para optimizar la digestión anaerobia y producción de biogás. Su objetivo es mantener las muestras biológicas en el rango térmico exacto para maximizar la actividad bacteriana, integrando además monitoreo de gases mediante sensores en conducto.",
+    whatIDid: "Desarrollo y programación del firmware en microcontrolador Arduino y simulación del circuito en Proteus. El sensor digital de temperatura DS18B20 se introdujo directamente dentro de las muestras para registrar la temperatura interna con máxima precisión. Con base en esta lectura, el sistema conmutaba mediante relevadores entre un foco incandescente de 127V (para calefacción) y un ventilador (para enfriamiento forzado). Adicionalmente, se integró un sensor de la serie MQ adaptado a la línea de tubería para registrar los gases emanados.",
     highlights: [
-      "Control proporcional / histerético para preservación de temperatura óptima",
-      "Cámara sensora de gas fabricada a medida con manufactura aditiva y sellado hermético",
-      "Gabinete de instrumentación electrónico aislado de la cámara húmeda"
+      "Medición de temperatura directa e in-situ dentro de las muestras biológicas con sensor digital DS18B20",
+      "Control térmico automatizado en lazo cerrado con doble etapa: foco calefactor y ventilador disipador",
+      "Monitoreo de gases en línea acoplando sensor de la serie MQ en ducto de latón sellado"
     ]
   },
   {
