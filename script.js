@@ -82,10 +82,7 @@ exit /b
 :FIN
 echo %green%Sesion iniciada exitosamente.%reset%
 pause`,
-    secondaryMedia: [
-      "inversor_cmos_tsmc28nm_layout.jpg",
-      "riscv_core_tsmc28nm_layout.jpg"
-    ],
+    secondaryMedia: [],
     tags: ["Cadence Virtuoso", "TSMC 28nm PDK", "Cadence Genus", "Script Launcher CLI", "Windows Batch", "Xming X11 / SSH", "Automatización EDA"],
     shortDesc: "Script interactivo en Windows Batch para automatizar el lanzamiento de Cadence Virtuoso TSMC 28nm, servidor gráfico X11, purga de sesiones y síntesis Genus.",
     whatIs: "Suite de automatización y entorno de trabajo CLI para herramientas EDA industriales (Cadence Virtuoso y Cadence Genus) con el kit de diseño de proceso (PDK) TSMC a 28 nanómetros. El objetivo del script es optimizar y asegurar el flujo de inicio de sesión hacia el cluster EDA, levantando el servidor gráfico X11 y gestionando bloqueos de diseño.",
@@ -106,8 +103,7 @@ pause`,
     mediaType: "image",
     mediaUrl: "inversor_cmos_tsmc28nm_layout.jpg",
     secondaryMedia: [
-      "riscv_core_tsmc28nm_layout.jpg",
-      "launcher.jpg"
+      "riscv_core_tsmc28nm_layout.jpg"
     ],
     tags: ["TSMC 28nm PDK", "Layout Full-Custom", "Inversor CMOS", "Procesador RISC-V", "Cadence Virtuoso", "Reglas DRC / LVS", "Floorplan & Routing"],
     shortDesc: "Trazado geométrico a nivel transistor de una celda inversora CMOS y análisis del floorplan físico del procesador RISC-V en nodo nanométrico TSMC 28nm.",
