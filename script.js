@@ -88,29 +88,27 @@ const projectsData = [
     ]
   },
   {
-    id: "dimmer-scr-potencia",
-    title: "Dimmer de Potencia AC por Control de Fase con SCR y Análisis Espectral",
+    id: "dimmer-scr-diac-baquelita",
+    title: "Placa Controladora de Potencia con SCR y DIAC en Baquelita Perforada",
     category: "power",
     categoryLabel: "Electrónica de Potencia",
-    tag: "Potencia & Simulación",
+    tag: "Potencia & Simulación BUAP",
     mediaType: "video",
-    mediaUrl: "VID-20241128-WA0026.mp4",
-    posterUrl: "video_thumbs/VID-20241128-WA0026.jpg",
+    mediaUrl: "bandicam_scr_proteus.mp4",
+    posterUrl: "video_thumbs/bandicam_thumb.jpg",
     secondaryMedia: [
       "Dimer scr proteus.png",
-      "WhatsApp Image 2026-09-22 at 4.35.48 PM.jpeg",
-      "WhatsApp Image 2026-09-22 at 4.35.30 PM.jpeg",
-      "Imagen de WhatsApp 2025-09-25 a las 19.40.56_6a8cc3ef.png",
-      "Imagen de WhatsApp 2025-09-20 a las 20.43.02_0caadc71.jpg"
+      "Imagen de WhatsApp 2025-09-20 a las 20.43.02_0caadc71.jpg",
+      "Imagen de WhatsApp 2025-09-25 a las 19.40.56_6a8cc3ef.png"
     ],
-    tags: ["SCR Tiristor", "Red RC Fase", "120V AC", "Osciloscopio GW Instek", "Proteus", "Perfboard"],
-    shortDesc: "Atenuador de fase AC para cargas resistivas e incandescentes, analizando la conmutación y armónicos a 120 Hz en osciloscopio digital.",
-    whatIs: "Atenuador electrónico de potencia (Dimmer) basado en tiristor SCR y red de desfasamiento RC para regular la potencia eficaz entregada a cargas conectadas a la red eléctrica doméstica/industrial de 120V AC.",
-    whatIDid: "Cálculo analítico del ángulo de retardo y simulación en Proteus con diodo rectificador y lámpara incandescente. Ensamble en placa perforada y protoboard con potenciómetro de ajuste fino. Medición en osciloscopio digital GW Instek GDS-1054B verificando la forma de onda recortada a 120.04 Hz y monitoreo de voltajes pico a pico de hasta 19.8V en el disparo de compuerta.",
+    tags: ["Tiristor SCR", "DIAC", "Baquelita Perforada", "Proteus 8 Professional", "Osciloscopio Digital", "Control de Fase AC", "Bandicam Demo"],
+    shortDesc: "Diseño, simulación en Proteus y construcción física en baquelita perforada de una tarjeta de control de fase AC con SCR y DIAC.",
+    whatIs: "Circuito de modulación de potencia eléctrica para corriente alterna (120V AC) basado en la conmutación controlada por ángulo de fase, utilizando un tiristor SCR disparado mediante la ruptura simétrica de un DIAC.",
+    whatIDid: "Modelado y simulación interactiva en Proteus 8 Professional verificando la respuesta de la señal senoidal recortada en el osciloscopio virtual ante variaciones del potenciómetro. Posteriormente, ensamble físico y soldadura de los componentes (red RC, potenciómetro, resistencias de precisión, DIAC y tiristor SCR) en baquelita perforada (perfboard). Validación experimental en el laboratorio de la BUAP comprobando la forma de onda a 120.04 Hz en osciloscopio digital GW Instek.",
     highlights: [
-      "Regulación continua y suave de 0 a 100% de luminosidad/potencia en bombilla de 120V",
-      "Validación experimental con coincidencia exacta respecto al modelo simulado en Proteus",
-      "Registro de oscilogramas reales con parámetros de frecuencia (120 Hz) y pendientes dV/dt"
+      "Simulación dinámica capturada en video demostrativo de Proteus 8 con osciloscopio virtual",
+      "Ensamble artesanal y soldadura en placa de baquelita perforada con potenciómetro integrado",
+      "Contraste y coincidencia perfecta entre la forma de onda simulada y la medida a 120 Hz en osciloscopio real"
     ]
   },
   {
