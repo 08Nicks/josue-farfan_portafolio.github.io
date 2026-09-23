@@ -1360,7 +1360,10 @@ class PortfolioView {
               <span>${this.escapeHtml(cert.title)}</span>
             </div>
             <div class="pdf-pane-actions">
-              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pantalla completa">
+              <button type="button" class="pdf-action-btn btn-view-switch" id="btnCertViewToggle" data-mode="pdf" title="Alternar entre visor PDF y vista completa de alta definición">
+                <span id="certToggleIcon">🖼️</span> <span id="certToggleLabel">Ajuste 100% Documento</span>
+              </button>
+              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir archivo PDF oficial en pestaña completa">
                 <span>↗</span> Pantalla Completa
               </a>
               <a href="${cert.fileUrl}" download class="pdf-action-btn" title="Descargar documento oficial original">
@@ -1368,11 +1371,48 @@ class PortfolioView {
               </a>
             </div>
           </div>
-          <div class="cert-pdf-viewport">
-            <iframe src="${cert.fileUrl}#toolbar=1&navpanes=0&view=FitH" class="cert-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
+          <div class="cert-pdf-viewport" id="certViewportContainer">
+            <div class="cert-embed-wrapper" id="certEmbedWrapper">
+              <iframe src="${cert.fileUrl}#page=1&view=Fit&toolbar=0&navpanes=0" class="cert-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
+            </div>
+            <div class="cert-fullimage-wrapper" id="certFullImageWrapper" style="display: none;">
+              <img src="${cert.previewUrl}" alt="${this.escapeHtml(cert.title)}" class="cert-full-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para abrir PDF oficial original" />
+              <div class="cert-fullimage-hint">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Documento oficial completo al 100% · Clic para abrir PDF vectorial en pestaña nueva</span>
+              </div>
+            </div>
           </div>
         </div>
       `;
+
+      // Event listener para alternar entre visor PDF y documento completo al 100%
+      const toggleBtn = document.getElementById("btnCertViewToggle");
+      const embedWrap = document.getElementById("certEmbedWrapper");
+      const imgWrap = document.getElementById("certFullImageWrapper");
+      const toggleLabel = document.getElementById("certToggleLabel");
+      const toggleIcon = document.getElementById("certToggleIcon");
+
+      if (toggleBtn && embedWrap && imgWrap) {
+        toggleBtn.addEventListener("click", () => {
+          const currentMode = toggleBtn.getAttribute("data-mode");
+          if (currentMode === "pdf") {
+            embedWrap.style.display = "none";
+            imgWrap.style.display = "flex";
+            toggleBtn.setAttribute("data-mode", "img");
+            toggleLabel.textContent = "Ver Visor PDF";
+            toggleIcon.textContent = "📄";
+            toggleBtn.classList.add("active-toggle");
+          } else {
+            imgWrap.style.display = "none";
+            embedWrap.style.display = "block";
+            toggleBtn.setAttribute("data-mode", "pdf");
+            toggleLabel.textContent = "Ajuste 100% Documento";
+            toggleIcon.textContent = "🖼️";
+            toggleBtn.classList.remove("active-toggle");
+          }
+        });
+      }
     } else {
       this.modalMediaStage.innerHTML = `
         <div class="modal-media-viewport">
