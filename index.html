@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ing. Josué Farfán González | Portafolio de Ingeniería Electrónica, Mecatrónica & Sistemas Embebidos</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Portafolio profesional del Ing. Josué Farfán González (BUAP / INAOE). Proyectos reales en Microelectrónica VLSI (TSMC 28nm, Cuarto Limpio), FPGAs Spartan, Sistemas Embebidos IoT ESP32, Electrónica de Potencia, Visión Artificial y RF." />
+  <meta name="keywords" content="Josué Farfán, Ingeniero Electrónica, Mecatrónica, INAOE, BUAP, FPGA, Spartan, ESP32, VHDL, Cadence Virtuoso, VLSI, Cleanroom, Electrónica de Potencia, SCR, Tiristores, FastALPR, Antena Patch 2.4GHz" />
+  <meta name="author" content="Ing. Josué Farfán González" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ing. Josué Farfán González | Portafolio de Ingeniería" />
+  <meta property="og:description" content="Evidencia técnica y proyectos de ingeniería: Silicio, FPGAs, Sistemas Embebidos, Motores Industriales y Visión Artificial." />
+  <meta property="og:image" content="WhatsApp Image 2026-09-22 at 4.38.59 PM.jpeg" />
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%230a0e17'/%3E%3Cpath d='M25 35 L45 35 L45 65 C45 72 38 75 30 75' stroke='%2300f2fe' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M55 35 L80 35 M55 52 L75 52 M55 35 L55 75' stroke='%233b82f6' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts Preconnect & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Ambient Animated Glow Orbs -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#inicio" class="nav-brand" aria-label="Inicio">
+        <div class="brand-badge">JF</div>
+        <div class="brand-info">
+          <span class="brand-name">Josué Farfán G.</span>
+          <span class="brand-sub">Ing. Electrónica & Mecatrónica</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+          <li><a href="#especialidades" class="nav-link">Especialidades</a></li>
+          <li><a href="#sobre-mi" class="nav-link">Trayectoria</a></li>
+          <li><a href="#instrumentacion" class="nav-link">Instrumentación</a></li>
+          <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com/08Nicks/josue-farfan_portafolio.github.io" target="_blank" rel="noopener noreferrer" class="btn-github" title="Ver repositorio en GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú de navegación">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <div class="hero-badge-wrap">
+            <span class="pulse-dot"></span>
+            <span class="hero-badge-text">Investigador & Desarrollador R&D • INAOE / BUAP</span>
+          </div>
+
+          <h1 class="hero-title">
+            Transformando ideas en <span class="gradient-text">silicio, hardware</span> y sistemas embebidos de alta precisión.
+          </h1>
+
+          <p class="hero-description">
+            Soy <strong>Josué Farfán González</strong>, Ingeniero especializado en <strong>Microelectrónica VLSI (TSMC 28nm)</strong>, lógica digital en <strong>FPGAs Spartan</strong>, sistemas embebidos IoT en <strong>ESP32</strong>, electrónica de potencia industrial y visión computacional en tiempo real.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#proyectos" class="btn-primary">
+              <span>Explorar Proyectos</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#contacto" class="btn-secondary">
+              <span>Contactar / Colaborar</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">15<span>+</span></div>
+              <div class="stat-label">Proyectos Documentados</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">6<span>/6</span></div>
+              <div class="stat-label">Áreas de Especialidad</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100<span>%</span></div>
+              <div class="stat-label">Evidencia Real en Laboratorio</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-card">
+            <!-- Chip flotante 1 -->
+            <div class="floating-chip chip-1">
+              <span style="color: #00f2fe;">◈</span> TSMC 28nm • Cadence
+            </div>
+
+            <div class="card-image-wrap">
+              <img src="WhatsApp%20Image%202026-09-22%20at%204.38.59%20PM.jpeg" alt="Ing. Josué Farfán en sala limpia de semiconductores con oblea de silicio" />
+            </div>
+
+            <!-- Chip flotante 2 -->
+            <div class="floating-chip chip-2">
+              <span style="color: #8b5cf6;">⚡</span> FPGA Spartan & ESP32
+            </div>
+
+            <div class="card-overlay-badge">
+              <div class="overlay-icon">🔬</div>
+              <div class="overlay-text">
+                <strong>Ing. Josué Farfán González</strong>
+                <span>Fabricación en Cuarto Limpio & Nodos Nanométricos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Portafolio Técnico</span>
+          <h2 class="section-title">Galería de Proyectos & Desarrollo de Hardware</h2>
+          <p class="section-sub">
+            Haz clic en cualquier proyecto para acceder a la <strong>ficha técnica detallada</strong>, esquemáticos en Proteus, videos demostrativos y registro de oscilogramas.
+          </p>
+        </div>
+
+        <!-- Controls: Search & Category Tabs -->
+        <div class="controls-container">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar por palabra clave: ESP32, FPGA, SCR, Cadence, Proteus, Antena..." aria-label="Buscar proyectos" />
+            <button id="searchClear" class="search-clear" title="Limpiar búsqueda">✕</button>
+          </div>
+
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">
+              <span>Todos</span>
+              <span class="tab-badge">15</span>
+            </button>
+            <button class="filter-tab" data-filter="vlsi">
+              <span>Microelectrónica & VLSI</span>
+            </button>
+            <button class="filter-tab" data-filter="embedded">
+              <span>Sistemas Embebidos & IoT</span>
+            </button>
+            <button class="filter-tab" data-filter="power">
+              <span>Electrónica de Potencia</span>
+            </button>
+            <button class="filter-tab" data-filter="fpga">
+              <span>FPGAs & Lógica Digital</span>
+            </button>
+            <button class="filter-tab" data-filter="ai">
+              <span>IA & Visión Artificial</span>
+            </button>
+            <button class="filter-tab" data-filter="rf">
+              <span>RF & Telecom</span>
+            </button>
+            <button class="filter-tab" data-filter="robotics">
+              <span>Robótica & CAD 3D</span>
+            </button>
+          </div>
+
+          <div class="results-count-bar" id="resultsCount">
+            Cargando proyectos...
+          </div>
+        </div>
+
+        <!-- Reactive Project Cards Grid -->
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Generado dinámicamente por script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Engineering Domains / Specializations Section -->
+    <section class="section" id="especialidades" style="background: rgba(10, 14, 23, 0.4); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Capacidades Técnicas</span>
+          <h2 class="section-title">Especializaciones de Ingeniería</h2>
+          <p class="section-sub">
+            Integración vertical de conocimiento: desde el diseño y fabricación de circuitos integrados hasta el control electromecánico de alta potencia en la industria.
+          </p>
+        </div>
+
+        <div class="specs-grid">
+          <!-- Card 1 -->
+          <div class="spec-card">
+            <div class="spec-icon-wrap">🔬</div>
+            <h3 class="spec-title">Microelectrónica & Diseño VLSI</h3>
+            <p class="spec-desc">
+              Flujo completo en herramientas de grado industrial EDA para nodos nanométricos (TSMC 28nm) y experiencia de sala limpia.
+            </p>
+            <ul class="spec-skills">
+              <li>Cadence Virtuoso (Layout & Schematics)</li>
+              <li>Síntesis lógica con Cadence Genus</li>
+              <li>Simulación RTL en Verilog / VHDL</li>
+              <li>Manipulación de obleas de silicio en Cleanroom</li>
+            </ul>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="spec-card">
+            <div class="spec-icon-wrap">⚡</div>
+            <h3 class="spec-title">Electrónica de Potencia & Motores</h3>
+            <p class="spec-desc">
+              Control de máquinas eléctricas rotativas y modulación de energía en corriente alterna y directa de alta potencia.
+            </p>
+            <ul class="spec-skills">
+              <li>Control de motores trifásicos industriales</li>
+              <li>Puentes rectificadores con tiristores (SCR)</li>
+              <li>Detección de cruce por cero y disparo de fase</li>
+              <li>Automatización con PLCs y lógica de relevación</li>
+            </ul>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="spec-card">
+            <div class="spec-icon-wrap">📟</div>
+            <h3 class="spec-title">FPGAs & Lógica Reconfigurable</h3>
+            <p class="spec-desc">
+              Diseño de arquitecturas paralelas en silicio sin latencia de CPU para procesamiento de señales y temporización digital.
+            </p>
+            <ul class="spec-skills">
+              <li>Familias Xilinx Spartan-3E y Spartan-6 Nexys 3</li>
+              <li>Descripción de hardware en VHDL</li>
+              <li>Generación de PWM y controladores LCD por compuertas</li>
+              <li>Conteo de tiempo de vuelo ultrasónico en tiempo real</li>
+            </ul>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="spec-card">
+            <div class="spec-icon-wrap">🌐</div>
+            <h3 class="spec-title">Sistemas Embebidos & IoT</h3>
+            <p class="spec-desc">
+              Desarrollo de firmware en C/C++ bare-metal y RTOS para telemetría distribuida, pantallas táctiles y sensores industriales.
+            </p>
+            <ul class="spec-skills">
+              <li>ESP32, Arduino Mega/Uno, STM32</li>
+              <li>Bibliotecas gráficas optimizadas (LovyanGFX)</li>
+              <li>Buses I2C, SPI, UART y 1-Wire (DS18B20, INA219)</li>
+              <li>Redes ad-hoc WiFi SoftAP y servidores HTTP asíncronos</li>
+            </ul>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="spec-card">
+            <div class="spec-icon-wrap">📡</div>
+            <h3 class="spec-title">RF & Telecomunicaciones</h3>
+            <p class="spec-desc">
+              Diseño electromagnético, acoplamiento de impedancias y caracterización instrumental en frecuencias de microondas.
+            </p>
+            <ul class="spec-skills">
+              <li>Antenas planas Microstrip Patch a 2.45 GHz</li>
+              <li>Líneas de transmisión y matching a 50 Ohmios</li>
+              <li>Medición en analizador de espectro de RF</li>
+              <li>Generación de ruido físico para criptografía (TRNG)</li>
+            </ul>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="spec-card">
+            <div class="spec-icon-wrap">👁️</div>
+            <h3 class="spec-title">IA, Visión & Robótica</h3>
+            <p class="spec-desc">
+              Procesamiento de imágenes por computadora, modelos de deep learning para OCR y cinemática de mecanismos impresos en 3D.
+            </p>
+            <ul class="spec-skills">
+              <li>Sistemas ANPR/ALPR en tiempo real (FastALPR)</li>
+              <li>OpenCV, Python, PyTorch y APIs FastAPI</li>
+              <li>Perfilometría e inspección por línea láser</li>
+              <li>Modelado 3D CAD y manufactura aditiva Creality Ender</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me / Trajectory Section -->
+    <section class="section" id="sobre-mi">
+      <div class="container about-grid">
+        <div class="about-card">
+          <div class="about-photo-wrap">
+            <img src="WhatsApp%20Image%202026-09-22%20at%204.38.59%20PM.jpeg" alt="Ing. Josué Farfán González en Sala Limpia de Semiconductores" />
+          </div>
+          <div class="about-caption">
+            Ing. Josué Farfán González • Sala Limpia & Oblea de Silicio
+          </div>
+        </div>
+
+        <div class="about-content">
+          <span class="section-tag">Perfil Profesional</span>
+          <h3>Ing. Josué Farfán González</h3>
+          <p class="about-lead">
+            Ingeniero apasionado por la convergencia entre el diseño de circuitos a nivel de silicio, la lógica programable en FPGAs y la electrónica de potencia aplicada a la industria.
+          </p>
+
+          <p class="about-text">
+            Mi trayectoria combina formación académica rigurosa en la <strong>Benemérita Universidad Autónoma de Puebla (BUAP)</strong> y proyectos de investigación aplicada en el <strong>Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE)</strong>. 
+          </p>
+          <p class="about-text">
+            No me limito a la teoría o simulación: cada proyecto en este portafolio cuenta con verificación física en banco de pruebas, registro en osciloscopio o analizador de espectro, prototipos funcionales y código en producción.
+          </p>
+
+          <div class="trajectory-list">
+            <div class="trajectory-item">
+              <div class="item-bullet">🏛️</div>
+              <div class="item-content">
+                <h4>Investigación & Desarrollo • INAOE</h4>
+                <p>Desarrollo de tacómetro de calibración industrial bajo supervisión del Dr. Alfredo Benítez Lara e implementación de estaciones de telemetría táctil con ESP32 y sensores de potencia.</p>
+              </div>
+            </div>
+
+            <div class="trajectory-item">
+              <div class="item-bullet">🎓</div>
+              <div class="item-content">
+                <h4>Formación en Ingeniería • BUAP</h4>
+                <p>Especialización en electrónica de potencia, diseño con FPGAs Xilinx en VHDL, control de motores industriales y banco de automatización con PLC.</p>
+              </div>
+            </div>
+
+            <div class="trajectory-item">
+              <div class="item-bullet">⚙️</div>
+              <div class="item-content">
+                <h4>Laboratorio & Sala Limpia de Semiconductores</h4>
+                <p>Experiencia práctica en cuarto limpio clase 100/1000 en procesos de fotolitografía para obleas de silicio, así como flujo RTL-to-GDSII en nodo TSMC de 28nm con Cadence Virtuoso.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab Instrumentation & Tech Matrix Section -->
+    <section class="section" id="instrumentacion">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Herramientas & Laboratorio</span>
+          <h2 class="section-title">Ecosistema Tecnológico e Instrumentación</h2>
+          <p class="section-sub">
+            Instrumentos de medición y suites de software con los que desarrollo, pruebo y valido sistemas físicos.
+          </p>
+        </div>
+
+        <div class="matrix-grid">
+          <div class="matrix-card">
+            <div class="matrix-header">
+              <span class="matrix-icon">📊</span>
+              <h4>Instrumentación de Laboratorio</h4>
+            </div>
+            <div class="matrix-tags">
+              <span class="matrix-badge">Tektronix TDS 2002C</span>
+              <span class="matrix-badge">GW Instek GDS-1054B</span>
+              <span class="matrix-badge">Analizador de Espectro RF (2.45 GHz)</span>
+              <span class="matrix-badge">HAMEG HMF2550 (Generador Arbitrario)</span>
+              <span class="matrix-badge">Multímetros Digitales de Banco</span>
+              <span class="matrix-badge">Tacómetros Ópticos Digitales</span>
+            </div>
+          </div>
+
+          <div class="matrix-card">
+            <div class="matrix-header">
+              <span class="matrix-icon">💻</span>
+              <h4>Software & Suites EDA</h4>
+            </div>
+            <div class="matrix-tags">
+              <span class="matrix-badge">Cadence Virtuoso</span>
+              <span class="matrix-badge">Cadence Genus Synthesis</span>
+              <span class="matrix-badge">Xilinx ISE / Vivado</span>
+              <span class="matrix-badge">Labcenter Proteus ISIS</span>
+              <span class="matrix-badge">PlatformIO & VS Code</span>
+              <span class="matrix-badge">Wokwi Simulator</span>
+              <span class="matrix-badge">AutoCAD & Tinkercad</span>
+            </div>
+          </div>
+
+          <div class="matrix-card">
+            <div class="matrix-header">
+              <span class="matrix-icon">🧩</span>
+              <h4>Hardware, MCUs & FPGAs</h4>
+            </div>
+            <div class="matrix-tags">
+              <span class="matrix-badge">Xilinx Spartan-3E</span>
+              <span class="matrix-badge">Spartan-6 Nexys 3</span>
+              <span class="matrix-badge">ESP32 (Dual Core Xtensa)</span>
+              <span class="matrix-badge">Arduino Mega 2560 / Uno</span>
+              <span class="matrix-badge">Tiristores SCR T106</span>
+              <span class="matrix-badge">Optoacopladores MOC3021 / PC817</span>
+              <span class="matrix-badge">Sensor INA219 (V/I)</span>
+              <span class="matrix-badge">ADC0804 & NE555</span>
+            </div>
+          </div>
+
+          <div class="matrix-card">
+            <div class="matrix-header">
+              <span class="matrix-icon">⚙️</span>
+              <h4>Lenguajes & Protocolos</h4>
+            </div>
+            <div class="matrix-tags">
+              <span class="matrix-badge">C / C++ Embebido</span>
+              <span class="matrix-badge">VHDL</span>
+              <span class="matrix-badge">Verilog</span>
+              <span class="matrix-badge">Python 3 (OpenCV, FastAPI)</span>
+              <span class="matrix-badge">I2C / SPI / UART</span>
+              <span class="matrix-badge">WiFi SoftAP / HTTP REST</span>
+              <span class="matrix-badge">Ladder Logic (PLC)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="contact-card">
+          <span class="section-tag" style="background: rgba(0, 242, 254, 0.1);">¿Interesado en colaborar?</span>
+          <h2 class="contact-title">Iniciemos un Proyecto Juntos</h2>
+          <p class="contact-sub">
+            Disponible para desarrollo de sistemas embebidos, diseño digital en FPGAs, electrónica de potencia, asesoría en microelectrónica y proyectos de visión computacional.
+          </p>
+
+          <div class="contact-buttons">
+            <a href="https://github.com/08Nicks" target="_blank" rel="noopener noreferrer" class="contact-btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>GitHub: @08Nicks</span>
+            </a>
+
+            <a href="https://wa.me/5212220000000" target="_blank" rel="noopener noreferrer" class="contact-btn btn-whatsapp" title="Enviar mensaje por WhatsApp">
+              <span>💬 Contactar por WhatsApp</span>
+            </a>
+
+            <a href="mailto:josue.farfan@example.com" class="contact-btn btn-email">
+              <span>✉ Enviar Correo Directo</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <p>© 2026 <strong>Ing. Josué Farfán González</strong>. Diseñado con Vanilla HTML5, CSS3 & JS para GitHub Pages.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#inicio" class="footer-link">Volver Arriba ↑</a>
+        <a href="https://github.com/08Nicks/josue-farfan_portafolio.github.io" target="_blank" rel="noopener noreferrer" class="footer-link">Ver Código Fuente</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox / Technical Detail Modal -->
+  <div class="modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-badge" id="modalCategoryBadge">Categoría</span>
+          <span class="modal-badge" id="modalTagBadge" style="background: rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.4); color: #c4b5fd;">Institución</span>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Cerrar modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Main Media Stage -->
+        <div class="modal-media-stage" id="modalMediaStage">
+          <!-- Renderizado dinámico de imagen o video -->
+        </div>
+
+        <!-- Secondary Thumbnails Strip -->
+        <div class="modal-gallery-strip" id="modalGalleryStrip">
+          <!-- Tira de miniaturas de vistas adicionales si aplica -->
+        </div>
+
+        <!-- Technical Description -->
+        <div class="modal-details">
+          <h3 id="modalTitle">Título del Proyecto</h3>
+
+          <div class="modal-sections">
+            <div class="modal-col">
+              <h4><span>💡</span> ¿Qué es este sistema?</h4>
+              <p id="modalWhatIs">Descripción conceptual y funcional del proyecto.</p>
+            </div>
+
+            <div class="modal-col">
+              <h4><span>🛠️</span> ¿Qué se hizo & Reto superado?</h4>
+              <p id="modalWhatIDid">Detalles del desarrollo técnico, programación y montaje físico.</p>
+            </div>
+          </div>
+
+          <div class="modal-col" style="margin-bottom: 1.5rem;">
+            <h4><span>⭐</span> Puntos Clave de Ingeniería</h4>
+            <ul class="modal-highlights" id="modalHighlights">
+              <!-- Lista de viñetas con logros técnicos -->
+            </ul>
+          </div>
+
+          <div>
+            <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
+              Tecnologías, Protocolos & Herramientas:
+            </div>
+            <div class="modal-tags-box" id="modalTagsBox">
+              <!-- Badges de herramientas -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>

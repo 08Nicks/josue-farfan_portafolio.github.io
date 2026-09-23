@@ -1,0 +1,17 @@
+# PlatformIO build artifacts
+.pio/
+**/build/
+*.bin
+*.elf
+*.hex
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS temporary files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
