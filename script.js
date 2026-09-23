@@ -1025,7 +1025,7 @@ class PortfolioView {
 
   renderProjectsGrid(filteredProjects, totalCount, onResetFilters) {
     if (this.resultsCountBar) {
-      this.resultsCountBar.textContent = `Mostrando ${filteredProjects.length} de ${totalCount} proyectos de ingeniería`;
+      this.resultsCountBar.textContent = `Mostrando ${filteredProjects.length} de ${totalCount} proyectos`;
     }
 
     if (!this.projectsGrid) return;
