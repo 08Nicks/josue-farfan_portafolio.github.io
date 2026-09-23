@@ -1613,8 +1613,8 @@
         const key = el.getAttribute("data-i18n");
         const translation = this.t(key);
         if (translation) {
-          // If translation contains HTML tags (e.g. strong, span)
-          if (/<[a-z][sS]*>/i.test(translation)) {
+          // If translation contains HTML tags (e.g. <strong>, <span class="...">)
+          if (translation.includes("<") && translation.includes(">")) {
             el.innerHTML = translation;
           } else {
             el.textContent = translation;

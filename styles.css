@@ -192,6 +192,7 @@ body::before {
   align-items: center;
   justify-content: space-between;
   height: 76px;
+  gap: 1.25rem;
 }
 
 .nav-brand {
@@ -274,18 +275,19 @@ body::before {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   list-style: none;
 }
 
 .nav-link {
   text-decoration: none;
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   transition: color var(--transition-fast);
   position: relative;
   padding: 6px 0;
+  white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -313,6 +315,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .nav-icon-link {
@@ -327,6 +331,7 @@ body::before {
   color: var(--text-secondary);
   transition: all var(--transition-fast);
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .nav-icon-link:hover {
@@ -336,7 +341,7 @@ body::before {
   transform: translateY(-2px);
 }
 
-/* Language Toggle Button (Cyber-Forge Aesthetic) */
+/* Language Toggle Button (Cyber-Forge Aesthetic - al fondo a la derecha) */
 .lang-toggle-btn {
   display: inline-flex;
   align-items: center;
@@ -356,7 +361,9 @@ body::before {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   position: relative;
   user-select: none;
-  margin-right: 4px;
+  margin-left: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .lang-toggle-btn:hover {
@@ -2514,6 +2521,15 @@ body::before {
 /* ==========================================================================
    Responsive Design System (Mobile & Tablet Optimization)
    ========================================================================== */
+@media (max-width: 1100px) {
+  .nav-menu {
+    gap: 0.95rem;
+  }
+  .nav-link {
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -2541,6 +2557,7 @@ body::before {
   /* Navbar */
   .nav-container {
     height: 64px;
+    gap: 0.75rem;
   }
   .nav-menu {
     position: fixed;
@@ -2574,10 +2591,16 @@ body::before {
     font-size: 1.6rem;
     color: var(--accent-cyan);
     padding: 6px;
+    flex-shrink: 0;
   }
-  .nav-actions .btn-github {
-    padding: 6px 12px;
-    font-size: 0.8rem;
+  .nav-actions {
+    gap: 8px;
+  }
+  .lang-toggle-btn {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.75rem;
+    margin-left: 2px;
   }
 
   /* Hero Section */
@@ -2902,6 +2925,42 @@ body::before {
 }
 
 @media (max-width: 480px) {
+  .nav-container {
+    padding: 0 0.75rem;
+    gap: 6px;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .brand-name {
+    font-size: 1rem;
+  }
+  .brand-badge-dragon {
+    width: 36px;
+    height: 36px;
+  }
+  .brand-dragon-crest {
+    width: 26px;
+    height: 26px;
+  }
+  .nav-actions {
+    gap: 5px;
+  }
+  .nav-icon-link {
+    width: 30px;
+    height: 30px;
+  }
+  .nav-icon-link svg {
+    width: 14px;
+    height: 14px;
+  }
+  .lang-toggle-btn {
+    height: 28px;
+    padding: 0 8px;
+    font-size: 0.68rem;
+    gap: 3px;
+    margin-left: 0;
+  }
   .hero-stats {
     grid-template-columns: 1fr;
     gap: 0.65rem;
