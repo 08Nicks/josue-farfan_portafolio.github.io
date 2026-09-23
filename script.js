@@ -426,480 +426,643 @@ const projectsData = [
   }
 ];
 
-// Estado global de filtrado y búsqueda
-let currentCategory = "all";
-let currentSearchQuery = "";
-let currentModalProject = null;
-let currentModalMediaIndex = 0;
-
-// Elementos del DOM
-const projectsGrid = document.getElementById("projectsGrid");
-const filterTabs = document.querySelectorAll(".filter-tab");
-const searchInput = document.getElementById("searchInput");
-const searchClearBtn = document.getElementById("searchClear");
-const resultsCountBar = document.getElementById("resultsCount");
-const mobileToggle = document.getElementById("mobileToggle");
-const navMenu = document.getElementById("navMenu");
-
-// Modal Elements
-const modalOverlay = document.getElementById("projectModal");
-const modalCloseBtn = document.getElementById("modalCloseBtn");
-const modalCategoryBadge = document.getElementById("modalCategoryBadge");
-const modalTagBadge = document.getElementById("modalTagBadge");
-const modalMediaStage = document.getElementById("modalMediaStage");
-const modalGalleryStrip = document.getElementById("modalGalleryStrip");
-const modalTitle = document.getElementById("modalTitle");
-const modalWhatIs = document.getElementById("modalWhatIs");
-const modalWhatIDid = document.getElementById("modalWhatIDid");
-const modalHighlights = document.getElementById("modalHighlights");
-const modalTagsBox = document.getElementById("modalTagsBox");
+// ==========================================================================
+// ARQUITECTURA MVC (MODELO - VISTA - CONTROLADOR)
+// ==========================================================================
 
 /**
- * Función auxiliar para codificar rutas de archivos de forma segura para la web y GitHub Pages
+ * --------------------------------------------------------------------------
+ * 1. MODELO (PortfolioModel)
+ * Gestiona el estado de la aplicación, los proyectos, medios y filtros.
+ * --------------------------------------------------------------------------
  */
-function safeMediaUrl(url) {
-  if (!url) return "";
-  return encodeURI(url);
-}
+class PortfolioModel {
+  constructor(projects = []) {
+    this.projects = projects;
+    this.currentCategory = "all";
+    this.currentSearchQuery = "";
+    this.activeProject = null;
+    this.activeMediaIndex = 0;
+  }
 
-/**
- * Obtiene la lista completa y unificada de medios de un proyecto
- */
-function getProjectAllMedia(project) {
-  if (!project) return [];
-  const media = [
-    { type: project.mediaType, url: project.mediaUrl, poster: project.posterUrl }
-  ];
+  setCategory(category) {
+    this.currentCategory = category || "all";
+  }
 
-  if (project.secondaryMedia && project.secondaryMedia.length > 0) {
-    project.secondaryMedia.forEach(secUrl => {
-      const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
-      media.push({
-        type: isSecVideo ? "video" : "image",
-        url: secUrl,
-        poster: ""
-      });
+  setSearchQuery(query) {
+    this.currentSearchQuery = (query || "").trim();
+  }
+
+  getFilteredProjects() {
+    return this.projects.filter(project => {
+      const matchesCategory = this.currentCategory === "all" || project.category === this.currentCategory;
+      const query = this.currentSearchQuery.toLowerCase();
+
+      if (!query) return matchesCategory;
+
+      const matchesSearch =
+        project.title.toLowerCase().includes(query) ||
+        project.shortDesc.toLowerCase().includes(query) ||
+        project.whatIs.toLowerCase().includes(query) ||
+        project.whatIDid.toLowerCase().includes(query) ||
+        (project.tags && project.tags.some(tag => tag.toLowerCase().includes(query))) ||
+        (project.tag && project.tag.toLowerCase().includes(query));
+
+      return matchesCategory && matchesSearch;
     });
   }
 
-  return media;
+  getProjectById(id) {
+    return this.projects.find(p => p.id === id) || null;
+  }
+
+  getAllMedia(project) {
+    if (!project) return [];
+    const media = [
+      {
+        type: project.mediaType,
+        url: project.mediaUrl,
+        poster: project.posterUrl || ""
+      }
+    ];
+
+    if (project.secondaryMedia && project.secondaryMedia.length > 0) {
+      project.secondaryMedia.forEach(secUrl => {
+        const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
+        media.push({
+          type: isSecVideo ? "video" : "image",
+          url: secUrl,
+          poster: ""
+        });
+      });
+    }
+
+    return media;
+  }
+
+  setActiveProject(projectId, initialIndex = 0) {
+    const project = this.getProjectById(projectId);
+    if (!project) return null;
+
+    this.activeProject = project;
+    const mediaList = this.getAllMedia(project);
+    this.activeMediaIndex = (initialIndex >= 0 && initialIndex < mediaList.length) ? initialIndex : 0;
+
+    return {
+      project: this.activeProject,
+      mediaList,
+      currentIndex: this.activeMediaIndex
+    };
+  }
+
+  clearActiveProject() {
+    this.activeProject = null;
+    this.activeMediaIndex = 0;
+  }
+
+  stepMedia(direction) {
+    if (!this.activeProject) return null;
+    const mediaList = this.getAllMedia(this.activeProject);
+    if (mediaList.length <= 1) {
+      return { mediaList, currentIndex: this.activeMediaIndex };
+    }
+
+    this.activeMediaIndex = (this.activeMediaIndex + direction + mediaList.length) % mediaList.length;
+    return {
+      mediaList,
+      currentIndex: this.activeMediaIndex
+    };
+  }
+
+  setMediaIndex(index) {
+    if (!this.activeProject) return null;
+    const mediaList = this.getAllMedia(this.activeProject);
+    if (index >= 0 && index < mediaList.length) {
+      this.activeMediaIndex = index;
+    }
+    return {
+      mediaList,
+      currentIndex: this.activeMediaIndex
+    };
+  }
+
+  resetFilters() {
+    this.currentCategory = "all";
+    this.currentSearchQuery = "";
+  }
 }
 
 /**
- * Renderizado de las tarjetas de proyectos
+ * --------------------------------------------------------------------------
+ * 2. VISTA (PortfolioView)
+ * Administra el DOM, la representación gráfica, el modal y las animaciones.
+ * --------------------------------------------------------------------------
  */
-function renderProjects() {
-  const filtered = projectsData.filter(project => {
-    const matchesCategory = currentCategory === "all" || project.category === currentCategory;
-    const query = currentSearchQuery.toLowerCase().trim();
-    
-    if (!query) return matchesCategory;
+class PortfolioView {
+  constructor() {
+    // Referencias principales del DOM
+    this.projectsGrid = document.getElementById("projectsGrid");
+    this.filterTabs = document.querySelectorAll(".filter-tab");
+    this.searchInput = document.getElementById("searchInput");
+    this.searchClearBtn = document.getElementById("searchClear");
+    this.resultsCountBar = document.getElementById("resultsCount");
+    this.mobileToggle = document.getElementById("mobileToggle");
+    this.navMenu = document.getElementById("navMenu");
 
-    const matchesSearch = 
-      project.title.toLowerCase().includes(query) ||
-      project.shortDesc.toLowerCase().includes(query) ||
-      project.whatIs.toLowerCase().includes(query) ||
-      project.whatIDid.toLowerCase().includes(query) ||
-      project.tags.some(tag => tag.toLowerCase().includes(query)) ||
-      project.tag.toLowerCase().includes(query);
-
-    return matchesCategory && matchesSearch;
-  });
-
-  // Actualizar contador
-  if (resultsCountBar) {
-    resultsCountBar.textContent = `Mostrando ${filtered.length} de ${projectsData.length} proyectos de ingeniería`;
+    // Referencias del Modal
+    this.modalOverlay = document.getElementById("projectModal");
+    this.modalCloseBtn = document.getElementById("modalCloseBtn");
+    this.modalCategoryBadge = document.getElementById("modalCategoryBadge");
+    this.modalTagBadge = document.getElementById("modalTagBadge");
+    this.modalMediaStage = document.getElementById("modalMediaStage");
+    this.modalGalleryStrip = document.getElementById("modalGalleryStrip");
+    this.modalTitle = document.getElementById("modalTitle");
+    this.modalWhatIs = document.getElementById("modalWhatIs");
+    this.modalWhatIDid = document.getElementById("modalWhatIDid");
+    this.modalHighlights = document.getElementById("modalHighlights");
+    this.modalTagsBox = document.getElementById("modalTagsBox");
   }
 
-  // Si no hay resultados
-  if (filtered.length === 0) {
-    projectsGrid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
-        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
-        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-white);">No se encontraron proyectos</h3>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Intenta con otra palabra clave como "ESP32", "FPGA", "Tiristor", "Cadence" o "Antena".</p>
-        <button onclick="resetFilters()" class="btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">Restablecer filtros</button>
-      </div>
-    `;
-    return;
+  safeMediaUrl(url) {
+    if (!url) return "";
+    return encodeURI(url);
   }
 
-  // Generar tarjetas limpias y directas (la navegación con flechas es exclusiva del modal)
-  projectsGrid.innerHTML = filtered.map(project => {
-    const allMedia = getProjectAllMedia(project);
-    const hasMultiple = allMedia.length > 1;
+  renderProjectsGrid(filteredProjects, totalCount, onResetFilters) {
+    if (this.resultsCountBar) {
+      this.resultsCountBar.textContent = `Mostrando ${filteredProjects.length} de ${totalCount} proyectos de ingeniería`;
+    }
 
-    return `
-      <article class="project-card" data-id="${project.id}">
-        <div class="card-media" id="card-media-${project.id}" onclick="openProjectModal('${project.id}')" title="Clic para abrir ficha técnica y evidencias">
-          ${project.mediaType === 'video' ? `
-            <img src="${project.posterUrl ? safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
-            <div class="media-play-overlay">
-              <div class="play-circle">▶</div>
-            </div>
-          ` : `
-            <img src="${safeMediaUrl(project.mediaUrl)}" alt="${project.title}" loading="lazy" />
-          `}
+    if (!this.projectsGrid) return;
 
-          <div class="media-badge">
-            <span>${project.mediaType === 'video' ? '🎥 Video Demostrativo' : (hasMultiple ? `📷 ${allMedia.length} Fotos` : '📷 Evidencia')}</span>
-          </div>
-          <div class="tag-badge">${project.tag}</div>
+    if (filteredProjects.length === 0) {
+      this.projectsGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-white);">No se encontraron proyectos</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Intenta con otra palabra clave como "ESP32", "FPGA", "Tiristor", "Cadence" o "Antena".</p>
+          <button class="btn-primary" data-action="reset-filters" style="padding: 8px 20px; font-size: 0.85rem; cursor: pointer;">Restablecer filtros</button>
         </div>
+      `;
+      return;
+    }
 
-        <div class="card-content">
-          <h3 class="card-title">${project.title}</h3>
-          <p class="card-desc">${project.shortDesc}</p>
-          
-          <div class="card-tech-list">
-            ${project.tags.slice(0, 4).map(t => `<span class="tech-tag">${t}</span>`).join('')}
-            ${project.tags.length > 4 ? `<span class="tech-tag">+${project.tags.length - 4}</span>` : ''}
+    this.projectsGrid.innerHTML = filteredProjects.map(project => {
+      const allMedia = [
+        { type: project.mediaType, url: project.mediaUrl },
+        ...(project.secondaryMedia || []).map(url => ({ type: url.endsWith('.mp4') ? 'video' : 'image', url }))
+      ];
+      const hasMultiple = allMedia.length > 1;
+
+      return `
+        <article class="project-card" data-id="${project.id}">
+          <div class="card-media" id="card-media-${project.id}" data-action="open-modal" data-id="${project.id}" title="Clic para abrir ficha técnica y evidencias">
+            ${project.mediaType === 'video' ? `
+              <img src="${project.posterUrl ? this.safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
+              <div class="media-play-overlay">
+                <div class="play-circle">▶</div>
+              </div>
+            ` : `
+              <img src="${this.safeMediaUrl(project.mediaUrl)}" alt="${project.title}" loading="lazy" />
+            `}
+
+            <div class="media-badge">
+              <span>${project.mediaType === 'video' ? '🎥 Video Demostrativo' : (hasMultiple ? `📷 ${allMedia.length} Fotos` : '📷 Evidencia')}</span>
+            </div>
+            <div class="tag-badge">${project.tag}</div>
           </div>
 
-          <div class="card-actions">
-            <button class="btn-details" onclick="openProjectModal('${project.id}')">
-              Ver Ficha Técnica <span>→</span>
-            </button>
-            <div class="evidence-badge">
-              <span>●</span> ${hasMultiple ? `${allMedia.length} evidencias` : '1 archivo'}
+          <div class="card-content">
+            <h3 class="card-title">${project.title}</h3>
+            <p class="card-desc">${project.shortDesc}</p>
+            
+            <div class="card-tech-list">
+              ${project.tags.slice(0, 4).map(t => `<span class="tech-tag">${t}</span>`).join('')}
+              ${project.tags.length > 4 ? `<span class="tech-tag">+${project.tags.length - 4}</span>` : ''}
+            </div>
+
+            <div class="card-actions">
+              <button class="btn-details" data-action="open-modal" data-id="${project.id}">
+                Ver Ficha Técnica <span>→</span>
+              </button>
+              <div class="evidence-badge">
+                <span>●</span> ${hasMultiple ? `${allMedia.length} evidencias` : '1 archivo'}
+              </div>
             </div>
           </div>
-        </div>
-      </article>
-    `;
-  }).join("");
-}
-
-/**
- * Apertura del modal interactivo con detalles técnicos completos
- */
-function openProjectModal(projectId, initialIndex = 0) {
-  const project = projectsData.find(p => p.id === projectId);
-  if (!project) return;
-
-  currentModalProject = project;
-  const allMedia = getProjectAllMedia(project);
-  currentModalMediaIndex = (initialIndex >= 0 && initialIndex < allMedia.length) ? initialIndex : 0;
-
-  // Actualizar metadatos
-  modalCategoryBadge.textContent = project.categoryLabel;
-  modalTagBadge.textContent = project.tag;
-  modalTitle.textContent = project.title;
-  modalWhatIs.textContent = project.whatIs;
-  modalWhatIDid.textContent = project.whatIDid;
-
-  // Lista de puntos destacados
-  modalHighlights.innerHTML = project.highlights.map(h => `<li>${h}</li>`).join('');
-
-  // Badges de tecnologías
-  modalTagsBox.innerHTML = project.tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
-
-  if (project.downloadUrl) {
-    modalTagsBox.innerHTML += `
-      <div style="width: 100%; margin-top: 1.25rem;">
-        <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
-          <span>⚡</span> Descargar Script: ${project.downloadName || project.downloadUrl}
-        </a>
-      </div>
-    `;
+        </article>
+      `;
+    }).join("");
   }
 
-  // RENDERIZADO DEL ESCENARIO MULTIMEDIA
-  // Si el proyecto tiene PDF, desplegar vista dual interactiva (Foto + PDF embebido lado a lado)
-  if (project.pdfUrl) {
-    modalMediaStage.classList.add("dual-showcase");
-    modalMediaStage.innerHTML = `
-      <div class="dual-stage-container">
-        <div class="dual-photo-pane">
-          <div class="modal-media-viewport">
-            <img src="${safeMediaUrl(allMedia[currentModalMediaIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${safeMediaUrl(allMedia[currentModalMediaIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
-          </div>
-          <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span>📸 Ensamble Físico</span>
-            <a href="${safeMediaUrl(allMedia[currentModalMediaIndex].url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(0,242,254,0.3); padding: 2px 8px; border-radius: 12px;" title="Ver imagen original en alta resolución">🔍 Ver completa</a>
-          </div>
-        </div>
+  renderModal(project, allMedia, initialIndex = 0) {
+    if (!this.modalOverlay || !project) return;
 
-        <div class="dual-pdf-pane">
-          <div class="pdf-pane-header">
-            <div class="pdf-title">
-              <span>📄</span> ${project.pdfName || 'Thermal Blueprint.pdf'}
-            </div>
-            <div class="pdf-pane-actions">
-              <a href="${safeMediaUrl(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pestaña nueva">
-                <span>↗</span> Pantalla Completa
-              </a>
-              <a href="${safeMediaUrl(project.pdfUrl)}" download class="pdf-action-btn" title="Descargar documento">
-                <span>⬇</span> Descargar
-              </a>
-            </div>
-          </div>
-          <iframe src="${safeMediaUrl(project.pdfUrl)}#toolbar=0&navpanes=0&view=FitH" class="embedded-pdf-frame" title="Manual del Curso Thermal Blueprint"></iframe>
-        </div>
-      </div>
-    `;
-    modalGalleryStrip.style.display = "none";
-  } else {
-    // Escenario fotográfico/video estándar con flechas de navegación y contador
-    modalMediaStage.classList.remove("dual-showcase");
-    renderModalMedia(allMedia, currentModalMediaIndex);
+    // Metadatos
+    if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = project.categoryLabel;
+    if (this.modalTagBadge) this.modalTagBadge.textContent = project.tag;
+    if (this.modalTitle) this.modalTitle.textContent = project.title;
+    if (this.modalWhatIs) this.modalWhatIs.textContent = project.whatIs;
+    if (this.modalWhatIDid) this.modalWhatIDid.textContent = project.whatIDid;
 
-    // Renderizar tira de miniaturas si hay más de 1 medio
-    if (allMedia.length > 1) {
-      modalGalleryStrip.style.display = "flex";
-      modalGalleryStrip.innerHTML = allMedia.map((m, idx) => {
-        const thumbSrc = m.type === "video" ? (m.poster ? safeMediaUrl(m.poster) : safeMediaUrl(m.url)) : safeMediaUrl(m.url);
-        return `
-          <div class="strip-thumb ${idx === currentModalMediaIndex ? 'active' : ''}" onclick="switchModalMedia(${idx})">
-            <img src="${thumbSrc}" alt="Vista ${idx + 1}" />
+    // Puntos destacados
+    if (this.modalHighlights) {
+      this.modalHighlights.innerHTML = project.highlights.map(h => `<li>${h}</li>`).join('');
+    }
+
+    // Badges de tecnologías y botón de descarga opcional
+    if (this.modalTagsBox) {
+      this.modalTagsBox.innerHTML = project.tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
+      if (project.downloadUrl) {
+        this.modalTagsBox.innerHTML += `
+          <div style="width: 100%; margin-top: 1.25rem;">
+            <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
+              <span>⚡</span> Descargar Script: ${project.downloadName || project.downloadUrl}
+            </a>
           </div>
         `;
-      }).join('');
+      }
+    }
+
+    // Escenario Multimedia
+    if (project.pdfUrl) {
+      // Vista dual interactiva (Foto + PDF embebido lado a lado)
+      this.modalMediaStage.classList.add("dual-showcase");
+      this.modalMediaStage.innerHTML = `
+        <div class="dual-stage-container">
+          <div class="dual-photo-pane">
+            <div class="modal-media-viewport">
+              <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
+            </div>
+            <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span>📸 Ensamble Físico</span>
+              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(0,242,254,0.3); padding: 2px 8px; border-radius: 12px;" title="Ver imagen original en alta resolución">🔍 Ver completa</a>
+            </div>
+          </div>
+
+          <div class="dual-pdf-pane">
+            <div class="pdf-pane-header">
+              <div class="pdf-title">
+                <span>📄</span> ${project.pdfName || 'Thermal Blueprint.pdf'}
+              </div>
+              <div class="pdf-pane-actions">
+                <a href="${this.safeMediaUrl(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pestaña nueva">
+                  <span>↗</span> Pantalla Completa
+                </a>
+                <a href="${this.safeMediaUrl(project.pdfUrl)}" download class="pdf-action-btn" title="Descargar documento">
+                  <span>⬇</span> Descargar
+                </a>
+              </div>
+            </div>
+            <iframe src="${this.safeMediaUrl(project.pdfUrl)}#toolbar=0&navpanes=0&view=FitH" class="embedded-pdf-frame" title="Manual del Curso Thermal Blueprint"></iframe>
+          </div>
+        </div>
+      `;
+      if (this.modalGalleryStrip) this.modalGalleryStrip.style.display = "none";
     } else {
-      modalGalleryStrip.style.display = "none";
-      modalGalleryStrip.innerHTML = "";
-    }
-  }
+      // Escenario de medios regular
+      this.modalMediaStage.classList.remove("dual-showcase");
+      this.renderModalMediaStage(allMedia, initialIndex);
 
-  // Mostrar modal
-  modalOverlay.classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-/**
- * Renderiza el medio activo dentro del modal estándar
- */
-function renderModalMedia(allMedia, index) {
-  const current = allMedia[index];
-  const safeUrl = safeMediaUrl(current.url);
-  const total = allMedia.length;
-
-  const navControlsHtml = total > 1 ? `
-    <button class="modal-nav-arrow prev" onclick="navigateModalMedia(-1)" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
-    <button class="modal-nav-arrow next" onclick="navigateModalMedia(1)" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
-    <div class="modal-slide-counter" id="modalSlideCounter">${index + 1} / ${total} Evidencias</div>
-  ` : '';
-
-  if (current.type === "video") {
-    modalMediaStage.innerHTML = `
-      <div class="modal-media-viewport" style="background: #000; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
-        <video id="activeModalVideo" 
-               src="${safeUrl}" 
-               controls 
-               playsinline 
-               preload="auto" 
-               poster="${current.poster ? safeMediaUrl(current.poster) : ''}" 
-               style="width: 100%; max-height: 480px; outline: none; background: #000; border-radius: var(--radius-md); display: block;">
-          <source src="${safeUrl}" type="video/mp4">
-          Tu navegador no soporta reproducción de video HTML5.
-        </video>
-      </div>
-      ${navControlsHtml}
-    `;
-    const v = document.getElementById("activeModalVideo");
-    if (v) {
-      v.load();
-      const p = v.play();
-      if (p !== undefined) {
-        p.catch(() => {
-          // Si el navegador bloquea la reproducción automática con audio, iniciar silenciado
-          v.muted = true;
-          v.play().catch(() => {});
-        });
-      }
-    }
-  } else {
-    modalMediaStage.innerHTML = `
-      <div class="modal-media-viewport">
-        <img src="${safeUrl}" alt="Detalle del proyecto" onclick="window.open('${safeUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
-      </div>
-      <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
-        <span>🔍</span> Ver completa
-      </a>
-      ${navControlsHtml}
-    `;
-  }
-}
-
-/**
- * Navega secuencialmente (adelante/atrás) en el modal
- */
-function navigateModalMedia(dir) {
-  if (!currentModalProject) return;
-  const allMedia = getProjectAllMedia(currentModalProject);
-  if (allMedia.length <= 1) return;
-
-  // Pausar video anterior si existía
-  const prevVideo = modalMediaStage.querySelector("video");
-  if (prevVideo) {
-    prevVideo.pause();
-  }
-
-  currentModalMediaIndex = (currentModalMediaIndex + dir + allMedia.length) % allMedia.length;
-  renderModalMedia(allMedia, currentModalMediaIndex);
-
-  // Actualizar clase activa en miniaturas inferiores
-  const thumbs = modalGalleryStrip.querySelectorAll(".strip-thumb");
-  thumbs.forEach((thumb, idx) => {
-    thumb.classList.toggle("active", idx === currentModalMediaIndex);
-  });
-}
-
-/**
- * Cambia el medio activo al hacer clic en una miniatura del modal
- */
-function switchModalMedia(index) {
-  if (!currentModalProject) return;
-  const allMedia = getProjectAllMedia(currentModalProject);
-  if (index < 0 || index >= allMedia.length) return;
-
-  // Pausar video anterior si existía
-  const prevVideo = modalMediaStage.querySelector("video");
-  if (prevVideo) {
-    prevVideo.pause();
-  }
-
-  currentModalMediaIndex = index;
-  renderModalMedia(allMedia, index);
-
-  // Actualizar clase activa en miniaturas
-  const thumbs = modalGalleryStrip.querySelectorAll(".strip-thumb");
-  thumbs.forEach((thumb, idx) => {
-    thumb.classList.toggle("active", idx === index);
-  });
-}
-
-/**
- * Cierre del modal
- */
-function closeProjectModal() {
-  modalOverlay.classList.remove("open");
-  document.body.style.overflow = "auto";
-  // Pausar y descargar cualquier video que estuviera reproduciéndose
-  const videoElem = modalMediaStage.querySelector("video");
-  if (videoElem) {
-    videoElem.pause();
-    videoElem.removeAttribute("src");
-    videoElem.load();
-  }
-}
-
-/**
- * Restablece los filtros de búsqueda
- */
-function resetFilters() {
-  currentCategory = "all";
-  currentSearchQuery = "";
-  if (searchInput) searchInput.value = "";
-  if (searchClearBtn) searchClearBtn.style.display = "none";
-  
-  filterTabs.forEach(tab => {
-    if (tab.getAttribute("data-filter") === "all") tab.classList.add("active");
-    else tab.classList.remove("active");
-  });
-
-  renderProjects();
-}
-
-/**
- * Inicialización de oyentes de eventos
- */
-function initEventListeners() {
-  // Filtros de categoría
-  filterTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      filterTabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      currentCategory = tab.getAttribute("data-filter");
-      renderProjects();
-    });
-  });
-
-  // Búsqueda en tiempo real
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      currentSearchQuery = e.target.value;
-      if (searchClearBtn) {
-        searchClearBtn.style.display = currentSearchQuery ? "block" : "none";
-      }
-      renderProjects();
-    });
-  }
-
-  // Botón para limpiar búsqueda
-  if (searchClearBtn) {
-    searchClearBtn.addEventListener("click", () => {
-      searchInput.value = "";
-      currentSearchQuery = "";
-      searchClearBtn.style.display = "none";
-      renderProjects();
-    });
-  }
-
-  // Cierre de modal por botón
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener("click", closeProjectModal);
-  }
-
-  // Cierre de modal al hacer clic en el fondo oscuro
-  if (modalOverlay) {
-    modalOverlay.addEventListener("click", (e) => {
-      if (e.target === modalOverlay) {
-        closeProjectModal();
-      }
-    });
-  }
-
-  // Control de modal por teclado (ESC para cerrar, Flechas Izquierda/Derecha para deslizar fotos)
-  document.addEventListener("keydown", (e) => {
-    if (!modalOverlay || !modalOverlay.classList.contains("open")) return;
-    if (e.key === "Escape") {
-      closeProjectModal();
-    } else if (e.key === "ArrowLeft") {
-      navigateModalMedia(-1);
-    } else if (e.key === "ArrowRight") {
-      navigateModalMedia(1);
-    }
-  });
-
-  // Gestos táctiles (swipe) en el modal para dispositivos móviles
-  if (modalMediaStage) {
-    let modalTouchStartX = 0;
-    let modalTouchEndX = 0;
-    modalMediaStage.addEventListener('touchstart', (e) => {
-      if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
-      modalTouchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    modalMediaStage.addEventListener('touchend', (e) => {
-      if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
-      modalTouchEndX = e.changedTouches[0].screenX;
-      const diff = modalTouchEndX - modalTouchStartX;
-      if (Math.abs(diff) > 40) {
-        if (diff < 0) {
-          navigateModalMedia(1);
+      if (this.modalGalleryStrip) {
+        if (allMedia.length > 1) {
+          this.modalGalleryStrip.style.display = "flex";
+          this.modalGalleryStrip.innerHTML = allMedia.map((m, idx) => {
+            const thumbSrc = m.type === "video" ? (m.poster ? this.safeMediaUrl(m.poster) : this.safeMediaUrl(m.url)) : this.safeMediaUrl(m.url);
+            return `
+              <div class="strip-thumb ${idx === initialIndex ? 'active' : ''}" data-action="switch-thumb" data-index="${idx}">
+                <img src="${thumbSrc}" alt="Vista ${idx + 1}" />
+              </div>
+            `;
+          }).join('');
         } else {
-          navigateModalMedia(-1);
+          this.modalGalleryStrip.style.display = "none";
+          this.modalGalleryStrip.innerHTML = "";
         }
       }
-    }, { passive: true });
+    }
+
+    this.modalOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
   }
 
-  // Menú móvil
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-    });
+  renderModalMediaStage(allMedia, index) {
+    if (!this.modalMediaStage || !allMedia || !allMedia[index]) return;
 
-    navMenu.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-      });
+    // Pausar cualquier video activo previamente
+    const prevVideo = this.modalMediaStage.querySelector("video");
+    if (prevVideo) {
+      prevVideo.pause();
+    }
+
+    const current = allMedia[index];
+    const safeUrl = this.safeMediaUrl(current.url);
+    const total = allMedia.length;
+
+    const navControlsHtml = total > 1 ? `
+      <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
+      <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
+      <div class="modal-slide-counter" id="modalSlideCounter">${index + 1} / ${total} Evidencias</div>
+    ` : '';
+
+    if (current.type === "video") {
+      this.modalMediaStage.innerHTML = `
+        <div class="modal-media-viewport" style="background: #000; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+          <video id="activeModalVideo" 
+                 src="${safeUrl}" 
+                 controls 
+                 playsinline 
+                 preload="auto" 
+                 poster="${current.poster ? this.safeMediaUrl(current.poster) : ''}" 
+                 style="width: 100%; max-height: 480px; outline: none; background: #000; border-radius: var(--radius-md); display: block;">
+            <source src="${safeUrl}" type="video/mp4">
+            Tu navegador no soporta reproducción de video HTML5.
+          </video>
+        </div>
+        ${navControlsHtml}
+      `;
+      const v = document.getElementById("activeModalVideo");
+      if (v) {
+        v.load();
+        const p = v.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            v.muted = true;
+            v.play().catch(() => {});
+          });
+        }
+      }
+    } else {
+      this.modalMediaStage.innerHTML = `
+        <div class="modal-media-viewport">
+          <img src="${safeUrl}" alt="Detalle del proyecto" onclick="window.open('${safeUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
+        </div>
+        <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
+          <span>🔍</span> Ver completa
+        </a>
+        ${navControlsHtml}
+      `;
+    }
+  }
+
+  updateThumbnails(activeIndex) {
+    if (!this.modalGalleryStrip) return;
+    const thumbs = this.modalGalleryStrip.querySelectorAll(".strip-thumb");
+    thumbs.forEach((thumb, idx) => {
+      thumb.classList.toggle("active", idx === activeIndex);
     });
+  }
+
+  closeModal() {
+    if (this.modalOverlay) {
+      this.modalOverlay.classList.remove("open");
+    }
+    document.body.style.overflow = "auto";
+
+    // Pausar y liberar memoria del reproductor de video
+    if (this.modalMediaStage) {
+      const videoElem = this.modalMediaStage.querySelector("video");
+      if (videoElem) {
+        videoElem.pause();
+        videoElem.removeAttribute("src");
+        videoElem.load();
+      }
+    }
+  }
+
+  updateFilterTabs(activeCategory) {
+    this.filterTabs.forEach(tab => {
+      const matches = tab.getAttribute("data-filter") === activeCategory;
+      tab.classList.toggle("active", matches);
+    });
+  }
+
+  updateSearchInput(query) {
+    if (this.searchInput) this.searchInput.value = query;
+    if (this.searchClearBtn) {
+      this.searchClearBtn.style.display = query ? "block" : "none";
+    }
   }
 }
 
-// Inicializar cuando el DOM esté listo
+/**
+ * --------------------------------------------------------------------------
+ * 3. CONTROLADOR (PortfolioController)
+ * Enlaza las interacciones del usuario entre el Modelo y la Vista.
+ * --------------------------------------------------------------------------
+ */
+class PortfolioController {
+  constructor(model, view) {
+    this.model = model;
+    this.view = view;
+  }
+
+  init() {
+    this.refreshGrid();
+    this.bindEvents();
+  }
+
+  refreshGrid() {
+    const filtered = this.model.getFilteredProjects();
+    this.view.renderProjectsGrid(filtered, this.model.projects.length);
+  }
+
+  bindEvents() {
+    // 1. Filtrado por categorías (Pills / Botones)
+    this.view.filterTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const category = tab.getAttribute("data-filter");
+        this.model.setCategory(category);
+        this.view.updateFilterTabs(category);
+        this.refreshGrid();
+      });
+    });
+
+    // 2. Búsqueda en tiempo real
+    if (this.view.searchInput) {
+      this.view.searchInput.addEventListener("input", (e) => {
+        this.model.setSearchQuery(e.target.value);
+        this.view.updateSearchInput(e.target.value);
+        this.refreshGrid();
+      });
+    }
+
+    // 3. Botón para limpiar campo de búsqueda
+    if (this.view.searchClearBtn) {
+      this.view.searchClearBtn.addEventListener("click", () => {
+        this.model.setSearchQuery("");
+        this.view.updateSearchInput("");
+        this.refreshGrid();
+      });
+    }
+
+    // 4. Delegación de eventos en la cuadrícula de proyectos (abrir modal / restablecer filtros)
+    if (this.view.projectsGrid) {
+      this.view.projectsGrid.addEventListener("click", (e) => {
+        const resetBtn = e.target.closest('[data-action="reset-filters"]');
+        if (resetBtn) {
+          this.handleResetFilters();
+          return;
+        }
+
+        const openBtn = e.target.closest('[data-action="open-modal"]');
+        if (openBtn) {
+          const projectId = openBtn.getAttribute("data-id");
+          if (projectId) {
+            this.openModal(projectId);
+          }
+        }
+      });
+    }
+
+    // 5. Botón cerrar modal
+    if (this.view.modalCloseBtn) {
+      this.view.modalCloseBtn.addEventListener("click", () => this.closeModal());
+    }
+
+    // 6. Cierre al hacer clic en el backdrop oscuro
+    if (this.view.modalOverlay) {
+      this.view.modalOverlay.addEventListener("click", (e) => {
+        if (e.target === this.view.modalOverlay) {
+          this.closeModal();
+        }
+      });
+    }
+
+    // 7. Delegación de eventos en el escenario del modal (flechas prev/next)
+    if (this.view.modalMediaStage) {
+      this.view.modalMediaStage.addEventListener("click", (e) => {
+        const prevBtn = e.target.closest('[data-action="prev-media"]');
+        if (prevBtn) {
+          this.navigateMedia(-1);
+          return;
+        }
+
+        const nextBtn = e.target.closest('[data-action="next-media"]');
+        if (nextBtn) {
+          this.navigateMedia(1);
+          return;
+        }
+      });
+    }
+
+    // 8. Delegación de eventos en la tira de miniaturas
+    if (this.view.modalGalleryStrip) {
+      this.view.modalGalleryStrip.addEventListener("click", (e) => {
+        const thumb = e.target.closest('[data-action="switch-thumb"]');
+        if (thumb) {
+          const idx = parseInt(thumb.getAttribute("data-index"), 10);
+          if (!isNaN(idx)) {
+            this.switchMedia(idx);
+          }
+        }
+      });
+    }
+
+    // 9. Teclado: ESC para cerrar, Flechas para navegar evidencias
+    document.addEventListener("keydown", (e) => {
+      if (!this.view.modalOverlay || !this.view.modalOverlay.classList.contains("open")) return;
+      if (e.key === "Escape") {
+        this.closeModal();
+      } else if (e.key === "ArrowLeft") {
+        this.navigateMedia(-1);
+      } else if (e.key === "ArrowRight") {
+        this.navigateMedia(1);
+      }
+    });
+
+    // 10. Gestos táctiles (Swipe) en el escenario del modal
+    if (this.view.modalMediaStage) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      this.view.modalMediaStage.addEventListener('touchstart', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      this.view.modalMediaStage.addEventListener('touchend', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.closest('video')) return;
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          this.navigateMedia(diff < 0 ? 1 : -1);
+        }
+      }, { passive: true });
+    }
+
+    // 11. Menú móvil (Hamburguesa)
+    if (this.view.mobileToggle && this.view.navMenu) {
+      this.view.mobileToggle.addEventListener("click", () => {
+        this.view.navMenu.classList.toggle("open");
+      });
+
+      this.view.navMenu.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+          this.view.navMenu.classList.remove("open");
+        });
+      });
+    }
+  }
+
+  openModal(projectId, initialIndex = 0) {
+    const modalData = this.model.setActiveProject(projectId, initialIndex);
+    if (!modalData) return;
+    this.view.renderModal(modalData.project, modalData.mediaList, modalData.currentIndex);
+  }
+
+  closeModal() {
+    this.view.closeModal();
+    this.model.clearActiveProject();
+  }
+
+  navigateMedia(direction) {
+    const res = this.model.stepMedia(direction);
+    if (!res) return;
+    this.view.renderModalMediaStage(res.mediaList, res.currentIndex);
+    this.view.updateThumbnails(res.currentIndex);
+  }
+
+  switchMedia(index) {
+    const res = this.model.setMediaIndex(index);
+    if (!res) return;
+    this.view.renderModalMediaStage(res.mediaList, res.currentIndex);
+    this.view.updateThumbnails(res.currentIndex);
+  }
+
+  handleResetFilters() {
+    this.model.resetFilters();
+    this.view.updateFilterTabs("all");
+    this.view.updateSearchInput("");
+    this.refreshGrid();
+  }
+}
+
+// ==========================================================================
+// INICIALIZACIÓN Y ENLACE GLOBAL
+// ==========================================================================
+
+let portfolioModel;
+let portfolioView;
+let portfolioController;
+
 document.addEventListener("DOMContentLoaded", () => {
-  renderProjects();
-  initEventListeners();
+  portfolioModel = new PortfolioModel(projectsData);
+  portfolioView = new PortfolioView();
+  portfolioController = new PortfolioController(portfolioModel, portfolioView);
+  portfolioController.init();
+
+  // Exponer instancia para depuración o hooks externos
+  window.PortfolioApp = {
+    model: portfolioModel,
+    view: portfolioView,
+    controller: portfolioController
+  };
+
+  // Compatibilidad hacia atrás para cualquier invocación tradicional
+  window.openProjectModal = (id, idx) => portfolioController.openModal(id, idx);
+  window.closeProjectModal = () => portfolioController.closeModal();
+  window.navigateModalMedia = (dir) => portfolioController.navigateMedia(dir);
+  window.switchModalMedia = (idx) => portfolioController.switchMedia(idx);
+  window.resetFilters = () => portfolioController.handleResetFilters();
 });
