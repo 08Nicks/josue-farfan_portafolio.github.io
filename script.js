@@ -29,18 +29,46 @@ const projectsData = [
     title: "Entorno Automatizado para Cadence Virtuoso (TSMC 28nm) & Síntesis Genus",
     category: "vlsi",
     categoryLabel: "Diseño VLSI & Microelectrónica",
-    tag: "Automatización EDA & RISC-V",
+    tag: "Automatización EDA & CLI",
     mediaType: "image",
     mediaUrl: "launcher.jpg",
-    secondaryMedia: [],
-    tags: ["Cadence Virtuoso", "TSMC 28nm PDK", "Cadence Genus", "Script Launcher CLI", "Xming X11 / SSH", "Inversor CMOS", "Arquitectura RISC-V", "Simulación RTL"],
-    shortDesc: "Script interactivo de automatización para despliegue de Cadence Virtuoso en nodo TSMC 28nm, servidor X11, síntesis con Genus y simulación de inversor CMOS y procesador RISC-V.",
-    whatIs: "Suite de automatización y entorno de trabajo desarrollado para el curso especializado de herramientas EDA industriales (Cadence Virtuoso y Cadence Genus) con el kit de diseño de proceso (PDK) TSMC a 28 nanómetros. El entorno permitió la simulación esquemática/layout de una compuerta inversora CMOS, síntesis lógica y exploración de la arquitectura de procesador RISC-V.",
-    whatIDid: "Desarrollo y programación del script lanzador («SELECCIÓN DE ENTORNO») por consola para automatizar la comprobación del servidor gráfico X11 (Xming), la configuración de variables de entorno para el usuario remoto y el establecimiento de la sesión SSH segura con reenvío de ventanas hacia el cluster EDA. En el curso se abordó el diseño a nivel transistor y layout de la compuerta inversora en Cadence Virtuoso, simulación RTL en Verilog/VHDL y síntesis lógica con Genus, analizando el flujo de implementación y optimización para el procesador de arquitectura abierta RISC-V.",
+    downloadUrl: "virtuoso_launcher.bat",
+    downloadName: "virtuoso_launcher.bat (Script CLI)",
+    secondaryMedia: [
+      "inversor_cmos_tsmc28nm_layout.jpg",
+      "riscv_core_tsmc28nm_layout.jpg"
+    ],
+    tags: ["Cadence Virtuoso", "TSMC 28nm PDK", "Cadence Genus", "Script Launcher CLI", "Windows Batch", "Xming X11 / SSH", "Automatización EDA"],
+    shortDesc: "Script interactivo en Windows Batch para automatizar el lanzamiento de Cadence Virtuoso TSMC 28nm, servidor gráfico X11, purga de sesiones y síntesis Genus.",
+    whatIs: "Suite de automatización y entorno de trabajo desarrollado para el curso especializado de herramientas EDA industriales (Cadence Virtuoso y Cadence Genus) con el kit de diseño de proceso (PDK) TSMC a 28 nanómetros. El objetivo del script fue simplificar y asegurar el flujo de inicio de sesión hacia el cluster EDA, levantando el servidor gráfico X11 y gestionando bloqueos de diseño.",
+    whatIDid: "Programación integral en Windows Batch del script lanzador («SELECCIÓN DE ENTORNO» / virtuoso_launcher.bat) con interfaz interactiva en consola usando colores ANSI y banner ASCII. El script verifica si el servidor gráfico Xming está en ejecución (iniciándolo automáticamente en pantalla múltiple si está inactivo), valida las credenciales y usuario, purga bloqueos de archivos huérfanos (.cdslck) y sesiones concurrentes de Virtuoso, carga el entorno .cds28nm y lanza la conexión segura por PuTTY con reenvío de túnel X11.",
     highlights: [
-      "Automatización completa del arranque de Cadence Virtuoso TSMC 28nm y servidor X11 mediante script personalizado",
-      "Flujo de diseño analógico/digital: modelado de compuerta inversora CMOS a nivel transistor en Virtuoso",
-      "Síntesis lógica con Cadence Genus y estudio de simulación RTL para procesador de arquitectura RISC-V"
+      "Automatización completa del arranque de Cadence Virtuoso TSMC 28nm y servidor gráfico X11 (Xming)",
+      "Gestión y limpieza remota de candados huérfanos (.cdslck) y procesos congelados vía SSH",
+      "Menú interactivo con guías rápidas integradas para simulación RTL (xmverilog/xmvhdl) y síntesis en Genus",
+      "Descarga directa del script funcional 'virtuoso_launcher.bat' en el portafolio"
+    ]
+  },
+  {
+    id: "vlsi-inversor-riscv-tsmc28nm",
+    title: "Diseño Físico de Layout: Inversor CMOS & Procesador RISC-V en TSMC 28nm",
+    category: "vlsi",
+    categoryLabel: "Diseño VLSI & Microelectrónica",
+    tag: "Layout Nanométrico TSMC 28nm",
+    mediaType: "image",
+    mediaUrl: "inversor_cmos_tsmc28nm_layout.jpg",
+    secondaryMedia: [
+      "riscv_core_tsmc28nm_layout.jpg",
+      "launcher.jpg"
+    ],
+    tags: ["TSMC 28nm PDK", "Layout Full-Custom", "Inversor CMOS", "Procesador RISC-V", "Cadence Virtuoso", "Reglas DRC / LVS", "Floorplan & Routing"],
+    shortDesc: "Trazado geométrico a nivel transistor de una celda inversora CMOS y análisis del floorplan físico del procesador RISC-V en nodo nanométrico TSMC 28nm.",
+    whatIs: "Trabajo formativo desarrollado en el curso especializado de microelectrónica y herramientas EDA de Cadence. Abarca el diseño físico full-custom a nivel layout de una celda básica inversora CMOS en tecnología avanzada de 28 nanómetros de TSMC, complementado con el estudio y exploración del layout completo del núcleo de procesamiento de arquitectura abierta RISC-V.",
+    whatIDid: "Diseño y trazado geométrico del inversor CMOS en Cadence Virtuoso Layout Suite respetando estrictamente las reglas de diseño (DRC) del nodo TSMC 28nm (ancho de canal, distancias de difusión P/N, colocación de compuertas de polisilicio, contactos y metal 1 para rieles de VDD y VSS con sus respectivos taps de sustrato y pozo para inmunidad a latch-up). Asimismo, análisis del floorplan del núcleo de silicio del procesador RISC-V, reconociendo la distribución perimetral del marco de E/S, las líneas principales de alimentación y la matriz densa de interconexiones lógicas.",
+    highlights: [
+      "Layout geométrico full-custom de inversor CMOS cumpliendo reglas DRC nanométricas de TSMC 28nm",
+      "Estructura óptima de alimentación VDD/VSS y contactos de sustrato (well taps)",
+      "Estudio del floorplan, distribución de celdas estándar y ruteo físico de procesador RISC-V"
     ]
   },
   {
@@ -548,6 +576,16 @@ function openProjectModal(projectId) {
       <div style="width: 100%; margin-top: 1.25rem;">
         <a href="${encodeURI(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
           <span>📄</span> Ver / Descargar Documento: ${project.pdfName || project.pdfUrl}
+        </a>
+      </div>
+    `;
+  }
+
+  if (project.downloadUrl) {
+    modalTagsBox.innerHTML += `
+      <div style="width: 100%; margin-top: 1.25rem;">
+        <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
+          <span>⚡</span> Descargar Script: ${project.downloadName || project.downloadUrl}
         </a>
       </div>
     `;
