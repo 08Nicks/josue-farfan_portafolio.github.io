@@ -319,29 +319,25 @@ void loop() {
     ]
   },
   {
-    id: "motor-trifasico-potencia",
-    title: "Controlador de Motor Trifásico por Tiristores (SCR) y Cruce por Cero",
-    category: "power",
-    categoryLabel: "Electrónica de Potencia",
-    tag: "Laboratorio BUAP",
-    mediaType: "video",
-    mediaUrl: "Video de WhatsApp 2025-10-18 a las 21.17.49_cada7f34.mp4",
-    posterUrl: "video_thumbs/Video de WhatsApp 2025-10.jpg",
+    id: "opamp-discreto-mosfet-bjt",
+    title: "Diseño y Construcción de Amplificador Operacional (Op-Amp) con MOSFETs, NPN y PNP",
+    category: "vlsi",
+    categoryLabel: "Microelectrónica & Circuitos Analógicos",
+    tag: "Op-Amp Discreto en Protoboard",
+    mediaType: "image",
+    mediaUrl: "WhatsApp Image 2026-09-22 at 4.28.00 PM.jpeg",
     secondaryMedia: [
-      "motor trifasico.png",
-      "WhatsApp Image 2026-09-22 at 4.28.00 PM.jpeg",
       "WhatsApp Image 2026-09-22 at 4.27.35 PM.jpeg",
-      "WhatsApp Image 2026-09-22 at 4.28.51 PM.jpeg",
-      "WhatsApp Image 2026-09-22 at 5.40.00 PM.jpeg"
+      "WhatsApp Image 2026-09-22 at 4.28.51 PM.jpeg"
     ],
-    tags: ["Motor Trifásico Industrial", "Tiristores SCR", "Optoacopladores MOC3021", "Cruce por Cero PC817", "Proteus", "Osciloscopio Tektronix", "Laboratorio BUAP"],
-    shortDesc: "Puente rectificador/controlador trifásico de 6 pulsos para motor industrial, con disparo sincronizado por ángulo de fase y aislamiento galvánico.",
-    whatIs: "Sistema electrónico de potencia capaz de modular la energía suministrada a un motor de inducción trifásico industrial de 3 fases mediante conmutación controlada por tiristores SCR.",
-    whatIDid: "Diseño y simulación del circuito completo en Proteus ISIS a partir de la base desarrollada en el prototipo monofásico de cruce por cero. Montaje físico en banco de pruebas con optoacopladores de pulso MOC3021 para aislamiento entre la lógica de control y las tres fases de alta tensión, junto a optoacoplador PC817 para sincronización de fase. Calibración del ángulo de disparo mediante osciloscopio Tektronix TDS 2002C analizando las señales senoidales y puesta en marcha del motor trifásico industrial con variación suave de velocidad.",
+    tags: ["Amplificador Operacional", "Transistores MOSFET", "BJT NPN y PNP", "Par Diferencial", "Espejo de Corriente", "Etapa Push-Pull", "Osciloscopio Tektronix TDS 2002C", "Laboratorio BUAP"],
+    shortDesc: "Diseño circuital, montaje en protoboard y caracterización dinámica de un amplificador operacional discreto implementado con transistores MOSFETs y pares BJT (NPN y PNP).",
+    whatIs: "Implementación experimental a nivel de componentes discretos de la arquitectura interna de un Amplificador Operacional (Op-Amp). El circuito materializa las etapas fundamentales de un circuito integrado analógico: etapa de entrada diferencial con transistores acoplados para alto CMRR, carga activa por espejo de corriente, etapa de ganancia de voltaje (VAS) y etapa de salida de potencia complementaria push-pull con transistores MOSFET y BJT (NPN y PNP).",
+    whatIDid: "Cálculo y ajuste de los puntos de operación DC (Q-point), polarización de compuertas y corrientes de colector para transistores MOSFETs y pares bipolares NPN y PNP. Montaje estructurado sobre protoboard con conexionado plano para reducir ruido parásito, integrando potenciómetro para ajuste fino y anulación de offset. Inyección de señal senoidal y validación experimental en osciloscopio digital Tektronix TDS 2002C a 114.8 Hz, comprobando simetría en la amplificación, ganancia en lazo abierto y desfase de 180° entre canales sin distorsión por cruce.",
     highlights: [
-      "Aislamiento galvánico total entre la etapa lógica y las fases de potencia trifásica",
-      "Modulación precisa del ángulo de disparo alfa (0° a 180°)",
-      "Validación experimental con motor trifásico industrial en laboratorios de la BUAP"
+      "Arquitectura analógica discreta completa: par diferencial de entrada, espejo de corriente, etapa VAS y etapa de salida push-pull",
+      "Integración híbrida de MOSFETs con transistores bipolares NPN y PNP para optimizar impedancias de entrada y salida",
+      "Medición experimental en osciloscopio digital Tektronix TDS 2002C a 114.8 Hz verificando amplificación lineal y desfase de 180° sin distorsión"
     ]
   },
   {
@@ -369,26 +365,27 @@ void loop() {
   },
   {
     id: "dimmer-scr-diac-baquelita",
-    title: "Placa Controladora de Potencia con SCR y DIAC en Baquelita Perforada",
+    title: "Controlador de Potencia AC con SCR y DIAC: Tarjeta en Baquelita y Control de Motor",
     category: "power",
     categoryLabel: "Electrónica de Potencia",
-    tag: "Potencia & Simulación BUAP",
+    tag: "Tiristores SCR & DIAC",
     mediaType: "video",
-    mediaUrl: "bandicam_scr_proteus.mp4",
-    posterUrl: "video_thumbs/bandicam_thumb.jpg",
+    mediaUrl: "Video de WhatsApp 2025-10-18 a las 21.17.49_cada7f34.mp4",
+    posterUrl: "video_thumbs/Video de WhatsApp 2025-10.jpg",
     secondaryMedia: [
+      "bandicam_scr_proteus.mp4",
       "Dimer scr proteus.png",
       "Imagen de WhatsApp 2025-09-20 a las 20.43.02_0caadc71.jpg",
       "Imagen de WhatsApp 2025-09-25 a las 19.40.56_6a8cc3ef.png"
     ],
-    tags: ["Tiristor SCR", "DIAC", "Baquelita Perforada", "Proteus 8 Professional", "Osciloscopio Digital", "Control de Fase AC", "Bandicam Demo"],
-    shortDesc: "Diseño, simulación en Proteus y construcción física en baquelita perforada de una tarjeta de control de fase AC con SCR y DIAC.",
-    whatIs: "Circuito de modulación de potencia eléctrica para corriente alterna (120V AC) basado en la conmutación controlada por ángulo de fase, utilizando un tiristor SCR disparado mediante la ruptura simétrica de un DIAC.",
-    whatIDid: "Modelado y simulación interactiva en Proteus 8 Professional verificando la respuesta de la señal senoidal recortada en el osciloscopio virtual ante variaciones del potenciómetro. Posteriormente, ensamble físico y soldadura de los componentes (red RC, potenciómetro, resistencias de precisión, DIAC y tiristor SCR) en baquelita perforada (perfboard). Validación experimental en el laboratorio de la BUAP comprobando la forma de onda a 120.04 Hz en osciloscopio digital GW Instek.",
+    tags: ["Control de Motor AC", "Tiristor SCR", "DIAC", "Baquelita Perforada", "Proteus 8 Professional", "Osciloscopio Digital", "Control de Fase AC", "Laboratorio BUAP"],
+    shortDesc: "Controlador de potencia AC por ángulo de fase con tiristor SCR y DIAC, validado en simulación Proteus, fabricado en placa de baquelita perforada y probado con motor en banco de laboratorio.",
+    whatIs: "Sistema electrónico de potencia para corriente alterna (120V AC) basado en el control de ángulo de fase mediante un tiristor SCR disparado por la tensión de ruptura de un DIAC. El circuito permite regular continuamente la tensión y potencia media entregada a motores y cargas eléctricas mediante la variación analógica de un potenciómetro en una red RC.",
+    whatIDid: "Diseño circuital y simulación dinámica en Proteus 8 Professional evaluando la conmutación y el recorte de la onda senoidal en el osciloscopio virtual. Fabricación física y soldadura de componentes en placa de baquelita perforada (perfboard). Validación experimental en el laboratorio de la BUAP conectando el controlador a un motor en banco de pruebas, logrando una regulación progresiva y estable de la velocidad de giro comandada por potenciómetro, además de la medición de formas de onda a 120.04 Hz en osciloscopio digital.",
     highlights: [
-      "Simulación dinámica capturada en video demostrativo de Proteus 8 con osciloscopio virtual",
-      "Ensamble artesanal y soldadura en placa de baquelita perforada con potenciómetro integrado",
-      "Contraste y coincidencia perfecta entre la forma de onda simulada y la medida a 120 Hz en osciloscopio real"
+      "Prueba experimental en video demostrando el control continuo de velocidad de un motor en banco de laboratorio",
+      "Disparo de compuerta sincronizado con tiristor SCR y DIAC a través de red desfasadora RC con potenciómetro",
+      "Construcción de tarjeta física en baquelita perforada y contraste contra simulación dinámica en Proteus 8"
     ]
   },
   {
@@ -876,10 +873,19 @@ class PortfolioModel {
     if (project.secondaryMedia && project.secondaryMedia.length > 0) {
       project.secondaryMedia.forEach(secUrl => {
         const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
+        let poster = "";
+        if (isSecVideo) {
+          if (secUrl.includes("Video de WhatsApp 2025-10")) poster = "video_thumbs/Video de WhatsApp 2025-10.jpg";
+          else if (secUrl.includes("bandicam")) poster = "video_thumbs/bandicam_thumb.jpg";
+          else if (secUrl.includes("VID-20241128")) poster = "video_thumbs/VID-20241128-WA0026.jpg";
+          else if (secUrl.includes("WhatsApp Video 2024-10-09")) poster = "video_thumbs/WhatsApp Video 2024-10-09.jpg";
+          else if (secUrl.includes("Video de WhatsApp 2025-04")) poster = "video_thumbs/Video de WhatsApp 2025-04.jpg";
+          else if (secUrl.includes("Wokwi")) poster = "video_thumbs/New Blank Diagram Project.jpg";
+        }
         media.push({
           type: isSecVideo ? "video" : "image",
           url: secUrl,
-          poster: ""
+          poster: poster
         });
       });
     }
