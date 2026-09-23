@@ -395,6 +395,13 @@ void loop() {
     category: "rf",
     categoryLabel: "RF & Microondas",
     tag: "Microondas, HFSS & VNA",
+    team: [
+      "Josué Farfán González",
+      "Cesar Marco Mucio Corte García",
+      "Ricardo Baruch Guzmán Lorenzo",
+      "José Manuel López Castro"
+    ],
+    institution: "BUAP - Facultad de Ciencias de la Electrónica",
     mediaType: "image",
     mediaUrl: "analisis.jpg",
     secondaryMedia: [
@@ -405,7 +412,13 @@ void loop() {
     codeFilename: "antena_patch_1_9ghz.m",
     codeSnippet: `% ============================================================
 % DISEÑO DE ANTENA MICROSTRIP RECTANGULAR A 1.9 GHz
-% Autores: Josue Farfan Gonzalez et al. (BUAP)
+% Autores (Equipo de Coautoria - BUAP):
+%   - Josue Farfan Gonzalez
+%   - Cesar Marco Mucio Corte Garcia
+%   - Ricardo Baruch Guzman Lorenzo
+%   - Jose Manuel Lopez Castro
+% Institucion: Benemerita Universidad Autonoma de Puebla (BUAP)
+% Facultad: Ciencias de la Electronica
 % Referencia: C. A. Balanis - Antenna Theory: Analysis and Design
 % ============================================================
 clear; clc; close all;
@@ -465,9 +478,10 @@ fprintf('Punto optimo de alimentacion desde el borde (X0): %.4f mm\\n', X0 * 100
       "MATLAB"
     ],
     shortDesc: "Diseño analítico en MATLAB, modelado electromagnético 3D en Ansys HFSS, microfabricación sobre Rogers 3003 y caracterización de parámetro S11 a 1.9 GHz con analizador vectorial de redes.",
-    whatIs: "Proyecto integral de ingeniería de microondas que abarca el ciclo completo de desarrollo de una antena de microcinta (microstrip patch) rectangular sintonizada a 1.9 GHz (banda PCS/GSM y telecomunicaciones móviles). Comprende el cálculo matemático riguroso según la teoría de Cavidades de Balanis, la simulación de parámetros de dispersión S11 y diagramas de radiación 2D/3D en Ansys HFSS, la microfabricación sobre sustrato de alta frecuencia Rogers RO3003 mediante mascarilla de vinil y ataque químico (FeCl3), y la validación experimental con analizador vectorial de redes.",
-    whatIDid: "Desarrollo del script de dimensionamiento en MATLAB (W = 55.82 mm, L = 45.12 mm, εreff = 2.8682, ΔL = 0.7493 mm) con cálculo de ranuras de inserción (inset feed) y acoplador de λ/4 para adaptación a 50 Ω. Modelado 3D de onda completa en Ansys HFSS 2024 R2 obteniendo S11 = -16.48 dB y ganancia directiva de 6.94 dB. Fabricación física transfiriendo el diseño exportado en DXF a una placa Rogers 3003 (εr = 3.0, h = 1.52 mm, cobre de 35 µm) mediante grabado en cloruro férrico y soldadura de conector SMA hembra de borde. Finalmente, medición en laboratorio con el analizador Anritsu Site Master S331D (Touchstone josuef.s1p), registrando una resonancia medida en 1.925 GHz (desviación de apenas 7.7 MHz respecto a la simulación), S11 = -14.93 dB (96.8% de potencia radiada eficaz) y un ancho de banda experimental de 50 MHz.",
+    whatIs: "Proyecto de investigación y desarrollo en ingeniería de microondas realizado en equipo en la Facultad de Ciencias de la Electrónica (BUAP) en coautoría con Cesar Marco Mucio Corte García, Ricardo Baruch Guzmán Lorenzo y José Manuel López Castro. Abarca el ciclo completo de desarrollo de una antena de microcinta (microstrip patch) rectangular sintonizada a 1.9 GHz (banda PCS/GSM y telecomunicaciones móviles), integrando cálculo analítico riguroso según la teoría de Cavidades de Balanis, simulación de dispersión S11 y diagramas de radiación en Ansys HFSS, microfabricación sobre sustrato de alta frecuencia Rogers RO3003 con mascarilla de vinil y ataque químico (FeCl3), y caracterización experimental en banco de RF con analizador vectorial de redes.",
+    whatIDid: "Colaboración activa en el equipo en todas las fases del proyecto: diseño del script matemático en MATLAB (W = 55.82 mm, L = 45.12 mm, εreff = 2.8682, ΔL = 0.7493 mm) con ranuras de inserción (inset feed) y acoplador de λ/4 a 50 Ω; modelado 3D de onda completa en Ansys HFSS 2024 R2 obteniendo S11 = -16.48 dB y ganancia directiva de 6.94 dB; transferencia física del diseño DXF a placa Rogers 3003 (εr = 3.0, h = 1.52 mm, cobre de 35 µm) mediante grabado en cloruro férrico y soldadura de conector SMA hembra de borde; y finalmente, medición experimental en laboratorio con el analizador Anritsu Site Master S331D (archivo Touchstone josuef.s1p), registrando una resonancia en 1.925 GHz (desviación de solo 7.7 MHz respecto a HFSS), S11 = -14.93 dB (96.8% de potencia radiada eficaz) y un ancho de banda experimental de 50 MHz.",
     highlights: [
+      "Investigación y desarrollo en equipo con coautoría junto a Cesar Marco Mucio Corte García, Ricardo Baruch Guzmán Lorenzo y José Manuel López Castro (BUAP)",
       "Ciclo completo de ingeniería RF: Teoría analítica → Simulación HFSS → Fabricación PCB Rogers 3003 → Medición VNA",
       "Resonancia medida experimentalmente en 1.925 GHz con S11 de -14.93 dB y 50 MHz de ancho de banda a -10 dB",
       "Simulación electromagnética en Ansys HFSS validando 6.94 dB de ganancia directiva frontal a 0° y S11 de -16.48 dB",
@@ -1021,7 +1035,20 @@ class PortfolioView {
 
     // Puntos destacados
     if (this.modalHighlights) {
-      this.modalHighlights.innerHTML = project.highlights.map(h => `<li>${h}</li>`).join('');
+      let highlightsHtml = project.highlights.map(h => `<li>${h}</li>`).join('');
+      if (project.team && project.team.length > 0) {
+        highlightsHtml += `
+          <li class="team-credit-item">
+            <div style="font-weight: 700; color: var(--accent-cyan); font-family: var(--font-heading); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+              <span>👥</span> Coautoría & Equipo de Proyecto (${project.institution || 'BUAP'}):
+            </div>
+            <div style="font-size: 0.85rem; line-height: 1.6; color: #f1f5f9;">
+              ${project.team.map(member => `<span style="display: inline-block; background: rgba(255,255,255,0.06); padding: 2px 10px; border-radius: 12px; margin: 3px 4px 3px 0; border: 1px solid rgba(255,255,255,0.1);">${member}</span>`).join('')}
+            </div>
+          </li>
+        `;
+      }
+      this.modalHighlights.innerHTML = highlightsHtml;
     }
 
     // Badges de tecnologías y botón de descarga condicional

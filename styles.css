@@ -2002,6 +2002,20 @@ body {
   font-weight: bold;
 }
 
+.modal-highlights li.team-credit-item {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  background: rgba(0, 242, 254, 0.05);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.modal-highlights li.team-credit-item::before {
+  content: none !important;
+  display: none !important;
+}
+
 .modal-tags-box {
   display: flex;
   flex-wrap: wrap;
