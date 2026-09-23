@@ -75,16 +75,40 @@ const projectsData = [
       "motor trifasico.png",
       "WhatsApp Image 2026-09-22 at 4.28.00 PM.jpeg",
       "WhatsApp Image 2026-09-22 at 4.27.35 PM.jpeg",
-      "WhatsApp Image 2026-09-22 at 4.28.51 PM.jpeg"
+      "WhatsApp Image 2026-09-22 at 4.28.51 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 5.40.00 PM.jpeg"
     ],
-    tags: ["Motor Trifásico", "Tiristores T106", "Optoacopladores MOC3021", "Cruce por Cero PC817", "Proteus", "Osciloscopio Tektronix"],
+    tags: ["Motor Trifásico Industrial", "Tiristores SCR", "Optoacopladores MOC3021", "Cruce por Cero PC817", "Proteus", "Osciloscopio Tektronix", "Laboratorio BUAP"],
     shortDesc: "Puente rectificador/controlador trifásico de 6 pulsos para motor industrial, con disparo sincronizado por ángulo de fase y aislamiento galvánico.",
     whatIs: "Sistema electrónico de potencia capaz de modular la energía suministrada a un motor de inducción trifásico industrial de 3 fases mediante conmutación controlada por tiristores SCR.",
-    whatIDid: "Diseño y simulación del circuito completo en Proteus ISIS. Montaje físico en banco de pruebas con optoacopladores de pulso MOC3021 para aislamiento entre la lógica de control y las tres fases de alta tensión, junto a optoacoplador PC817 para detección de cruce por cero. Calibración del ángulo de disparo mediante osciloscopio Tektronix TDS 2002C analizando las señales senoidales y puesta en marcha del motor con variación suave de velocidad.",
+    whatIDid: "Diseño y simulación del circuito completo en Proteus ISIS a partir de la base desarrollada en el prototipo monofásico de cruce por cero. Montaje físico en banco de pruebas con optoacopladores de pulso MOC3021 para aislamiento entre la lógica de control y las tres fases de alta tensión, junto a optoacoplador PC817 para sincronización de fase. Calibración del ángulo de disparo mediante osciloscopio Tektronix TDS 2002C analizando las señales senoidales y puesta en marcha del motor trifásico industrial con variación suave de velocidad.",
     highlights: [
       "Aislamiento galvánico total entre la etapa lógica y las fases de potencia trifásica",
       "Modulación precisa del ángulo de disparo alfa (0° a 180°)",
       "Validación experimental con motor trifásico industrial en laboratorios de la BUAP"
+    ]
+  },
+  {
+    id: "modulo-cruce-cero-mcu",
+    title: "Prototipo de Control de Fase y Cruce por Cero con Microcontrolador",
+    category: "power",
+    categoryLabel: "Electrónica de Potencia",
+    tag: "Prueba de Concepto / MCU",
+    mediaType: "video",
+    mediaUrl: "VID-20241128-WA0026.mp4",
+    posterUrl: "video_thumbs/VID-20241128-WA0026.jpg",
+    secondaryMedia: [
+      "WhatsApp Image 2026-09-22 at 4.35.30 PM.jpeg",
+      "WhatsApp Image 2026-09-22 at 4.35.48 PM.jpeg"
+    ],
+    tags: ["Arduino Mega", "Cruce por Cero", "Optoacoplador", "Corte de Fase", "Potenciómetros Analógicos", "Osciloscopio Digital", "Control de Motores"],
+    shortDesc: "Diseño y validación de etapa de sincronización por cruce por cero y corte de fase analógica en microcontrolador como base para control de motores.",
+    whatIs: "Sistema de prueba de concepto para la modulación de potencia eléctrica en corriente alterna mediante control digital. Su propósito fue validar el algoritmo de detección de cruce por cero (zero-crossing) y la temporización precisa de los pulsos de disparo para variar la velocidad de motores antes de escalar al sistema trifásico.",
+    whatIDid: "Implementación en Arduino Mega de la lectura de dos potenciómetros como referencias analógicas de velocidad y ajuste. Uso de un optoacoplador para censar el cruce por cero de la línea de red y sincronizar interrupciones en el microcontrolador. Programación del corte exacto en la señal análoga de alimentación y verificación experimental de la potencia entregada utilizando un foco incandescente como carga de prueba y osciloscopio para capturar el instante de conmutación.",
+    highlights: [
+      "Detección precisa del cruce por cero con aislamiento optoelectrónico e interrupciones de hardware",
+      "Ajuste dinámico de velocidad mediante referencias analógicas con potenciómetros",
+      "Base algorítmica y circuital que sirvió para el diseño del controlador de motor trifásico industrial"
     ]
   },
   {
