@@ -286,14 +286,14 @@ const projectsData = [
       "genertador de numeros alatoios por rsuido.png",
       "WhatsApp Image 2026-09-22 at 4.24.56 PM.jpeg"
     ],
-    tags: ["ADC0804", "NE555 Astable", "Generador HMF2550", "Ruido Rosa (Pink Noise)", "Proteus", "Bargraph LED"],
-    shortDesc: "Diseño y caracterización de un circuito conversor analógico a digital para captura de entropía física y generación de bytes aleatorios no deterministas.",
-    whatIs: "Generador de números aleatorios por hardware (True Random Number Generator). A diferencia de los generadores pseudo-aleatorios por software, este diseño toma como semilla fluctuaciones físicas reales (ruido térmico/rosa) para obtener valores completamente impredecibles para criptografía.",
-    whatIDid: "Diseño en Proteus de una etapa de muestreo con temporizador 555 como oscilador de reloj astable y convertidor analógico a digital rápido ADC0804 de 8 bits con salida a barra de LEDs. En laboratorio, inyección y calibración de ruido rosa con amplitud de 10 Vpp utilizando un generador de funciones arbitrarias Rohde & Schwarz / HAMEG HMF2550 acoplado a Arduino.",
+    tags: ["TRNG", "ADC0804 (8 Bits)", "Micrófono Electret", "Preamplificador Analógico", "Arduino", "Exportación a Excel", "Ruido Rosa (HMF2550)", "Proteus"],
+    shortDesc: "Diseño e implementación de un generador TRNG por entropía física capturando ruido analógico con micrófono electret y ADC0804, leído por Arduino y exportado a Excel.",
+    whatIs: "Sistema generador de números aleatorios por hardware (TRNG - True Random Number Generator) que extrae entropía de fluctuaciones físicas reales del entorno capturadas por un micrófono electret preamplificado (y contrastado con ruido rosa). Al convertir este ruido analógico continuo en palabras binarias de 8 bits mediante un convertidor analógico a digital ADC0804, se obtienen secuencias verdaderamente impredecibles para criptografía o simulación estocástica.",
+    whatIDid: "Diseño esquemático y simulación en Proteus incorporando el convertidor ADC0804, considerando la alta sensibilidad del circuito integrado en su sincronía de reloj, referencias de voltaje y polarización analógica. En la etapa física en protoboard, se acondicionó la señal de un micrófono electret con un amplificador para alimentar la entrada analógica del ADC con ruido acústico ambiental, y se validó en laboratorio inyectando 10 Vpp de ruido rosa mediante un generador arbitrario Rohde & Schwarz / HAMEG HMF2550. Un microcontrolador Arduino se encargó de leer el bus paralelo de salida de 8 bits del ADC y transmitir el flujo de bytes hacia la PC para guardarlos automáticamente en Excel para su posterior análisis estadístico.",
     highlights: [
-      "Generación de entropía física real imposible de predecir algorítmicamente",
-      "Monitoreo visual simultáneo en barra gráfica de 10 LEDs",
-      "Validación metrológica con fuente de ruido rosa calibrada en banco de pruebas"
+      "Generación de entropía física real con micrófono electret preamplificado y validación con ruido rosa (HMF2550)",
+      "Digitalización precisa de 8 bits en paralelo dominando la calibración y temporización del ADC0804",
+      "Lectura y adquisición de datos en tiempo real mediante Arduino con registro automático en Excel"
     ]
   },
   {
