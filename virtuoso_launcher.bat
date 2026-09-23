@@ -33,22 +33,12 @@ echo %white%             INICIO DE SESION AUTOMATICO%reset%
 echo %cyan%==================================================%reset%
 echo.
 echo %green%Ingresa tus credenciales de acceso.%reset%
-echo %white%Ejemplo de usuario: vlsi100%reset%
+echo %white%Ejemplo de usuario: usuario_eda%reset%
 echo.
 set /p usuario="%yellow%Usuario: %reset%"
 
 :: Si el usuario no escribe nada y da Enter por error, lo regresa al inicio
 if "%usuario%"=="" (
-    cls
-    goto INICIO
-)
-
-:: Validacion de seguridad
-if "%usuario%"=="vlsi20" (
-    echo.
-    echo %red%[ERROR ACCESO DENEGADO] El usuario vlsi20 esta estrictamente prohibido.%reset%
-    echo %white%Presiona cualquier tecla para intentar de nuevo...%reset%
-    pause > nul
     cls
     goto INICIO
 )
@@ -218,8 +208,11 @@ goto LANZAR_PUTTY
 :: RUTINA DE CONEXION PUTTY
 :: ========================================================
 :LANZAR_PUTTY
-echo %cyan%Iniciando conexion SSH...%reset%
-"C:\Program Files\PuTTY\putty.exe" -ssh %usuario%@148.228.14.4 -pw %contrasena% -X -t -m "%TEMP%\cmd_remote.txt"
+echo %cyan%Iniciando conexion SSH hacia el servidor EDA...%reset%
+:: Configuracion de servidor remoto (generica y configurable)
+if "%SERVER_HOST%"=="" set "SERVER_HOST=servidor.eda.local"
+
+"C:\Program Files\PuTTY\putty.exe" -ssh %usuario%@%SERVER_HOST% -pw %contrasena% -X -t -m "%TEMP%\cmd_remote.txt"
 
 :: Borra el archivo temporal al terminar
 del "%TEMP%\cmd_remote.txt"
