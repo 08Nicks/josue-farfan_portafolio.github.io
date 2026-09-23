@@ -6,22 +6,41 @@
 // Dataset exhaustivo de proyectos con categorización y detalles de ingeniería
 const projectsData = [
   {
-    id: "cleanroom-semiconductores",
-    title: "Fabricación de Microelectrónica en Cuarto Limpio & Nodos Nanométricos",
+    id: "cleanroom-semiconductores-inaoe",
+    title: "Procesamiento de Obleas de Silicio en Cuarto Limpio — Semana de Semiconductores INAOE",
     category: "vlsi",
-    categoryLabel: "Microelectrónica & VLSI",
-    tag: "INAOE / Cleanroom",
+    categoryLabel: "Microelectrónica & Semiconductores",
+    tag: "INAOE Cleanroom",
     mediaType: "image",
     mediaUrl: "WhatsApp Image 2026-09-22 at 4.38.59 PM.jpeg",
-    secondaryMedia: ["launcher.jpg"],
-    tags: ["Cleanroom Clase 100/1000", "Obleas de Silicio", "Fotolitografía", "Cadence Virtuoso", "TSMC 28nm", "Genus Synthesis"],
-    shortDesc: "Experiencia práctica en sala limpia para procesamiento de semiconductores y diseño de circuitos integrados en nodo TSMC de 28nm.",
-    whatIs: "Desarrollo y manufactura de dispositivos semiconductores a escala micro y nanométrica. Involucra tanto el flujo digital/analógico en software de grado industrial (Cadence Virtuoso, Genus) como la manipulación física de obleas de silicio en cuartos limpios bajo estrictos estándares de control de partículas.",
-    whatIDid: "Manipulación de obleas de silicio bajo atmósfera controlada y luz amarilla de fotolitografía para procesos de grabado y deposición. En diseño EDA, configuración de entornos automatizados para Cadence Virtuoso con tecnología TSMC 28nm, simulación RTL de bloques Verilog/VHDL y síntesis lógica con Genus a través de entorno X11 remoto.",
+    secondaryMedia: [],
+    tags: ["INAOE", "Semana de Semiconductores", "Cuarto Limpio (Cleanroom)", "Obleas de Silicio", "Fotolitografía", "Microfabricación"],
+    shortDesc: "Participación en la Semana de Semiconductores del INAOE, experimentando en sala limpia los procesos de fotolitografía, grabado químico y manejo de obleas de silicio.",
+    whatIs: "Estancia académica y formativa en la infraestructura de investigación de microtecnologías del INAOE durante la Semana de Semiconductores. Inmersión en cuartos limpios con control riguroso de partículas en suspensión para el procesamiento y fabricación física de dispositivos semiconductores.",
+    whatIDid: "Entrenamiento y operación en cuartos limpios utilizando traje estéril especializado (bunny suit) y protección en áreas con luz amarilla inactínica para fotolitografía. Manipulación de obleas de silicio monocristalino mediante pinzas de precisión, estudio de las técnicas de deposición, recubrimiento de fotoresina, exposición UV y etapas de grabado para la integración de microestructuras sólidas.",
     highlights: [
-      "Manipulación segura de obleas de silicio monocristalino con equipo de protección estéril (bunny suit)",
-      "Comprensión práctica de pasos de fotolitografía, ataque químico y caracterización física",
-      "Automatización de flujo RTL-to-GDSII y simulación en nodo nanométrico de 28nm"
+      "Estancia práctica en las instalaciones de sala limpia del INAOE durante la Semana de Semiconductores",
+      "Manipulación física de obleas de silicio monocristalino bajo estándares de control de partículas",
+      "Comprensión in-situ de los procesos de fotolitografía, aplicación de fotoresina y caracterización física"
+    ]
+  },
+  {
+    id: "cadence-virtuoso-launcher-vlsi",
+    title: "Entorno Automatizado para Cadence Virtuoso (TSMC 28nm) & Síntesis Genus",
+    category: "vlsi",
+    categoryLabel: "Diseño VLSI & Microelectrónica",
+    tag: "Automatización EDA & RISC-V",
+    mediaType: "image",
+    mediaUrl: "launcher.jpg",
+    secondaryMedia: [],
+    tags: ["Cadence Virtuoso", "TSMC 28nm PDK", "Cadence Genus", "Script Launcher CLI", "Xming X11 / SSH", "Inversor CMOS", "Arquitectura RISC-V", "Simulación RTL"],
+    shortDesc: "Script interactivo de automatización para despliegue de Cadence Virtuoso en nodo TSMC 28nm, servidor X11, síntesis con Genus y simulación de inversor CMOS y procesador RISC-V.",
+    whatIs: "Suite de automatización y entorno de trabajo desarrollado para el curso especializado de herramientas EDA industriales (Cadence Virtuoso y Cadence Genus) con el kit de diseño de proceso (PDK) TSMC a 28 nanómetros. El entorno permitió la simulación esquemática/layout de una compuerta inversora CMOS, síntesis lógica y exploración de la arquitectura de procesador RISC-V.",
+    whatIDid: "Desarrollo y programación del script lanzador («SELECCIÓN DE ENTORNO») por consola para automatizar la comprobación del servidor gráfico X11 (Xming), la configuración de variables de entorno para el usuario remoto y el establecimiento de la sesión SSH segura con reenvío de ventanas hacia el cluster EDA. En el curso se abordó el diseño a nivel transistor y layout de la compuerta inversora en Cadence Virtuoso, simulación RTL en Verilog/VHDL y síntesis lógica con Genus, analizando el flujo de implementación y optimización para el procesador de arquitectura abierta RISC-V.",
+    highlights: [
+      "Automatización completa del arranque de Cadence Virtuoso TSMC 28nm y servidor X11 mediante script personalizado",
+      "Flujo de diseño analógico/digital: modelado de compuerta inversora CMOS a nivel transistor en Virtuoso",
+      "Síntesis lógica con Cadence Genus y estudio de simulación RTL para procesador de arquitectura RISC-V"
     ]
   },
   {
