@@ -612,10 +612,11 @@ function openProjectModal(projectId, initialIndex = 0) {
       <div class="dual-stage-container">
         <div class="dual-photo-pane">
           <div class="modal-media-viewport">
-            <img src="${safeMediaUrl(allMedia[currentModalMediaIndex].url)}" alt="${project.title}" id="dualModalImg" />
+            <img src="${safeMediaUrl(allMedia[currentModalMediaIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${safeMediaUrl(allMedia[currentModalMediaIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
           </div>
-          <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px;">
-            📸 Ensamble Físico: Resistencia Eléctrica en Ladrillo Refractario
+          <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>📸 Ensamble Físico</span>
+            <a href="${safeMediaUrl(allMedia[currentModalMediaIndex].url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(0,242,254,0.3); padding: 2px 8px; border-radius: 12px;" title="Ver imagen original en alta resolución">🔍 Ver completa</a>
           </div>
         </div>
 
@@ -710,8 +711,11 @@ function renderModalMedia(allMedia, index) {
   } else {
     modalMediaStage.innerHTML = `
       <div class="modal-media-viewport">
-        <img src="${safeUrl}" alt="Detalle del proyecto" />
+        <img src="${safeUrl}" alt="Detalle del proyecto" onclick="window.open('${safeUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
       </div>
+      <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
+        <span>🔍</span> Ver completa
+      </a>
       ${navControlsHtml}
     `;
   }

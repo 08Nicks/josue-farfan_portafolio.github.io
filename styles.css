@@ -1326,9 +1326,9 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border-active);
   border-radius: var(--radius-lg);
-  width: 100%;
-  max-width: 960px;
-  max-height: 90vh;
+  width: 95vw;
+  max-width: 1160px;
+  max-height: 92vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1393,13 +1393,13 @@ body {
 .modal-media-stage {
   position: relative;
   width: 100%;
-  background: #020408;
+  background: #010307;
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 320px;
+  min-height: 380px;
   border: 1px solid var(--border-subtle);
 }
 
@@ -1409,9 +1409,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 320px;
-  max-height: 520px;
-  overflow: hidden;
+  min-height: 380px;
+  max-height: 72vh;
+  padding: 8px;
 }
 
 .modal-media-viewport img,
@@ -1419,11 +1419,47 @@ body {
 .modal-media-stage > img,
 .modal-media-stage > video {
   max-width: 100%;
-  max-height: 520px;
+  max-height: 70vh;
   width: auto;
   height: auto;
-  object-fit: contain;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius-sm);
   transition: opacity 0.25s ease;
+}
+
+.modal-media-viewport img {
+  cursor: zoom-in;
+}
+
+/* Botón flotante para ver imagen en tamaño completo original */
+.modal-expand-btn {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(6, 10, 18, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  transition: all var(--transition-fast);
+}
+
+.modal-expand-btn:hover {
+  background: var(--accent-cyan);
+  color: #06090e;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.6);
+  transform: translateY(-2px);
 }
 
 /* Modal Navigation Arrows */
@@ -1511,9 +1547,12 @@ body {
 
 .dual-photo-pane img {
   max-width: 100%;
-  max-height: 420px;
-  object-fit: contain;
+  max-height: 520px;
+  width: auto;
+  height: auto;
+  object-fit: contain !important;
   border-radius: var(--radius-sm);
+  cursor: zoom-in;
 }
 
 .dual-pdf-pane {
