@@ -391,21 +391,87 @@ void loop() {
   },
   {
     id: "rf-antena-microstrip-espectro",
-    title: "Diseño de Antena Microstrip Patch y Caracterización Espectral a 2.45 GHz",
+    title: "Diseño, Simulación en HFSS y Fabricación de Antena Microstrip a 1.9 GHz",
     category: "rf",
     categoryLabel: "RF & Microondas",
-    tag: "Microondas & RF",
+    tag: "Microondas, HFSS & VNA",
     mediaType: "image",
-    mediaUrl: "Imagen de WhatsApp 2025-09-20 a las 21.15.06_2bed19f5.jpg",
-    secondaryMedia: ["WhatsApp Image 2026-09-22 at 5.40.32 PM.jpeg"],
-    tags: ["Antena Patch 2.4 GHz", "Conector SMA", "Analizador de Espectro", "Línea Microstrip", "Banda ISM", "Impedancia 50Ω"],
-    shortDesc: "Fabricación de antena plana de cobre sobre sustrato dieléctrico sintonizada a 2.4 GHz y medición de pico de resonancia en analizador de RF a 2.450 GHz.",
-    whatIs: "Diseño electromagnético, dimensionamiento y validación experimental de una antena de parche microstrip resonante para aplicaciones inalámbricas en la banda libre industrial, científica y médica (ISM 2.4 GHz).",
-    whatIDid: "Cálculo geométrico del parche radiante y la ranura de acoplamiento para matching de impedancia a 50 ohmios. Fabricación física con conector hembra SMA dorado de montaje en borde. Evaluación en analizador de espectro de alta frecuencia constatando la frecuencia central exacta a 2.450 000 000 GHz con nivel de señal y pureza espectral óptimos para WiFi/Bluetooth.",
+    mediaUrl: "analisis.jpg",
+    secondaryMedia: [
+      "parche_hfss_3d.png",
+      "Imagen de WhatsApp 2025-09-20 a las 21.15.06_2bed19f5.jpg",
+      "WhatsApp Image 2026-09-22 at 5.40.32 PM.jpeg"
+    ],
+    codeFilename: "antena_patch_1_9ghz.m",
+    codeSnippet: `% ============================================================
+% DISEÑO DE ANTENA MICROSTRIP RECTANGULAR A 1.9 GHz
+% Autores: Josue Farfan Gonzalez et al. (BUAP)
+% Referencia: C. A. Balanis - Antenna Theory: Analysis and Design
+% ============================================================
+clear; clc; close all;
+
+% 1. PARAMETROS DE ENTRADA Y SUSTRATO (Rogers RO3003)
+f = 1.9e9;          % Frecuencia central de diseño (1.9 GHz - PCS/GSM)
+er = 3.0;           % Constante dielectrica del sustrato (Rogers RO3003)
+h = 1.52e-3;        % Espesor del sustrato dielectrico (1.52 mm)
+c = 3e8;            % Velocidad de la luz en el vacio (m/s)
+
+% 2. PASO 1: CALCULO DEL ANCHO FISICO DEL PARCHE (W)
+W = (c / (2 * f)) * sqrt(2 / (er + 1));
+fprintf('Ancho del parche (W): %.4f mm\\n', W * 1000);
+
+% 3. PASO 2: CONSTANTE DIELECTRICA EFECTIVA (ereff)
+% Considera el efecto de borde y la proporcion campo aire/sustrato
+ereff = ((er + 1) / 2) + ((er - 1) / 2) * (1 + 12 * h / W)^(-1/2);
+fprintf('Constante dielectrica efectiva (ereff): %.4f\\n', ereff);
+
+% 4. PASO 3: EXTENSION DE LONGITUD POR DISPERSION DE BORDE (deltaL)
+num = (ereff + 0.3) * (W / h + 0.264);
+den = (ereff - 0.258) * (W / h + 0.8);
+deltaL = 0.412 * h * (num / den);
+fprintf('Extension de longitud por borde (deltaL): %.4f mm\\n', deltaL * 1000);
+
+% 5. PASO 4: LONGITUD FISICA RESONANTE DEL PARCHE (L)
+L = (c / (2 * f * sqrt(ereff))) - 2 * deltaL;
+fprintf('Longitud fisica resonante (L): %.4f mm\\n', L * 1000);
+
+% 6. LONGITUD ELECTRICA EFECTIVA (Leff)
+Leff = L + 2 * deltaL;
+fprintf('Longitud efectiva (Leff): %.4f mm\\n', Leff * 1000);
+
+% 7. IMPEDANCIA CARACTERISTICA DE ENTRADA EN EL BORDE (Z0)
+Z0 = (120 * pi / sqrt(ereff)) * (h / W + 1.393 + 0.667 * log(h / W + 1.444));
+fprintf('Impedancia de entrada en el borde (Z0): %.2f Ohms\\n', Z0);
+
+% 8. ACOPLAMIENTO DE IMPEDANCIA A 50 OHMS (PUNTO INSET FEED X0)
+% Transformador lambda/4 para igualar con conector SMA 50 Ohms
+X0 = (L / 2) * acos(sqrt(50 / Z0));
+fprintf('Punto optimo de alimentacion desde el borde (X0): %.4f mm\\n', X0 * 1000);
+
+% ============================================================
+% RESUMEN VALIDADO EN LABORATORIO (Anritsu Site Master S331D):
+% - Frecuencia medida: 1.925 GHz (Desviacion < 0.4% vs Ansys HFSS)
+% - Coeficiente S11 medido: -14.93 dB (96.8% de potencia radiada)
+% - Ancho de banda util a -10 dB: 50 MHz (1.90 GHz - 1.95 GHz)
+% ============================================================`,
+    tags: [
+      "Antena Patch 1.9 GHz",
+      "Ansys HFSS 2024",
+      "Rogers RO3003",
+      "Anritsu Site Master S331D",
+      "Parámetro S11 (-14.93 dB)",
+      "Conector SMA Edge-Mount",
+      "Grabado Químico FeCl3",
+      "MATLAB"
+    ],
+    shortDesc: "Diseño analítico en MATLAB, modelado electromagnético 3D en Ansys HFSS, microfabricación sobre Rogers 3003 y caracterización de parámetro S11 a 1.9 GHz con analizador vectorial de redes.",
+    whatIs: "Proyecto integral de ingeniería de microondas que abarca el ciclo completo de desarrollo de una antena de microcinta (microstrip patch) rectangular sintonizada a 1.9 GHz (banda PCS/GSM y telecomunicaciones móviles). Comprende el cálculo matemático riguroso según la teoría de Cavidades de Balanis, la simulación de parámetros de dispersión S11 y diagramas de radiación 2D/3D en Ansys HFSS, la microfabricación sobre sustrato de alta frecuencia Rogers RO3003 mediante mascarilla de vinil y ataque químico (FeCl3), y la validación experimental con analizador vectorial de redes.",
+    whatIDid: "Desarrollo del script de dimensionamiento en MATLAB (W = 55.82 mm, L = 45.12 mm, εreff = 2.8682, ΔL = 0.7493 mm) con cálculo de ranuras de inserción (inset feed) y acoplador de λ/4 para adaptación a 50 Ω. Modelado 3D de onda completa en Ansys HFSS 2024 R2 obteniendo S11 = -16.48 dB y ganancia directiva de 6.94 dB. Fabricación física transfiriendo el diseño exportado en DXF a una placa Rogers 3003 (εr = 3.0, h = 1.52 mm, cobre de 35 µm) mediante grabado en cloruro férrico y soldadura de conector SMA hembra de borde. Finalmente, medición en laboratorio con el analizador Anritsu Site Master S331D (Touchstone josuef.s1p), registrando una resonancia medida en 1.925 GHz (desviación de apenas 7.7 MHz respecto a la simulación), S11 = -14.93 dB (96.8% de potencia radiada eficaz) y un ancho de banda experimental de 50 MHz.",
     highlights: [
-      "Resonancia exacta validada en 2.450 GHz en pantalla de analizador de espectro",
-      "Adaptación de impedancia directa por línea microstrip plana",
-      "Proceso completo desde cálculo electromagnético hasta prueba en banco de RF"
+      "Ciclo completo de ingeniería RF: Teoría analítica → Simulación HFSS → Fabricación PCB Rogers 3003 → Medición VNA",
+      "Resonancia medida experimentalmente en 1.925 GHz con S11 de -14.93 dB y 50 MHz de ancho de banda a -10 dB",
+      "Simulación electromagnética en Ansys HFSS validando 6.94 dB de ganancia directiva frontal a 0° y S11 de -16.48 dB",
+      "Proceso de grabado químico controlado con FeCl3 y conector SMA edge-mount de 50 Ω sin degradación de impedancia"
     ]
   },
   {
@@ -1027,8 +1093,13 @@ class PortfolioView {
             <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
               <span>🔍</span> Ver completa
             </a>
+            ${allMedia.length > 1 ? `
+              <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
+              <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
+              <div class="modal-slide-counter" id="modalSlideCounter">${initialIndex + 1} / ${allMedia.length} Evidencias</div>
+            ` : ''}
             <div class="dual-pane-footer">
-              <span class="dual-pane-tag">📸 Evidencia de Hardware</span>
+              <span class="dual-pane-tag">📸 Evidencias (${allMedia.length})</span>
               <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">🔍 Ver completa (100%)</a>
             </div>
           </div>
@@ -1068,7 +1139,22 @@ class PortfolioView {
           </div>
         </div>
       `;
-      if (this.modalGalleryStrip) this.modalGalleryStrip.style.display = "none";
+      if (this.modalGalleryStrip) {
+        if (allMedia.length > 1) {
+          this.modalGalleryStrip.style.display = "flex";
+          this.modalGalleryStrip.innerHTML = allMedia.map((m, idx) => {
+            const thumbSrc = m.type === "video" ? (m.poster ? this.safeMediaUrl(m.poster) : this.safeMediaUrl(m.url)) : this.safeMediaUrl(m.url);
+            return `
+              <div class="strip-thumb ${idx === initialIndex ? 'active' : ''}" data-action="switch-thumb" data-index="${idx}">
+                <img src="${thumbSrc}" alt="Vista ${idx + 1}" />
+              </div>
+            `;
+          }).join('');
+        } else {
+          this.modalGalleryStrip.style.display = "none";
+          this.modalGalleryStrip.innerHTML = "";
+        }
+      }
     } else {
       // 3. Escenario fotográfico/video estándar
       this.modalMediaStage.classList.remove("dual-showcase");
@@ -1192,6 +1278,29 @@ class PortfolioView {
     if (this.searchClearBtn) {
       this.searchClearBtn.style.display = query ? "block" : "none";
     }
+  }
+
+  updateModalMedia(allMedia, currentIndex) {
+    if (!allMedia || !allMedia[currentIndex]) return;
+    const current = allMedia[currentIndex];
+    const safeUrl = this.safeMediaUrl(current.url);
+
+    if (this.modalMediaStage && this.modalMediaStage.classList.contains("dual-showcase")) {
+      const dualImg = document.getElementById("dualModalImg");
+      if (dualImg) {
+        dualImg.src = safeUrl;
+        dualImg.setAttribute("onclick", `window.open('${safeUrl}', '_blank')`);
+      }
+      const expandBtn = this.modalMediaStage.querySelector(".modal-expand-btn");
+      if (expandBtn) expandBtn.href = safeUrl;
+      const paneActionLink = this.modalMediaStage.querySelector(".pane-action-link");
+      if (paneActionLink) paneActionLink.href = safeUrl;
+      const counter = this.modalMediaStage.querySelector("#modalSlideCounter");
+      if (counter) counter.textContent = `${currentIndex + 1} / ${allMedia.length} Evidencias`;
+    } else {
+      this.renderModalMediaStage(allMedia, currentIndex);
+    }
+    this.updateThumbnails(currentIndex);
   }
 }
 
@@ -1419,15 +1528,13 @@ class PortfolioController {
   navigateMedia(direction) {
     const res = this.model.stepMedia(direction);
     if (!res) return;
-    this.view.renderModalMediaStage(res.mediaList, res.currentIndex);
-    this.view.updateThumbnails(res.currentIndex);
+    this.view.updateModalMedia(res.mediaList, res.currentIndex);
   }
 
   switchMedia(index) {
     const res = this.model.setMediaIndex(index);
     if (!res) return;
-    this.view.renderModalMediaStage(res.mediaList, res.currentIndex);
-    this.view.updateThumbnails(res.currentIndex);
+    this.view.updateModalMedia(res.mediaList, res.currentIndex);
   }
 
   handleResetFilters() {
