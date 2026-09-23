@@ -172,22 +172,22 @@ const projectsData = [
     ]
   },
   {
-    id: "ai-fastalpr-vision",
-    title: "Sistema Inteligente de Reconocimiento de Placas Vehiculares (FastALPR)",
+    id: "ai-vision-detection",
+    title: "Pipeline de Visión por Computadora & Detección de Patrones con IA",
     category: "ai",
     categoryLabel: "IA & Visión Artificial",
     tag: "Computer Vision & Deep Learning",
     mediaType: "image",
     mediaUrl: "analiis imagen ia.jpg",
-    secondaryMedia: ["WhatsApp Image 2026-09-22 at 4.32.30 PM.jpeg"],
-    tags: ["Python", "FastALPR / YOLO", "OpenCV", "FastAPI", "OCR Neuronal", "Cámara en Tiempo Real"],
-    shortDesc: "Pipeline completo de visión artificial para detección y lectura automática de placas automotrices (ANPR/ALPR) con backend en FastAPI.",
-    whatIs: "Sistema de lectura automatizada de matrículas vehiculares (Automatic Number Plate Recognition) capaz de operar en transmisiones de video en vivo, localizando la placa vehicular y realizando transcripción OCR simultánea.",
-    whatIDid: "Desarrollo del software en Python integrando OpenCV con aceleración DSHOW y modelos de deep learning para detección de región de interés (ROI) y red OCR para caracteres de placas vehiculares. Creación de una API REST con FastAPI para ingesta de video y respuesta estructurada en JSON con coordenadas del bounding box, texto reconocido («A00-AAA», «JCZ-263-A») y confianza estadística.",
+    secondaryMedia: [],
+    tags: ["Python", "OpenCV", "Deep Learning", "FastAPI", "Inferencia en Tiempo Real", "Detección de Objetos"],
+    shortDesc: "Sistema de visión artificial en tiempo real desarrollado en Python para detección multiobjeto y extracción de características sobre video en vivo.",
+    whatIs: "Arquitectura de procesamiento digital de imágenes y visión computacional que procesa flujos de video en vivo provenientes de cámara, aplicando modelos de redes neuronales convolucionales para detección espacial, delimitación por bounding boxes y reconocimiento óptico de caracteres.",
+    whatIDid: "Desarrollo del pipeline de inferencia en Python utilizando OpenCV con aceleración DSHOW y modelos neuronales optimizados para ejecución fluida en ventana interactiva. Implementación de una arquitectura modular conectada a endpoints en FastAPI para ingesta de video, extracción de coordenadas espaciales, análisis probabilístico de confianza y despliegue gráfico en tiempo real.",
     highlights: [
-      "Detección multiobjeto simultánea de múltiples placas en el mismo cuadro",
-      "Filtrado morfológico y binarización adaptativa para placas con reflejos y sombras",
-      "Alta tasa de acierto y confianza OCR en condiciones de iluminación variables"
+      "Inferencia multiobjeto de alta velocidad y bajo retraso directamente sobre video en vivo",
+      "Filtrado morfológico y normalización de imagen ante variaciones drásticas de luz y reflejos",
+      "Integración de modelos neuronales con arquitectura de servicios backend en FastAPI"
     ]
   },
   {
