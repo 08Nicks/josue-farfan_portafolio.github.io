@@ -2050,6 +2050,34 @@ class PortfolioController {
         });
       });
     }
+
+    // 9. Alternador de vista en escaparate PCB Dragon (Hardware PCB vs Arte & Simbología)
+    const pcbBtnHw = document.getElementById("pcbBtnHw");
+    const pcbBtnArt = document.getElementById("pcbBtnArt");
+    const pcbImg = document.getElementById("pcbShowcaseImg");
+    const pcbHint = document.getElementById("pcbOverlayHint");
+
+    if (pcbBtnHw && pcbBtnArt && pcbImg) {
+      pcbBtnHw.addEventListener("click", () => {
+        pcbBtnHw.classList.add("active");
+        pcbBtnArt.classList.remove("active");
+        pcbImg.src = "assets/branding/pcb-banner-dragon.png";
+        pcbImg.alt = "Placa de circuito impreso PCB con dragón medieval enrutado en cobre y LEDs activos - Forging the Digital Reality";
+        if (pcbHint) {
+          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Circuito Físico Real • Trazas en Cobre Top Layer & LEDs SMD Activos`;
+        }
+      });
+
+      pcbBtnArt.addEventListener("click", () => {
+        pcbBtnArt.classList.add("active");
+        pcbBtnHw.classList.remove("active");
+        pcbImg.src = "assets/branding/dragon-fire-banner.jpg";
+        pcbImg.alt = "Arte y simbología medieval de dragón y fuego - Forging the Digital Reality";
+        if (pcbHint) {
+          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Simbología Gráfica • Fuego forjado en nudos celtas y glifos`;
+        }
+      });
+    }
   }
 
   openModal(projectId, initialIndex = 0) {
