@@ -12,7 +12,7 @@ const projectsData = [
     categoryLabel: "Microelectrónica & Semiconductores",
     tag: "INAOE Cleanroom",
     mediaType: "image",
-    mediaUrl: "oblea_silicio_cleanroom.jpg",
+    mediaUrl: "WhatsApp Image 2026-09-22 at 4.38.59 PM.jpeg",
     secondaryMedia: [],
     tags: ["INAOE", "Semana de Semiconductores", "Cuarto Limpio (Cleanroom)", "Obleas de Silicio", "Fotolitografía", "Microfabricación"],
     shortDesc: "Participación en la Semana de Semiconductores del INAOE, experimentando en sala limpia los procesos de fotolitografía, grabado químico y manejo de obleas de silicio.",
@@ -965,12 +965,10 @@ class PortfolioView {
 
     if (filteredProjects.length === 0) {
       this.projectsGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1.5px dashed var(--border-subtle);">
-          <div style="margin-bottom: 1rem; color: var(--accent-blue);">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </div>
-          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main);">No se encontraron proyectos</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Intenta con otra palabra clave como "ESP32", "FPGA", "Tiristor", "Cadence" o "Antena".</p>
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-subtle);">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-white);">No se encontraron proyectos</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">Intenta con otra palabra clave como "ESP32", "FPGA", "Tiristor", "Cadence" o "Antena".</p>
           <button class="btn-primary" data-action="reset-filters" style="padding: 8px 20px; font-size: 0.85rem; cursor: pointer;">Restablecer filtros</button>
         </div>
       `;
@@ -990,16 +988,14 @@ class PortfolioView {
             ${project.mediaType === 'video' ? `
               <img src="${project.posterUrl ? this.safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
               <div class="media-play-overlay">
-                <div class="play-circle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                </div>
+                <div class="play-circle">▶</div>
               </div>
             ` : `
               <img src="${this.safeMediaUrl(project.mediaUrl)}" alt="${project.title}" loading="lazy" />
             `}
 
             <div class="media-badge">
-              <span>${project.mediaType === 'video' ? 'Video Demostrativo' : (hasMultiple ? `${allMedia.length} Fotos` : 'Evidencia')}</span>
+              <span>${project.mediaType === 'video' ? '🎥 Video Demostrativo' : (hasMultiple ? `📷 ${allMedia.length} Fotos` : '📷 Evidencia')}</span>
             </div>
             <div class="tag-badge">${project.tag}</div>
           </div>
@@ -1018,7 +1014,7 @@ class PortfolioView {
                 Ver Ficha Técnica <span>→</span>
               </button>
               <div class="evidence-badge">
-                <span>■</span> ${hasMultiple ? `${allMedia.length} evidencias` : '1 archivo'}
+                <span>●</span> ${hasMultiple ? `${allMedia.length} evidencias` : '1 archivo'}
               </div>
             </div>
           </div>
@@ -1043,11 +1039,11 @@ class PortfolioView {
       if (project.team && project.team.length > 0) {
         highlightsHtml += `
           <li class="team-credit-item">
-            <div style="font-weight: 700; color: var(--accent-blue); font-family: var(--font-heading); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
-              Coautoría & Equipo de Proyecto (${project.institution || 'BUAP'}):
+            <div style="font-weight: 700; color: var(--accent-cyan); font-family: var(--font-heading); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+              <span>👥</span> Coautoría & Equipo de Proyecto (${project.institution || 'BUAP'}):
             </div>
-            <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-main);">
-              ${project.team.map(member => `<span style="display: inline-block; background: var(--bg-card); padding: 3px 10px; border-radius: 6px; margin: 3px 4px 3px 0; border: 1.5px solid var(--border-subtle);">${member}</span>`).join('')}
+            <div style="font-size: 0.85rem; line-height: 1.6; color: #f1f5f9;">
+              ${project.team.map(member => `<span style="display: inline-block; background: rgba(255,255,255,0.06); padding: 2px 10px; border-radius: 12px; margin: 3px 4px 3px 0; border: 1px solid rgba(255,255,255,0.1);">${member}</span>`).join('')}
             </div>
           </li>
         `;
@@ -1063,7 +1059,7 @@ class PortfolioView {
         this.modalTagsBox.innerHTML += `
           <div style="width: 100%; margin-top: 1.25rem;">
             <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
-              Descargar Script: ${project.downloadName || project.downloadUrl}
+              <span>⚡</span> Descargar Script: ${project.downloadName || project.downloadUrl}
             </a>
           </div>
         `;
@@ -1081,28 +1077,28 @@ class PortfolioView {
               <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
             </div>
             <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
-              <span>Ver completa</span>
+              <span>🔍</span> Ver completa
             </a>
             <div class="dual-pane-footer">
-              <span class="dual-pane-tag">Ensamble Físico</span>
-              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">Ver completa (100%)</a>
+              <span class="dual-pane-tag">📸 Ensamble Físico</span>
+              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">🔍 Ver completa (100%)</a>
             </div>
           </div>
 
           <div class="dual-pdf-pane">
             <div class="pdf-pane-header">
               <div class="pdf-title">
-                ${project.pdfName || 'Thermal Blueprint.pdf'}
+                <span>📄</span> ${project.pdfName || 'Thermal Blueprint.pdf'}
               </div>
               <div class="pdf-pane-actions">
                 <button class="code-action-btn layout-toggle-btn" data-action="toggle-dual-layout" title="Alternar entre ver al lado o abajo para ampliar la imagen y documento">
-                  <span class="layout-toggle-text">Ver Abajo</span>
+                  <span class="layout-toggle-icon">⬍</span> <span class="layout-toggle-text">Ver Abajo</span>
                 </button>
                 <a href="${this.safeMediaUrl(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pestaña nueva">
-                  Pantalla Completa
+                  <span>↗</span> Pantalla Completa
                 </a>
                 <a href="${this.safeMediaUrl(project.pdfUrl)}" download class="pdf-action-btn" title="Descargar documento">
-                  Descargar
+                  <span>⬇</span> Descargar
                 </a>
               </div>
             </div>
@@ -1122,16 +1118,16 @@ class PortfolioView {
               <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
             </div>
             <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
-              <span>Ver completa</span>
+              <span>🔍</span> Ver completa
             </a>
             ${allMedia.length > 1 ? `
-              <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">&lsaquo;</button>
-              <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">&rsaquo;</button>
+              <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
+              <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
               <div class="modal-slide-counter" id="modalSlideCounter">${initialIndex + 1} / ${allMedia.length} Evidencias</div>
             ` : ''}
             <div class="dual-pane-footer">
-              <span class="dual-pane-tag">Evidencias (${allMedia.length})</span>
-              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">Ver completa (100%)</a>
+              <span class="dual-pane-tag">📸 Evidencias (${allMedia.length})</span>
+              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">🔍 Ver completa (100%)</a>
             </div>
           </div>
 
@@ -1144,20 +1140,20 @@ class PortfolioView {
                   <span class="dot-green"></span>
                 </div>
                 <div class="code-pane-title">
-                  ${project.codeFilename || 'script'}
+                  <span>💻</span> ${project.codeFilename || 'script'}
                 </div>
                 <span class="code-line-count-badge">${lineCount} líneas</span>
               </div>
               <div class="code-pane-actions">
                 <button class="code-action-btn layout-toggle-btn" data-action="toggle-dual-layout" title="Alternar entre ver al lado o abajo para ampliar la imagen">
-                  <span class="layout-toggle-text">Ver Abajo</span>
+                  <span class="layout-toggle-icon">⬍</span> <span class="layout-toggle-text">Ver Abajo</span>
                 </button>
                 <button class="code-action-btn" data-action="copy-code" title="Copiar código al portapapeles">
-                  Copiar Código
+                  <span>📋</span> Copiar Código
                 </button>
                 ${project.downloadUrl ? `
                   <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="code-action-btn" title="Descargar archivo">
-                    Descargar
+                    <span>⬇</span> Descargar
                   </a>
                 ` : ''}
               </div>
@@ -1227,8 +1223,8 @@ class PortfolioView {
     const total = allMedia.length;
 
     const navControlsHtml = total > 1 ? `
-      <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">&lsaquo;</button>
-      <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">&rsaquo;</button>
+      <button class="modal-nav-arrow prev" data-action="prev-media" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
+      <button class="modal-nav-arrow next" data-action="next-media" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
       <div class="modal-slide-counter" id="modalSlideCounter">${index + 1} / ${total} Evidencias</div>
     ` : '';
 
@@ -1265,7 +1261,7 @@ class PortfolioView {
           <img src="${safeUrl}" alt="Detalle del proyecto" onclick="window.open('${safeUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
         </div>
         <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
-          <span>Ver completa</span>
+          <span>🔍</span> Ver completa
         </a>
         ${navControlsHtml}
       `;
@@ -1431,11 +1427,11 @@ class PortfolioController {
             const iconEl = toggleLayoutBtn.querySelector('.layout-toggle-icon');
             const textEl = toggleLayoutBtn.querySelector('.layout-toggle-text');
             if (isStacked) {
-              if (iconEl) iconEl.textContent = '';
+              if (iconEl) iconEl.textContent = '◫';
               if (textEl) textEl.textContent = 'Ver Lado a Lado';
               toggleLayoutBtn.setAttribute('title', 'Cambiar a vista lado a lado');
             } else {
-              if (iconEl) iconEl.textContent = '';
+              if (iconEl) iconEl.textContent = '⬍';
               if (textEl) textEl.textContent = 'Ver Abajo';
               toggleLayoutBtn.setAttribute('title', 'Colocar código abajo y ampliar imagen al 100%');
             }
@@ -1451,9 +1447,9 @@ class PortfolioController {
           if (copyText) {
             const handleSuccess = () => {
               const prev = copyBtn.innerHTML;
-              copyBtn.innerHTML = '¡Copiado!';
-              copyBtn.style.color = 'var(--accent-blue)';
-              copyBtn.style.borderColor = 'var(--accent-blue)';
+              copyBtn.innerHTML = '<span>✓</span> ¡Copiado!';
+              copyBtn.style.color = '#27c93f';
+              copyBtn.style.borderColor = '#27c93f';
               setTimeout(() => {
                 copyBtn.innerHTML = prev;
                 copyBtn.style.color = '';
