@@ -1349,46 +1349,37 @@ class PortfolioView {
       this.modalTagsBox.innerHTML = cert.tags.map(t => `<span class="tech-tag">${t}</span>`).join("");
     }
 
+    this.modalMediaStage.classList.remove("dual-showcase");
+
     if (cert.mediaType === "pdf") {
-      this.modalMediaStage.classList.add("dual-showcase");
       this.modalMediaStage.innerHTML = `
-        <div class="dual-stage-container">
-          <div class="dual-photo-pane">
-            <div class="modal-media-viewport">
-              <img src="${cert.previewUrl}" alt="${cert.title}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para abrir documento oficial completo" />
+        <div class="cert-pdf-stage">
+          <div class="pdf-pane-header">
+            <div class="pdf-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span>${this.escapeHtml(cert.title)}</span>
             </div>
-            <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir documento original en resolución completa">
-              <span>Ver PDF completo</span>
-            </a>
-            <div class="dual-pane-footer">
-              <span class="dual-pane-tag">${cert.issuerBadge}</span>
-              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pane-action-link">Abrir en Nueva Pestaña ↗</a>
+            <div class="pdf-pane-actions">
+              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pantalla completa">
+                <span>↗</span> Pantalla Completa
+              </a>
+              <a href="${cert.fileUrl}" download class="pdf-action-btn" title="Descargar documento oficial original">
+                <span>⬇</span> Descargar PDF
+              </a>
             </div>
           </div>
-          <div class="dual-pdf-pane">
-            <div class="pdf-pane-header">
-              <div class="pdf-title">${cert.title}</div>
-              <div class="pdf-pane-actions">
-                <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn">
-                  <span>↗</span> Pantalla Completa
-                </a>
-                <a href="${cert.fileUrl}" download class="pdf-action-btn">
-                  <span>⬇</span> Descargar
-                </a>
-              </div>
-            </div>
-            <iframe src="${cert.fileUrl}#toolbar=0&navpanes=0&view=FitH" class="embedded-pdf-frame" title="${cert.title}"></iframe>
+          <div class="cert-pdf-viewport">
+            <iframe src="${cert.fileUrl}#toolbar=1&navpanes=0&view=FitH" class="cert-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
           </div>
         </div>
       `;
     } else {
-      this.modalMediaStage.classList.remove("dual-showcase");
       this.modalMediaStage.innerHTML = `
         <div class="modal-media-viewport">
-          <img src="${cert.fileUrl}" alt="${cert.title}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
+          <img src="${cert.fileUrl}" alt="${this.escapeHtml(cert.title)}" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
         </div>
         <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original">
-          <span>Ver imagen completa</span>
+          <span>Ver imagen completa ↗</span>
         </a>
       `;
     }

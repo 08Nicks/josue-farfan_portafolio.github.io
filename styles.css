@@ -1785,6 +1785,72 @@ body {
   height: 540px;
 }
 
+/* Visor Dedicado de Certificados PDF en Modal (Sin imagen redundante) */
+.cert-pdf-stage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #040711;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.cert-pdf-stage .pdf-pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cert-pdf-stage .pdf-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-cyan);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.cert-pdf-viewport {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 540px;
+  background: #0b1120;
+}
+
+.cert-pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #0f172a;
+}
+
+@media (max-width: 900px) {
+  .cert-pdf-viewport {
+    height: 55vh;
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cert-pdf-viewport {
+    height: 50vh;
+    min-height: 350px;
+  }
+  .cert-pdf-stage .pdf-pane-header {
+    padding: 8px 10px;
+  }
+}
+
 /* Dual Showcase: Photo + Embedded Code Viewer side by side */
 .dual-code-pane {
   display: flex;
