@@ -3,6 +3,23 @@
  * Base de datos de proyectos, renderizado reactivo, filtros, búsqueda y visor modal técnico.
  */
 
+// ==========================================================================
+// SEGURIDAD & HARDENING DEL CLIENTE
+// ==========================================================================
+// 1. Enforzamiento HTTPS (Cifrado de extremo a extremo en producción)
+if (window.location.protocol === "http:" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+  window.location.replace(window.location.href.replace(/^http:/, "https:"));
+}
+
+// 2. Anti-Clickjacking / Frame-Guard (Protección contra clonación e incrustación en iframes maliciosos)
+if (window.top !== window.self) {
+  try {
+    window.top.location = window.self.location;
+  } catch (err) {
+    document.documentElement.style.display = "none";
+  }
+}
+
 // Dataset exhaustivo de proyectos con categorización y detalles de ingeniería
 const projectsData = [
   {
@@ -1852,11 +1869,17 @@ class PortfolioController {
       });
     }
 
-    // 2. Búsqueda en tiempo real
+    // 2. Búsqueda en tiempo real sanitizada y protegida contra DoS/ReDoS
     if (this.view.searchInput) {
       this.view.searchInput.addEventListener("input", (e) => {
-        this.model.setSearchQuery(e.target.value);
-        this.view.updateSearchInput(e.target.value);
+        const rawValue = e.target.value || "";
+        // Sanitización: acotar longitud máxima a 80 caracteres y neutralizar inyecciones de markup
+        const sanitized = rawValue.slice(0, 80).replace(/[<>]/g, "");
+        if (sanitized !== rawValue) {
+          e.target.value = sanitized;
+        }
+        this.model.setSearchQuery(sanitized);
+        this.view.updateSearchInput(sanitized);
         this.refreshGrid();
       });
     }

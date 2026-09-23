@@ -1,0 +1,5 @@
+# Security Policy - Josué Farfán González Portfolio
+Contact: https://linkedin.com/in/josue-farfan
+Preferred-Languages: es, en
+Canonical: https://08nicks.github.io/josue-farfan_portafolio.github.io/.well-known/security.txt
+Policy: https://github.com/08Nicks/josue-farfan_portafolio.github.io/security/policy
