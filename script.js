@@ -72,22 +72,24 @@ const projectsData = [
     ]
   },
   {
-    id: "esp32-pizarra-telemetria",
-    title: "Estación de Telemetría Táctil y Control de Motor DC con ESP32",
+    id: "esp32-pizarra-interfaz-tft",
+    title: "Creación de Interfaces Gráficas Táctiles (GUI) en Pantallas TFT con ESP32",
     category: "embedded",
-    categoryLabel: "Sistemas Embebidos & IoT",
-    tag: "Proyecto INAOE",
+    categoryLabel: "Sistemas Embebidos & Interfaces",
+    tag: "GUI & Pantallas TFT",
     mediaType: "image",
     mediaUrl: "WhatsApp Image 2026-09-22 at 4.43.02 PM.jpeg",
     secondaryMedia: [],
-    tags: ["ESP32", "LovyanGFX", "TFT ILI9341", "INA219", "ESP32Encoder", "Motor GA25-370", "C++"],
-    shortDesc: "Sistema embebido en tiempo real con pantalla táctil TFT ILI9341, monitoreo de tensión, corriente y velocidad angular con encoder en cuadratura.",
-    whatIs: "Consola de control y monitoreo interactivo para actuadores electromecánicos. Integra adquisición de datos analógicos de alta precisión, lectura de encoder óptico/magnético y renderizado gráfico fluido en una pantalla táctil gráfica color.",
-    whatIDid: "Desarrollo del firmware en C++ utilizando la biblioteca gráfica LovyanGFX optimizada para bus paralelo de 8 bits en ESP32. Implementación de controladores para el sensor INA219 (I2C) para cálculo de voltaje (V), corriente (mA) y potencia en tiempo real. Gestión de interrupciones para encoder rotativo calculando RPM instantáneas y sentido de giro, desplegados dinámicamente en la pantalla.",
+    downloadUrl: "tft_touch_pizarra_esp32_pinout.ino",
+    downloadName: "tft_touch_pizarra_esp32_pinout.ino",
+    tags: ["ESP32", "Pantalla TFT ILI9341", "LovyanGFX", "TouchScreen Resistivo", "Bus Paralelo 8-bit", "Diseño de Interfaces GUI", "Pizarra Digital"],
+    shortDesc: "Desarrollo de interfaces gráficas interactivas y pizarra táctil sobre pantallas TFT a color gobernadas por microcontrolador ESP32 mediante bus paralelo.",
+    whatIs: "Proyecto enfocado en la concepción, renderizado y optimización de interfaces gráficas de usuario (GUI) en tiempo real para pantallas TFT color con controlador ILI9341 y panel táctil resistivo. Abarca el manejo de controladores gráficos de alta velocidad y la creación de componentes interactivos como lienzos de dibujo, menús táctiles y paneles de visualización digital.",
+    whatIDid: "Mapeo de hardware y configuración del bus paralelo de 8 bits en microcontrolador ESP32 aprovechando el acelerador de la biblioteca LovyanGFX para maximizar la tasa de cuadros por segundo (FPS) sin parpadeo. Implementación de la calibración del panel táctil resistivo con resolución de coordenadas X/Y y desarrollo de una pizarra digital interactiva que responde de manera inmediata al tacto directo.",
     highlights: [
-      "Frecuencia de refresco gráfico optimizada por bus paralelo de 8 bits",
-      "Monitoreo bidireccional y simultáneo de variables eléctricas (V, I) y cinemáticas (RPM, Dirección)",
-      "Calibración táctil resistiva personalizada y control de potencia para motor GA25-370"
+      "Configuración optimizada de bus paralelo de 8 bits en ESP32 para alta velocidad de refresco",
+      "Rutina de muestreo y calibración precisa de panel táctil resistivo X/Y",
+      "Renderizado de componentes de interfaz gráfica, tipografías escalables y lienzo de pizarra interactiva"
     ]
   },
   {
