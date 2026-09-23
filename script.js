@@ -1057,13 +1057,36 @@ class PortfolioView {
       return `
         <article class="project-card" data-id="${project.id}">
           <div class="card-media" id="card-media-${project.id}" data-action="open-modal" data-id="${project.id}" title="Clic para abrir ficha técnica y evidencias">
+            <!-- Skeleton con barritas sin nada de carga / fallback si no carga -->
+            <div class="card-media-skeleton" id="media-sk-${project.id}" aria-hidden="true">
+              <div class="skeleton-shimmer-box shimmer-box">
+                <div class="skeleton-placeholder-inner">
+                  <svg class="skeleton-circuit-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="2" y="2" width="20" height="20" rx="4"></rect>
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                  <div class="skeleton-bar-line skeleton-mini-bar shimmer-bar"></div>
+                  <div class="skeleton-bar-line skeleton-mini-bar-sm shimmer-bar"></div>
+                </div>
+              </div>
+            </div>
+
             ${project.mediaType === 'video' ? `
-              <img src="${project.posterUrl ? this.safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
+              <img src="${project.posterUrl ? this.safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" 
+                alt="${project.title}" 
+                loading="lazy" 
+                onload="this.classList.add('is-loaded'); const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.style.display='none';" 
+                onerror="this.style.display='none'; const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.classList.add('is-failed');" />
               <div class="media-play-overlay">
                 <div class="play-circle">▶</div>
               </div>
             ` : `
-              <img src="${this.safeMediaUrl(project.mediaUrl)}" alt="${project.title}" loading="lazy" />
+              <img src="${this.safeMediaUrl(project.mediaUrl)}" 
+                alt="${project.title}" 
+                loading="lazy" 
+                onload="this.classList.add('is-loaded'); const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.style.display='none';" 
+                onerror="this.style.display='none'; const sk=document.getElementById('media-sk-${project.id}'); if(sk) sk.classList.add('is-failed');" />
             `}
 
             <div class="media-badge">
@@ -1093,6 +1116,15 @@ class PortfolioView {
         </article>
       `;
     }).join("");
+
+    // Verificación inmediata si las imágenes ya estaban cacheadas por el navegador
+    this.projectsGrid.querySelectorAll(".card-media img").forEach(img => {
+      if (img.complete && img.naturalHeight !== 0) {
+        img.classList.add("is-loaded");
+        const sk = img.parentElement.querySelector(".card-media-skeleton");
+        if (sk) sk.style.display = "none";
+      }
+    });
   }
 
   renderModal(project, allMedia, initialIndex = 0) {
@@ -1146,7 +1178,19 @@ class PortfolioView {
         <div class="dual-stage-container">
           <div class="dual-photo-pane">
             <div class="modal-media-viewport">
-              <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
+              <div class="modal-media-skeleton" id="dual-sk-pdf" aria-hidden="true">
+                <div class="skeleton-placeholder-inner">
+                  <div class="skeleton-bar-line skeleton-mini-bar shimmer-bar"></div>
+                  <div class="skeleton-bar-line skeleton-mini-bar-sm shimmer-bar"></div>
+                </div>
+              </div>
+              <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" 
+                alt="${project.title}" 
+                id="dualModalImg" 
+                onload="const sk=document.getElementById('dual-sk-pdf'); if(sk) sk.style.display='none';"
+                onerror="this.style.display='none'; const sk=document.getElementById('dual-sk-pdf'); if(sk) sk.classList.add('is-failed');"
+                onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" 
+                title="Clic para ver en tamaño original completo" />
             </div>
             <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
               <span>Ver completa</span>
@@ -1187,7 +1231,19 @@ class PortfolioView {
         <div class="dual-stage-container">
           <div class="dual-photo-pane">
             <div class="modal-media-viewport">
-              <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
+              <div class="modal-media-skeleton" id="dual-sk-code" aria-hidden="true">
+                <div class="skeleton-placeholder-inner">
+                  <div class="skeleton-bar-line skeleton-mini-bar shimmer-bar"></div>
+                  <div class="skeleton-bar-line skeleton-mini-bar-sm shimmer-bar"></div>
+                </div>
+              </div>
+              <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" 
+                alt="${project.title}" 
+                id="dualModalImg" 
+                onload="const sk=document.getElementById('dual-sk-code'); if(sk) sk.style.display='none';"
+                onerror="this.style.display='none'; const sk=document.getElementById('dual-sk-code'); if(sk) sk.classList.add('is-failed');"
+                onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" 
+                title="Clic para ver en tamaño original completo" />
             </div>
             <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
               <span>Ver completa</span>
@@ -1330,7 +1386,18 @@ class PortfolioView {
     } else {
       this.modalMediaStage.innerHTML = `
         <div class="modal-media-viewport">
-          <img src="${safeUrl}" alt="Detalle del proyecto" onclick="window.open('${safeUrl}', '_blank')" title="Clic para ver en tamaño original completo" />
+          <div class="modal-media-skeleton" id="stage-sk-img" aria-hidden="true">
+            <div class="skeleton-placeholder-inner">
+              <div class="skeleton-bar-line skeleton-mini-bar shimmer-bar"></div>
+              <div class="skeleton-bar-line skeleton-mini-bar-sm shimmer-bar"></div>
+            </div>
+          </div>
+          <img src="${safeUrl}" 
+            alt="Detalle del proyecto" 
+            onload="const sk=document.getElementById('stage-sk-img'); if(sk) sk.style.display='none';"
+            onerror="this.style.display='none'; const sk=document.getElementById('stage-sk-img'); if(sk) sk.classList.add('is-failed');"
+            onclick="window.open('${safeUrl}', '_blank')" 
+            title="Clic para ver en tamaño original completo" />
         </div>
         <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
           <span>Ver completa</span>
