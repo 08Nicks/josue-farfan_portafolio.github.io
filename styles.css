@@ -1858,6 +1858,11 @@ body {
   transform: scale(1.012);
 }
 
+.modal-bottom-pdf-stage {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 /* 2. Panel de Visor PDF Abajo (Con Toolbar para Descargar e Imprimir) */
 .cert-pdf-pane {
   width: 100%;

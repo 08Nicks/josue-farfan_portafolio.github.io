@@ -1154,6 +1154,7 @@ class PortfolioView {
     this.modalWhatIDid = document.getElementById("modalWhatIDid");
     this.modalHighlights = document.getElementById("modalHighlights");
     this.modalTagsBox = document.getElementById("modalTagsBox");
+    this.modalBottomPdfStage = document.getElementById("modalBottomPdfStage");
   }
 
   escapeHtml(text) {
@@ -1352,25 +1353,28 @@ class PortfolioView {
     this.modalMediaStage.classList.remove("dual-showcase");
 
     if (cert.mediaType === "pdf") {
+      // 1. Imagen Oficial en Alta Definición en el media stage principal arriba
       this.modalMediaStage.innerHTML = `
-        <div class="cert-stacked-container">
-          <!-- 1. Vista de Imagen Oficial Completa (Nítida, sin recortes) -->
-          <div class="cert-image-pane">
-            <div class="cert-pane-banner">
-              <div class="cert-pane-banner-title">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                <span>Documento Oficial Acreditado (Vista Completa)</span>
-              </div>
-              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Abrir archivo original en nueva pestaña">
-                Abrir PDF Original ↗
-              </a>
+        <div class="cert-image-pane">
+          <div class="cert-pane-banner">
+            <div class="cert-pane-banner-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <span>Documento Oficial Acreditado (Vista Completa)</span>
             </div>
-            <div class="cert-image-viewport">
-              <img src="${cert.previewUrl}" alt="${this.escapeHtml(cert.title)}" class="cert-stacked-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para abrir documento oficial completo" />
-            </div>
+            <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Abrir archivo original en nueva pestaña">
+              Abrir PDF Original ↗
+            </a>
           </div>
+          <div class="cert-image-viewport">
+            <img src="${cert.previewUrl}" alt="${this.escapeHtml(cert.title)}" class="cert-stacked-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para ver o abrir PDF original" />
+          </div>
+        </div>
+      `;
 
-          <!-- 2. Visor PDF Oficial Abajo (Con menú de navegación, descarga e impresión) -->
+      // 2. Visor PDF Oficial hasta abajo de la Ficha Técnica
+      if (this.modalBottomPdfStage) {
+        this.modalBottomPdfStage.style.display = "block";
+        this.modalBottomPdfStage.innerHTML = `
           <div class="cert-pdf-pane">
             <div class="pdf-pane-header">
               <div class="pdf-title">
@@ -1390,8 +1394,8 @@ class PortfolioView {
               <iframe src="${cert.fileUrl}#toolbar=1&navpanes=0&view=FitH" class="cert-full-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
             </div>
           </div>
-        </div>
-      `;
+        `;
+      }
     } else {
       this.modalMediaStage.innerHTML = `
         <div class="modal-media-viewport">
@@ -1401,6 +1405,10 @@ class PortfolioView {
           <span>Ver imagen completa ↗</span>
         </a>
       `;
+      if (this.modalBottomPdfStage) {
+        this.modalBottomPdfStage.style.display = "none";
+        this.modalBottomPdfStage.innerHTML = "";
+      }
     }
 
     if (this.modalGalleryStrip) {
@@ -1414,6 +1422,11 @@ class PortfolioView {
 
   renderModal(project, allMedia, initialIndex = 0) {
     if (!this.modalOverlay || !project) return;
+
+    if (this.modalBottomPdfStage) {
+      this.modalBottomPdfStage.style.display = "none";
+      this.modalBottomPdfStage.innerHTML = "";
+    }
 
     // Metadatos
     if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = project.categoryLabel;
@@ -1705,6 +1718,11 @@ class PortfolioView {
       this.modalOverlay.classList.remove("open");
     }
     document.body.style.overflow = "auto";
+
+    if (this.modalBottomPdfStage) {
+      this.modalBottomPdfStage.style.display = "none";
+      this.modalBottomPdfStage.innerHTML = "";
+    }
 
     // Pausar y liberar memoria del reproductor de video
     if (this.modalMediaStage) {
