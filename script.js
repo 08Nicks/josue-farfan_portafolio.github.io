@@ -320,7 +320,7 @@ void loop() {
   },
   {
     id: "opamp-discreto-mosfet-bjt",
-    title: "Diseño y Construcción de Amplificador Operacional (Op-Amp) con MOSFETs, NPN y PNP",
+    title: "Diseño y Construcción de Amplificador Operacional (Op-Amp) con MOSFETs, NPN y PNP en Modo Inversor",
     category: "vlsi",
     categoryLabel: "Microelectrónica & Circuitos Analógicos",
     tag: "Op-Amp Discreto en Protoboard",
@@ -330,14 +330,15 @@ void loop() {
       "WhatsApp Image 2026-09-22 at 4.27.35 PM.jpeg",
       "WhatsApp Image 2026-09-22 at 4.28.51 PM.jpeg"
     ],
-    tags: ["Amplificador Operacional", "Transistores MOSFET", "BJT NPN y PNP", "Par Diferencial", "Espejo de Corriente", "Etapa Push-Pull", "Osciloscopio Tektronix TDS 2002C", "Laboratorio BUAP"],
-    shortDesc: "Diseño circuital, montaje en protoboard y caracterización dinámica de un amplificador operacional discreto implementado con transistores MOSFETs y pares BJT (NPN y PNP).",
-    whatIs: "Implementación experimental a nivel de componentes discretos de la arquitectura interna de un Amplificador Operacional (Op-Amp). El circuito materializa las etapas fundamentales de un circuito integrado analógico: etapa de entrada diferencial con transistores acoplados para alto CMRR, carga activa por espejo de corriente, etapa de ganancia de voltaje (VAS) y etapa de salida de potencia complementaria push-pull con transistores MOSFET y BJT (NPN y PNP).",
-    whatIDid: "Cálculo y ajuste de los puntos de operación DC (Q-point), polarización de compuertas y corrientes de colector para transistores MOSFETs y pares bipolares NPN y PNP. Montaje estructurado sobre protoboard con conexionado plano para reducir ruido parásito, integrando potenciómetro para ajuste fino y anulación de offset. Inyección de señal senoidal y validación experimental en osciloscopio digital Tektronix TDS 2002C a 114.8 Hz, comprobando simetría en la amplificación, ganancia en lazo abierto y desfase de 180° entre canales sin distorsión por cruce.",
+    tags: ["Amplificador Inversor (180°)", "Amplificador Operacional", "Transistores MOSFET", "BJT NPN y PNP", "Par Diferencial", "Espejo de Corriente", "Etapa Push-Pull", "Osciloscopio Tektronix TDS 2002C"],
+    shortDesc: "Diseño circuital, montaje en protoboard y caracterización dinámica en modo inversor de un amplificador operacional discreto construido con transistores MOSFETs y pares BJT (NPN y PNP).",
+    whatIs: "Implementación experimental a nivel de componentes discretos de la arquitectura interna de un Amplificador Operacional (Op-Amp) configurado en topología de amplificador inversor con retroalimentación negativa. El circuito materializa las etapas fundamentales de un circuito integrado analógico: par diferencial de entrada para alto CMRR, carga activa por espejo de corriente, etapa de ganancia de voltaje (VAS) y etapa de salida complementaria push-pull con transistores MOSFET y BJT (NPN y PNP).",
+    whatIDid: "Cálculo y ajuste de los puntos de operación DC (Q-point), corrientes de reposo y resistencias de polarización para MOSFETs y transistores bipolares NPN y PNP. Cableado estructurado sobre protoboard reduciendo inductancias parásitas e incorporación de potenciómetro para ajuste y anulación de tensión de offset. Conexión de la red de retroalimentación negativa en modo inversor y caracterización en osciloscopio digital Tektronix TDS 2002C a 114.8 Hz: se evidencia la señal de entrada en el Canal 1 (traza amarilla) y la salida en el Canal 2 (traza cian), mostrando la inversión senoidal exacta de 180° (anti-fase) sin saturación ni distorsión por cruce (crossover).",
     highlights: [
+      "Operación en modo amplificador inversor con retroalimentación negativa demostrando respuesta matemática y lineal",
+      "Evidencia en osciloscopio Tektronix TDS 2002C a 114.8 Hz: Canal 1 (entrada) vs Canal 2 (salida) con desfase exacto de 180° (anti-fase)",
       "Arquitectura analógica discreta completa: par diferencial de entrada, espejo de corriente, etapa VAS y etapa de salida push-pull",
-      "Integración híbrida de MOSFETs con transistores bipolares NPN y PNP para optimizar impedancias de entrada y salida",
-      "Medición experimental en osciloscopio digital Tektronix TDS 2002C a 114.8 Hz verificando amplificación lineal y desfase de 180° sin distorsión"
+      "Integración híbrida de MOSFETs con transistores bipolares NPN y PNP para optimizar impedancias de entrada y salida"
     ]
   },
   {
