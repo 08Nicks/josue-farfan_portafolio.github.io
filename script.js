@@ -97,7 +97,7 @@ const projectsData = [
     categoryLabel: "Sistemas Embebidos & Control",
     tag: "Instrumentación & Control",
     mediaType: "image",
-    mediaUrl: "WhatsApp Image 2026-09-22 at 4.40.52 PM.jpeg",
+    mediaUrl: "control_velocidad_ventilador_mcu.jpg",
     secondaryMedia: [],
     tags: ["Arduino Mega", "Sensor Efecto Hall", "Ventilador de Servidor", "Control PWM", "Display LCD 16x2", "Teclado Matricial 4x4", "Consola Portátil Modular"],
     shortDesc: "Consola portátil modular gobernada por Arduino Mega para el control de velocidad en lazo cerrado y calibración de ventilador de alto flujo mediante sensor Hall.",
@@ -459,8 +459,8 @@ const modalTagsBox = document.getElementById("modalTagsBox");
  */
 function safeMediaUrl(url) {
   if (!url) return "";
-  // Si ya contiene protocolo o barra inicial, procesar adecuadamente
-  return encodeURI(url);
+  const encoded = encodeURI(url);
+  return encoded.includes("?") ? `${encoded}&v=2` : `${encoded}?v=2`;
 }
 
 /**
