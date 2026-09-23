@@ -3428,5 +3428,77 @@ body {
   color: var(--text-secondary);
 }
 
+/* ==========================================================================
+   CELTIC / NORDIC / PRE-HISPANIC GEOMETRIC ACCENTS
+   ========================================================================== */
+.divider-knot-wrap {
+  width: 100%;
+  max-width: 720px;
+  margin: 1.75rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.circuit-knot-divider {
+  width: 100%;
+  max-width: 640px;
+  height: 28px;
+  opacity: 0.75;
+  filter: drop-shadow(0 0 8px rgba(212, 155, 87, 0.25));
+  transition: opacity var(--transition-smooth), filter var(--transition-smooth);
+}
+
+.divider-knot-wrap:hover .circuit-knot-divider {
+  opacity: 1;
+  filter: drop-shadow(0 0 12px rgba(245, 194, 120, 0.45));
+}
+
+/* Esquinas con geometría de greca prehispánica y escuadra rúnica */
+.fret-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  z-index: 5;
+  transition: all var(--transition-smooth);
+}
+
+.fret-corner.top-left {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid rgba(212, 155, 87, 0.6);
+  border-left: 2px solid rgba(212, 155, 87, 0.6);
+}
+
+.fret-corner.top-right {
+  top: 10px;
+  right: 10px;
+  border-top: 2px solid rgba(212, 155, 87, 0.6);
+  border-right: 2px solid rgba(212, 155, 87, 0.6);
+}
+
+.fret-corner.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 2px solid rgba(212, 155, 87, 0.6);
+  border-left: 2px solid rgba(212, 155, 87, 0.6);
+}
+
+.fret-corner.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid rgba(212, 155, 87, 0.6);
+  border-right: 2px solid rgba(212, 155, 87, 0.6);
+}
+
+.visual-card:hover .fret-corner {
+  border-color: #f5c278;
+  box-shadow: 0 0 12px rgba(245, 194, 120, 0.45);
+}
+
+
 
 

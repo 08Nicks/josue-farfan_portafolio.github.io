@@ -2062,9 +2062,9 @@ class PortfolioController {
         pcbBtnHw.classList.add("active");
         pcbBtnArt.classList.remove("active");
         pcbImg.src = "assets/branding/pcb-banner-dragon.png";
-        pcbImg.alt = "Placa de circuito impreso PCB con dragón medieval enrutado en cobre y LEDs activos - Forging the Digital Reality";
+        pcbImg.alt = "Arte conceptual generado con IA estilo PCB con dragón medieval enrutado en cobre - Forging the Digital Reality";
         if (pcbHint) {
-          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Circuito Físico Real • Trazas en Cobre Top Layer & LEDs SMD Activos`;
+          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Arte Conceptual con IA • Estética de circuito impreso, trazas de cobre y dragón medieval`;
         }
       });
 
@@ -2072,9 +2072,9 @@ class PortfolioController {
         pcbBtnArt.classList.add("active");
         pcbBtnHw.classList.remove("active");
         pcbImg.src = "assets/branding/dragon-fire-banner.jpg";
-        pcbImg.alt = "Arte y simbología medieval de dragón y fuego - Forging the Digital Reality";
+        pcbImg.alt = "Concept Art con IA con dragón nórdico/celta y fuego entre glifos prehispánicos - Forging the Digital Reality";
         if (pcbHint) {
-          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Simbología Gráfica • Fuego forjado en nudos celtas y glifos`;
+          pcbHint.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Concept Art con IA • Dragón nórdico/celta exhalando fuego entre glifos prehispánicos`;
         }
       });
     }
