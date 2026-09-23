@@ -502,25 +502,157 @@ function renderProjects() {
     return;
   }
 
+/**
+ * Obtiene la lista completa y unificada de medios de un proyecto
+ */
+function getProjectAllMedia(project) {
+  if (!project) return [];
+  const media = [
+    { type: project.mediaType, url: project.mediaUrl, poster: project.posterUrl }
+  ];
+
+  if (project.secondaryMedia && project.secondaryMedia.length > 0) {
+    project.secondaryMedia.forEach(secUrl => {
+      const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
+      media.push({
+        type: isSecVideo ? "video" : "image",
+        url: secUrl,
+        poster: ""
+      });
+    });
+  }
+
+  return media;
+}
+
+// Registro del índice de diapositiva activo en cada tarjeta
+const cardActiveIndexes = {};
+
+/**
+ * Desplaza las diapositivas de una tarjeta de proyecto hacia adelante o atrás
+ */
+function slideCard(event, projectId, dir) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  const project = projectsData.find(p => p.id === projectId);
+  if (!project) return;
+  const allMedia = getProjectAllMedia(project);
+  if (allMedia.length <= 1) return;
+
+  const currentIdx = cardActiveIndexes[projectId] || 0;
+  const nextIdx = (currentIdx + dir + allMedia.length) % allMedia.length;
+  cardActiveIndexes[projectId] = nextIdx;
+
+  const track = document.getElementById(`card-track-${projectId}`);
+  if (track) {
+    track.style.transform = `translateX(-${nextIdx * 100}%)`;
+  }
+
+  // Actualizar dots
+  const dotsContainer = document.getElementById(`card-dots-${projectId}`);
+  if (dotsContainer) {
+    const dots = dotsContainer.querySelectorAll('.card-dot');
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === nextIdx);
+    });
+  }
+
+  // Actualizar contador
+  const counter = document.getElementById(`card-counter-${projectId}`);
+  if (counter) {
+    counter.innerHTML = `<span class="curr-idx">${nextIdx + 1}</span>/${allMedia.length}`;
+  }
+}
+
+/**
+ * Salta directamente a una diapositiva específica desde los puntos indicadores
+ */
+function jumpCardSlide(event, projectId, targetIdx) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  const project = projectsData.find(p => p.id === projectId);
+  if (!project) return;
+  const allMedia = getProjectAllMedia(project);
+  if (targetIdx < 0 || targetIdx >= allMedia.length) return;
+
+  cardActiveIndexes[projectId] = targetIdx;
+
+  const track = document.getElementById(`card-track-${projectId}`);
+  if (track) {
+    track.style.transform = `translateX(-${targetIdx * 100}%)`;
+  }
+
+  const dotsContainer = document.getElementById(`card-dots-${projectId}`);
+  if (dotsContainer) {
+    const dots = dotsContainer.querySelectorAll('.card-dot');
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === targetIdx);
+    });
+  }
+
+  const counter = document.getElementById(`card-counter-${projectId}`);
+  if (counter) {
+    counter.innerHTML = `<span class="curr-idx">${targetIdx + 1}</span>/${allMedia.length}`;
+  }
+}
+
+/**
+ * Maneja el clic en el área multimedia de la tarjeta para abrir el modal
+ */
+function handleCardMediaClick(event, projectId) {
+  if (event.target.closest('.card-slider-btn') || event.target.closest('.card-slider-dots')) {
+    return;
+  }
+  const currentIdx = cardActiveIndexes[projectId] || 0;
+  openProjectModal(projectId, currentIdx);
+}
+
   // Generar tarjetas
   projectsGrid.innerHTML = filtered.map(project => {
-    const isVideo = project.mediaType === "video";
-    const mediaSrc = safeMediaUrl(project.mediaUrl);
-    const posterSrc = project.posterUrl ? safeMediaUrl(project.posterUrl) : "";
+    const allMedia = getProjectAllMedia(project);
+    const hasMultiple = allMedia.length > 1;
+    const currentSlide = cardActiveIndexes[project.id] || 0;
 
     return `
       <article class="project-card" data-id="${project.id}">
-        <div class="card-media" onclick="openProjectModal('${project.id}')">
-          ${isVideo ? `
-            <img src="${posterSrc || 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
-            <div class="media-play-overlay">
-              <div class="play-circle">▶</div>
+        <div class="card-media" onclick="handleCardMediaClick(event, '${project.id}')" id="card-media-${project.id}">
+          
+          <div class="card-slider-track" id="card-track-${project.id}" style="transform: translateX(-${currentSlide * 100}%);">
+            ${allMedia.map((m, idx) => `
+              <div class="card-slide">
+                ${m.type === 'video' ? `
+                  <img src="${m.poster ? safeMediaUrl(m.poster) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title} - Vista ${idx + 1}" loading="lazy" />
+                  <div class="media-play-overlay">
+                    <div class="play-circle">▶</div>
+                  </div>
+                ` : `
+                  <img src="${safeMediaUrl(m.url)}" alt="${project.title} - Vista ${idx + 1}" loading="lazy" />
+                `}
+              </div>
+            `).join('')}
+          </div>
+
+          ${hasMultiple ? `
+            <button class="card-slider-btn prev-btn" onclick="slideCard(event, '${project.id}', -1)" aria-label="Anterior">‹</button>
+            <button class="card-slider-btn next-btn" onclick="slideCard(event, '${project.id}', 1)" aria-label="Siguiente">›</button>
+
+            <div class="card-slider-dots" id="card-dots-${project.id}">
+              ${allMedia.map((_, idx) => `
+                <span class="card-dot ${idx === currentSlide ? 'active' : ''}" onclick="jumpCardSlide(event, '${project.id}', ${idx})"></span>
+              `).join('')}
             </div>
-          ` : `
-            <img src="${mediaSrc}" alt="${project.title}" loading="lazy" />
-          `}
+
+            <div class="card-slider-counter" id="card-counter-${project.id}">
+              <span class="curr-idx">${currentSlide + 1}</span>/${allMedia.length}
+            </div>
+          ` : ''}
+
           <div class="media-badge">
-            <span>${isVideo ? '🎥 Video Demostrativo' : '📷 Evidencia'}</span>
+            <span>${project.mediaType === 'video' ? '🎥 Video Demostrativo' : (hasMultiple ? `📷 ${allMedia.length} Vistas` : '📷 Evidencia')}</span>
           </div>
           <div class="tag-badge">${project.tag}</div>
         </div>
@@ -535,28 +667,60 @@ function renderProjects() {
           </div>
 
           <div class="card-actions">
-            <button class="btn-details" onclick="openProjectModal('${project.id}')">
+            <button class="btn-details" onclick="openProjectModal('${project.id}', ${currentSlide})">
               Ver Ficha Técnica <span>→</span>
             </button>
             <div class="evidence-badge">
-              <span>●</span> ${project.secondaryMedia && project.secondaryMedia.length > 0 ? `${project.secondaryMedia.length + 1} archivos` : '1 archivo'}
+              <span>●</span> ${allMedia.length > 1 ? `${allMedia.length} archivos deslizables` : '1 archivo'}
             </div>
           </div>
         </div>
       </article>
     `;
   }).join("");
+
+  // Inicializar gestos táctiles (swipe) en cada tarjeta
+  initCardTouchGestures();
+}
+
+/**
+ * Soporte de deslizamiento táctil (swipe) para pantallas touch en tarjetas
+ */
+function initCardTouchGestures() {
+  projectsData.forEach(project => {
+    const cardMedia = document.getElementById(`card-media-${project.id}`);
+    if (!cardMedia) return;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    cardMedia.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    cardMedia.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diffX = touchEndX - touchStartX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          slideCard(null, project.id, 1);
+        } else {
+          slideCard(null, project.id, -1);
+        }
+      }
+    }, { passive: true });
+  });
 }
 
 /**
  * Apertura del modal interactivo con detalles técnicos completos
  */
-function openProjectModal(projectId) {
+function openProjectModal(projectId, initialIndex = 0) {
   const project = projectsData.find(p => p.id === projectId);
   if (!project) return;
 
   currentModalProject = project;
-  currentModalMediaIndex = 0;
+  const allMedia = getProjectAllMedia(project);
+  currentModalMediaIndex = (initialIndex >= 0 && initialIndex < allMedia.length) ? initialIndex : 0;
 
   // Actualizar metadatos
   modalCategoryBadge.textContent = project.categoryLabel;
@@ -571,16 +735,6 @@ function openProjectModal(projectId) {
   // Badges de tecnologías
   modalTagsBox.innerHTML = project.tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
 
-  if (project.pdfUrl) {
-    modalTagsBox.innerHTML += `
-      <div style="width: 100%; margin-top: 1.25rem;">
-        <a href="${encodeURI(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
-          <span>📄</span> Ver / Descargar Documento: ${project.pdfName || project.pdfUrl}
-        </a>
-      </div>
-    `;
-  }
-
   if (project.downloadUrl) {
     modalTagsBox.innerHTML += `
       <div style="width: 100%; margin-top: 1.25rem;">
@@ -591,39 +745,60 @@ function openProjectModal(projectId) {
     `;
   }
 
-  // Preparar lista de medios (principal + secundarios)
-  const allMedia = [
-    { type: project.mediaType, url: project.mediaUrl, poster: project.posterUrl }
-  ];
-
-  if (project.secondaryMedia && project.secondaryMedia.length > 0) {
-    project.secondaryMedia.forEach(secUrl => {
-      const isSecVideo = secUrl.toLowerCase().endsWith(".mp4");
-      allMedia.push({
-        type: isSecVideo ? "video" : "image",
-        url: secUrl,
-        poster: ""
-      });
-    });
-  }
-
-  // Renderizar etapa de medios
-  renderModalMedia(allMedia, 0);
-
-  // Renderizar tira de miniaturas si hay más de 1 medio
-  if (allMedia.length > 1) {
-    modalGalleryStrip.style.display = "flex";
-    modalGalleryStrip.innerHTML = allMedia.map((m, idx) => {
-      const thumbSrc = m.type === "video" ? (m.poster || safeMediaUrl(m.url)) : safeMediaUrl(m.url);
-      return `
-        <div class="strip-thumb ${idx === 0 ? 'active' : ''}" onclick="switchModalMedia(${idx})">
-          <img src="${thumbSrc}" alt="Vista ${idx + 1}" />
+  // RENDERIZADO DEL ESCENARIO MULTIMEDIA
+  // Si el proyecto tiene PDF, desplegar vista dual interactiva (Foto + PDF embebido lado a lado)
+  if (project.pdfUrl) {
+    modalMediaStage.classList.add("dual-showcase");
+    modalMediaStage.innerHTML = `
+      <div class="dual-stage-container">
+        <div class="dual-photo-pane">
+          <div class="modal-media-viewport">
+            <img src="${safeMediaUrl(allMedia[currentModalMediaIndex].url)}" alt="${project.title}" id="dualModalImg" />
+          </div>
+          <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px;">
+            📸 Ensamble Físico: Resistencia Eléctrica en Ladrillo Refractario
+          </div>
         </div>
-      `;
-    }).join('');
-  } else {
+
+        <div class="dual-pdf-pane">
+          <div class="pdf-pane-header">
+            <div class="pdf-title">
+              <span>📄</span> ${project.pdfName || 'Thermal Blueprint.pdf'}
+            </div>
+            <div class="pdf-pane-actions">
+              <a href="${safeMediaUrl(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pestaña nueva">
+                <span>↗</span> Pantalla Completa
+              </a>
+              <a href="${safeMediaUrl(project.pdfUrl)}" download class="pdf-action-btn" title="Descargar documento">
+                <span>⬇</span> Descargar
+              </a>
+            </div>
+          </div>
+          <iframe src="${safeMediaUrl(project.pdfUrl)}#toolbar=0&navpanes=0&view=FitH" class="embedded-pdf-frame" title="Manual del Curso Thermal Blueprint"></iframe>
+        </div>
+      </div>
+    `;
     modalGalleryStrip.style.display = "none";
-    modalGalleryStrip.innerHTML = "";
+  } else {
+    // Escenario fotográfico/video estándar con flechas de navegación y contador
+    modalMediaStage.classList.remove("dual-showcase");
+    renderModalMedia(allMedia, currentModalMediaIndex);
+
+    // Renderizar tira de miniaturas si hay más de 1 medio
+    if (allMedia.length > 1) {
+      modalGalleryStrip.style.display = "flex";
+      modalGalleryStrip.innerHTML = allMedia.map((m, idx) => {
+        const thumbSrc = m.type === "video" ? (m.poster ? safeMediaUrl(m.poster) : safeMediaUrl(m.url)) : safeMediaUrl(m.url);
+        return `
+          <div class="strip-thumb ${idx === currentModalMediaIndex ? 'active' : ''}" onclick="switchModalMedia(${idx})">
+            <img src="${thumbSrc}" alt="Vista ${idx + 1}" />
+          </div>
+        `;
+      }).join('');
+    } else {
+      modalGalleryStrip.style.display = "none";
+      modalGalleryStrip.innerHTML = "";
+    }
   }
 
   // Mostrar modal
@@ -632,24 +807,55 @@ function openProjectModal(projectId) {
 }
 
 /**
- * Renderiza el medio activo dentro del modal
+ * Renderiza el medio activo dentro del modal estándar
  */
 function renderModalMedia(allMedia, index) {
   const current = allMedia[index];
   const safeUrl = safeMediaUrl(current.url);
+  const total = allMedia.length;
+
+  const navControlsHtml = total > 1 ? `
+    <button class="modal-nav-arrow prev" onclick="navigateModalMedia(-1)" title="Anterior (Flecha Izquierda)" aria-label="Foto anterior">‹</button>
+    <button class="modal-nav-arrow next" onclick="navigateModalMedia(1)" title="Siguiente (Flecha Derecha)" aria-label="Foto siguiente">›</button>
+    <div class="modal-slide-counter" id="modalSlideCounter">${index + 1} / ${total} Evidencias</div>
+  ` : '';
 
   if (current.type === "video") {
     modalMediaStage.innerHTML = `
-      <video controls autoplay playsinline style="width: 100%; max-height: 480px; outline: none; background: #000;" poster="${current.poster ? safeMediaUrl(current.poster) : ''}">
-        <source src="${safeUrl}" type="video/mp4">
-        Tu navegador no soporta reproducción de video HTML5.
-      </video>
+      <div class="modal-media-viewport">
+        <video controls autoplay playsinline style="width: 100%; max-height: 480px; outline: none; background: #000;" poster="${current.poster ? safeMediaUrl(current.poster) : ''}">
+          <source src="${safeUrl}" type="video/mp4">
+          Tu navegador no soporta reproducción de video HTML5.
+        </video>
+      </div>
+      ${navControlsHtml}
     `;
   } else {
     modalMediaStage.innerHTML = `
-      <img src="${safeUrl}" alt="Detalle del proyecto" style="max-width: 100%; max-height: 480px; object-fit: contain;" />
+      <div class="modal-media-viewport">
+        <img src="${safeUrl}" alt="Detalle del proyecto" />
+      </div>
+      ${navControlsHtml}
     `;
   }
+}
+
+/**
+ * Navega secuencialmente (adelante/atrás) en el modal
+ */
+function navigateModalMedia(dir) {
+  if (!currentModalProject) return;
+  const allMedia = getProjectAllMedia(currentModalProject);
+  if (allMedia.length <= 1) return;
+
+  currentModalMediaIndex = (currentModalMediaIndex + dir + allMedia.length) % allMedia.length;
+  renderModalMedia(allMedia, currentModalMediaIndex);
+
+  // Actualizar clase activa en miniaturas inferiores
+  const thumbs = modalGalleryStrip.querySelectorAll(".strip-thumb");
+  thumbs.forEach((thumb, idx) => {
+    thumb.classList.toggle("active", idx === currentModalMediaIndex);
+  });
 }
 
 /**
@@ -657,26 +863,14 @@ function renderModalMedia(allMedia, index) {
  */
 function switchModalMedia(index) {
   if (!currentModalProject) return;
-  const allMedia = [
-    { type: currentModalProject.mediaType, url: currentModalProject.mediaUrl, poster: currentModalProject.posterUrl }
-  ];
-  if (currentModalProject.secondaryMedia) {
-    currentModalProject.secondaryMedia.forEach(secUrl => {
-      allMedia.push({
-        type: secUrl.toLowerCase().endsWith(".mp4") ? "video" : "image",
-        url: secUrl,
-        poster: ""
-      });
-    });
-  }
-
+  const allMedia = getProjectAllMedia(currentModalProject);
+  currentModalMediaIndex = index;
   renderModalMedia(allMedia, index);
 
   // Actualizar clase activa en miniaturas
   const thumbs = modalGalleryStrip.querySelectorAll(".strip-thumb");
   thumbs.forEach((thumb, idx) => {
-    if (idx === index) thumb.classList.add("active");
-    else thumb.classList.remove("active");
+    thumb.classList.toggle("active", idx === index);
   });
 }
 
@@ -760,12 +954,37 @@ function initEventListeners() {
     });
   }
 
-  // Cierre de modal con tecla ESC
+  // Control de modal por teclado (ESC para cerrar, Flechas Izquierda/Derecha para deslizar fotos)
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalOverlay.classList.contains("open")) {
+    if (!modalOverlay || !modalOverlay.classList.contains("open")) return;
+    if (e.key === "Escape") {
       closeProjectModal();
+    } else if (e.key === "ArrowLeft") {
+      navigateModalMedia(-1);
+    } else if (e.key === "ArrowRight") {
+      navigateModalMedia(1);
     }
   });
+
+  // Gestos táctiles (swipe) en el modal para dispositivos móviles
+  if (modalMediaStage) {
+    let modalTouchStartX = 0;
+    let modalTouchEndX = 0;
+    modalMediaStage.addEventListener('touchstart', (e) => {
+      modalTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    modalMediaStage.addEventListener('touchend', (e) => {
+      modalTouchEndX = e.changedTouches[0].screenX;
+      const diff = modalTouchEndX - modalTouchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff < 0) {
+          navigateModalMedia(1);
+        } else {
+          navigateModalMedia(-1);
+        }
+      }
+    }, { passive: true });
+  }
 
   // Menú móvil
   if (mobileToggle && navMenu) {
