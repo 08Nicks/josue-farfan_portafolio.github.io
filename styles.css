@@ -613,6 +613,50 @@ body::before {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Hero Dragon Totem (Cyber-Forge Aesthetic - Visible inmediatamente al abrir el sitio) */
+.hero-dragon-totem {
+  position: absolute;
+  top: -55px;
+  right: -50px;
+  width: 320px;
+  height: 320px;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: dragonFloat 6.5s ease-in-out infinite alternate;
+}
+
+.dragon-totem-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 24px rgba(245, 194, 120, 0.55)) drop-shadow(0 0 52px rgba(229, 57, 53, 0.4));
+  transition: all var(--transition-smooth);
+}
+
+.hero-visual:hover .dragon-totem-img {
+  opacity: 1;
+  filter: drop-shadow(0 0 38px rgba(245, 194, 120, 0.8)) drop-shadow(0 0 70px rgba(229, 57, 53, 0.6));
+  transform: scale(1.06) rotate(4deg);
+}
+
+@keyframes dragonFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(4px) rotate(-1.5deg);
+  }
 }
 
 .visual-card {
@@ -625,8 +669,10 @@ body::before {
   padding: 1.25rem;
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
-  overflow: hidden;
+  overflow: visible; /* Visible para que los chips superiores y el brillo no se corten */
   transition: transform var(--transition-smooth);
+  z-index: 2;
+  margin: 0 auto;
 }
 
 .visual-card:hover {
@@ -638,7 +684,7 @@ body::before {
   width: 100%;
   height: 380px;
   border-radius: var(--radius-md);
-  overflow: hidden;
+  overflow: hidden; /* Mantiene la foto con esquinas redondeadas limpias */
   position: relative;
 }
 
@@ -646,7 +692,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%;
+  object-position: 49% 22%; /* Centrado óptimo de Josué y su rostro */
   transition: transform var(--transition-slow);
 }
 
@@ -659,14 +705,17 @@ body::before {
   bottom: 14px;
   left: 14px;
   right: 14px;
-  background: rgba(10, 14, 23, 0.88);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 14, 23, 0.92);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 155, 87, 0.35);
   border-radius: var(--radius-md);
-  padding: 12px 14px;
+  padding: 11px 16px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  z-index: 3;
 }
 
 .overlay-icon {
@@ -679,12 +728,20 @@ body::before {
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.overlay-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .overlay-text strong {
   display: block;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--text-white);
+  letter-spacing: -0.01em;
 }
 
 .overlay-text span {
@@ -692,41 +749,42 @@ body::before {
   color: var(--text-secondary);
 }
 
-/* Floating Tech Badges */
+/* Floating Tech Badges (Alineados, simétricos y centrados en la parte superior) */
 .floating-chip {
   position: absolute;
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.92);
   border: 1px solid rgba(0, 242, 254, 0.3);
-  padding: 8px 16px;
+  padding: 7px 14px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  gap: 7px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 12px rgba(0, 242, 254, 0.15);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--text-primary);
-  z-index: 2;
+  z-index: 4;
   backdrop-filter: blur(8px);
   animation: floatChip 5s infinite alternate ease-in-out;
+  white-space: nowrap;
 }
 
 .chip-1 {
-  top: 15px;
-  left: -20px;
-  border-color: rgba(0, 242, 254, 0.4);
+  top: -14px;
+  left: 14px;
+  border-color: rgba(0, 242, 254, 0.45);
 }
 
 .chip-2 {
-  bottom: 50px;
-  right: -25px;
-  border-color: rgba(139, 92, 246, 0.4);
+  top: -14px;
+  right: 14px;
+  border-color: rgba(139, 92, 246, 0.45);
   animation-delay: -2.5s;
 }
 
 @keyframes floatChip {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-10px); }
+  100% { transform: translateY(-8px); }
 }
 
 /* ==========================================================================
@@ -2651,12 +2709,19 @@ body::before {
     max-width: 360px;
     margin: 0 auto;
   }
+  .hero-dragon-totem {
+    top: -30px;
+    right: -25px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.85;
+  }
   .visual-card {
     padding: 0.85rem;
     border-radius: var(--radius-md);
   }
   .card-image-wrap {
-    height: 280px;
+    height: 300px;
   }
   .card-overlay-badge {
     bottom: 8px;
@@ -2664,6 +2729,19 @@ body::before {
     right: 8px;
     padding: 8px 10px;
     gap: 8px;
+  }
+  .floating-chip {
+    padding: 5px 10px;
+    font-size: 0.68rem;
+    gap: 5px;
+  }
+  .chip-1 {
+    top: -10px;
+    left: 8px;
+  }
+  .chip-2 {
+    top: -10px;
+    right: 8px;
   }
 
   /* Category Filter Pills (Horizontal Flickable Bar) */
@@ -2969,8 +3047,28 @@ body::before {
   .stat-item {
     align-items: center;
   }
+  .hero-dragon-totem {
+    top: -20px;
+    right: -15px;
+    width: 170px;
+    height: 170px;
+    opacity: 0.8;
+  }
   .card-image-wrap {
-    height: 240px;
+    height: 270px;
+  }
+  .floating-chip {
+    padding: 4px 8px;
+    font-size: 0.64rem;
+    gap: 4px;
+  }
+  .chip-1 {
+    top: -9px;
+    left: 4px;
+  }
+  .chip-2 {
+    top: -9px;
+    right: 4px;
   }
   .card-media {
     height: 190px;
