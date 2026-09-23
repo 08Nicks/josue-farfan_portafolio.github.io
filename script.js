@@ -1353,66 +1353,45 @@ class PortfolioView {
 
     if (cert.mediaType === "pdf") {
       this.modalMediaStage.innerHTML = `
-        <div class="cert-pdf-stage">
-          <div class="pdf-pane-header">
-            <div class="pdf-title">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              <span>${this.escapeHtml(cert.title)}</span>
+        <div class="cert-stacked-container">
+          <!-- 1. Vista de Imagen Oficial Completa (Nítida, sin recortes) -->
+          <div class="cert-image-pane">
+            <div class="cert-pane-banner">
+              <div class="cert-pane-banner-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <span>Documento Oficial Acreditado (Vista Completa)</span>
+              </div>
+              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Abrir archivo original en nueva pestaña">
+                Abrir PDF Original ↗
+              </a>
             </div>
-            <div class="pdf-pane-actions">
-              <button type="button" class="pdf-action-btn btn-view-switch" id="btnCertViewToggle" data-mode="pdf" title="Alternar entre visor PDF y vista completa de alta definición">
-                <span id="certToggleIcon">🖼️</span> <span id="certToggleLabel">Ajuste 100% Documento</span>
-              </button>
-              <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir archivo PDF oficial en pestaña completa">
-                <span>↗</span> Pantalla Completa
-              </a>
-              <a href="${cert.fileUrl}" download class="pdf-action-btn" title="Descargar documento oficial original">
-                <span>⬇</span> Descargar PDF
-              </a>
+            <div class="cert-image-viewport">
+              <img src="${cert.previewUrl}" alt="${this.escapeHtml(cert.title)}" class="cert-stacked-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para abrir documento oficial completo" />
             </div>
           </div>
-          <div class="cert-pdf-viewport" id="certViewportContainer">
-            <div class="cert-embed-wrapper" id="certEmbedWrapper">
-              <iframe src="${cert.fileUrl}#page=1&view=Fit&toolbar=0&navpanes=0" class="cert-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
-            </div>
-            <div class="cert-fullimage-wrapper" id="certFullImageWrapper" style="display: none;">
-              <img src="${cert.previewUrl}" alt="${this.escapeHtml(cert.title)}" class="cert-full-img" onclick="window.open('${cert.fileUrl}', '_blank')" title="Clic para abrir PDF oficial original" />
-              <div class="cert-fullimage-hint">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                <span>Documento oficial completo al 100% · Clic para abrir PDF vectorial en pestaña nueva</span>
+
+          <!-- 2. Visor PDF Oficial Abajo (Con menú de navegación, descarga e impresión) -->
+          <div class="cert-pdf-pane">
+            <div class="pdf-pane-header">
+              <div class="pdf-title">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Visor PDF Interactivo Oficial · Descargar e Imprimir</span>
               </div>
+              <div class="pdf-pane-actions">
+                <a href="${cert.fileUrl}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir archivo PDF oficial en pestaña completa">
+                  <span>↗</span> Pantalla Completa
+                </a>
+                <a href="${cert.fileUrl}" download class="pdf-action-btn" title="Descargar documento oficial original">
+                  <span>⬇</span> Descargar PDF
+                </a>
+              </div>
+            </div>
+            <div class="cert-pdf-frame-wrap">
+              <iframe src="${cert.fileUrl}#toolbar=1&navpanes=0&view=FitH" class="cert-full-pdf-frame" title="${this.escapeHtml(cert.title)}"></iframe>
             </div>
           </div>
         </div>
       `;
-
-      // Event listener para alternar entre visor PDF y documento completo al 100%
-      const toggleBtn = document.getElementById("btnCertViewToggle");
-      const embedWrap = document.getElementById("certEmbedWrapper");
-      const imgWrap = document.getElementById("certFullImageWrapper");
-      const toggleLabel = document.getElementById("certToggleLabel");
-      const toggleIcon = document.getElementById("certToggleIcon");
-
-      if (toggleBtn && embedWrap && imgWrap) {
-        toggleBtn.addEventListener("click", () => {
-          const currentMode = toggleBtn.getAttribute("data-mode");
-          if (currentMode === "pdf") {
-            embedWrap.style.display = "none";
-            imgWrap.style.display = "flex";
-            toggleBtn.setAttribute("data-mode", "img");
-            toggleLabel.textContent = "Ver Visor PDF";
-            toggleIcon.textContent = "📄";
-            toggleBtn.classList.add("active-toggle");
-          } else {
-            imgWrap.style.display = "none";
-            embedWrap.style.display = "block";
-            toggleBtn.setAttribute("data-mode", "pdf");
-            toggleLabel.textContent = "Ajuste 100% Documento";
-            toggleIcon.textContent = "🖼️";
-            toggleBtn.classList.remove("active-toggle");
-          }
-        });
-      }
     } else {
       this.modalMediaStage.innerHTML = `
         <div class="modal-media-viewport">

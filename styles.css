@@ -1785,131 +1785,157 @@ body {
   height: 540px;
 }
 
-/* Visor Dedicado de Certificados PDF en Modal (Sin imagen redundante / Ajuste 100% a página) */
-.cert-pdf-stage {
+/* ==========================================================================
+   Contenedor Stacked para Certificados:
+   1. Arriba: Imagen Oficial de Alta Definición (100% visible, sin recortes)
+   2. Abajo: Visor PDF Completo con Menú de Descarga e Impresión
+   ========================================================================== */
+.cert-stacked-container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: #040711;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 1px solid rgba(0, 242, 254, 0.25);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+  gap: 2rem;
 }
 
-.cert-pdf-stage .pdf-pane-header {
+/* 1. Panel de Imagen Oficial */
+.cert-image-pane {
+  width: 100%;
+  background: #03060c;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-pane-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 16px;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.85);
   border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--text-white);
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.cert-pdf-stage .pdf-title {
+.cert-pane-banner-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.cert-image-viewport {
+  width: 100%;
+  min-height: 380px;
+  max-height: 72vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: radial-gradient(circle at center, #0b1220 0%, #020408 100%);
+}
+
+.cert-stacked-img {
+  max-width: 100%;
+  max-height: calc(72vh - 40px);
+  width: auto;
+  height: auto;
+  object-fit: contain !important;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.7);
+  cursor: zoom-in;
+  transition: transform var(--transition-fast);
+}
+
+.cert-stacked-img:hover {
+  transform: scale(1.012);
+}
+
+/* 2. Panel de Visor PDF Abajo (Con Toolbar para Descargar e Imprimir) */
+.cert-pdf-pane {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #040711;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.cert-pdf-pane .pdf-pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cert-pdf-pane .pdf-title {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   color: var(--accent-cyan);
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
-.cert-pdf-viewport {
+.cert-pdf-frame-wrap {
   position: relative;
   width: 100%;
-  height: 76vh;
-  min-height: 580px;
-  background: #080d1a;
-  overflow: hidden;
+  height: 82vh;
+  min-height: 700px;
+  background: #0f172a;
 }
 
-.cert-embed-wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.cert-pdf-frame {
+.cert-full-pdf-frame {
   width: 100%;
   height: 100%;
   border: none;
   display: block;
-  background: #0b1120;
-}
-
-.cert-fullimage-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: radial-gradient(circle at center, #0c1424 0%, #03060c 100%);
-  position: relative;
-}
-
-.cert-full-img {
-  max-width: 100%;
-  max-height: calc(76vh - 55px);
-  width: auto;
-  height: auto;
-  object-fit: contain !important;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-  cursor: zoom-in;
-  transition: transform var(--transition-fast);
-}
-
-.cert-full-img:hover {
-  transform: scale(1.012);
-}
-
-.cert-fullimage-hint {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: #94a3b8;
-  margin-top: 10px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-view-switch {
-  cursor: pointer;
-}
-
-.btn-view-switch.active-toggle {
-  background: rgba(0, 242, 254, 0.18);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
 }
 
 @media (max-width: 900px) {
-  .cert-pdf-viewport {
-    height: 60vh;
-    min-height: 440px;
+  .cert-image-viewport {
+    min-height: 280px;
+    max-height: 55vh;
+    padding: 0.75rem;
   }
-  .cert-full-img {
-    max-height: calc(60vh - 45px);
+  .cert-stacked-img {
+    max-height: calc(55vh - 30px);
+  }
+  .cert-pdf-frame-wrap {
+    height: 68vh;
+    min-height: 500px;
   }
 }
 
 @media (max-width: 600px) {
-  .cert-pdf-viewport {
-    height: 52vh;
-    min-height: 360px;
+  .cert-image-viewport {
+    min-height: 220px;
+    max-height: 48vh;
+    padding: 0.5rem;
   }
-  .cert-pdf-stage .pdf-pane-header {
-    padding: 8px 10px;
+  .cert-stacked-img {
+    max-height: calc(48vh - 20px);
   }
-  .cert-full-img {
-    max-height: calc(52vh - 40px);
+  .cert-pdf-frame-wrap {
+    height: 58vh;
+    min-height: 400px;
+  }
+  .cert-pdf-pane .pdf-pane-header {
+    padding: 8px 12px;
   }
 }
 
