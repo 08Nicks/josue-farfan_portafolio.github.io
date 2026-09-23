@@ -137,22 +137,22 @@ const projectsData = [
   },
   {
     id: "fpga-spartan3e-servo",
-    title: "Controlador PWM de Servomotor y Display LCD en FPGA Spartan-3E",
+    title: "Controlador PWM para Servomotor Futaba y Display LCD en FPGA Spartan-3E",
     category: "fpga",
     categoryLabel: "FPGAs & Lógica Digital",
-    tag: "Hardware Digital VHDL",
+    tag: "Lógica Digital Pura en VHDL",
     mediaType: "video",
     mediaUrl: "WhatsApp Video 2024-10-09 at 11.10.15 PM.mp4",
     posterUrl: "video_thumbs/WhatsApp Video 2024-10-09.jpg",
     secondaryMedia: ["WhatsApp Image 2024-10-09 at 11.09.43 PM.png"],
-    tags: ["Xilinx Spartan-3E", "VHDL", "PWM Hardware", "LCD Alfanumérico", "Futaba Servo", "Digilent Board"],
-    shortDesc: "Implementación en arquitectura digital pura (VHDL) de un generador PWM a 50 Hz con driver para pantalla LCD indicando el ángulo angular en tiempo real.",
-    whatIs: "Módulo en FPGA (Field Programmable Gate Array) que genera señales de control de modulación por ancho de pulso con precisión de microsegundos para posicionar un servomotor, controlando simultáneamente una pantalla LCD alfanumérica.",
-    whatIDid: "Descripción en VHDL de divisores de frecuencia a partir del oscilador maestro de 50 MHz, máquinas de estados finitos (FSM) para el protocolo de inicialización de la pantalla LCD HD44780 en modo de 4 bits, y bloque generador PWM libre de jitter. Visualización dinámica del ángulo actual («ANGULO: 000°» a «POS 5») comandado por pulsadores y potenciómetro digital.",
+    tags: ["Xilinx Spartan-3E", "VHDL", "Generador PWM Hardware", "Display LCD 16x2", "Servomotor Futaba 3000", "Control por Potenciómetro", "Máquinas de Estado FSM"],
+    shortDesc: "Control de ángulo para servomotor Futaba 3000 y display LCD 16x2 implementado 100% en hardware digital con FPGA Spartan-3E gobernado por potenciómetro rotativo.",
+    whatIs: "Sistema de control angular y visualización en tiempo real implementado íntegramente en arquitectura lógica digital reconfigurable (FPGA Xilinx Spartan-3E). Toda la lógica de control, el muestreo de la consigna mediante la perilla/potenciómetro de la tarjeta, la generación del tren de pulsos PWM a 50 Hz y el driver de la pantalla LCD 16x2 fueron sintetizados en hardware a nivel compuertas, prescindiendo por completo de microcontroladores.",
+    whatIDid: "Diseño y síntesis de módulos en VHDL para la tarjeta Digilent Spartan-3E. Se implementó la lógica digital para interpretar el ajuste angular proveniente del potenciómetro/perilla rotativa de la tarjeta y transferirlo simultáneamente a dos bloques: por un lado, un modulador PWM a 50 Hz con ancho de pulso de precisión de microsegundos libre de fluctuaciones para orientar con exactitud el servomotor Futaba 3000; y por otro lado, una máquina de estados finitos (FSM) que controla la inicialización y refresco del display alfanumérico LCD 16x2 integrado en la tarjeta, reflejando el ángulo actual («ANGULO: 000°» y «POS 5»).",
     highlights: [
-      "Cero latencia de software gracias a la ejecución 100% concurrente en hardware digital",
-      "Driver para pantalla HD44780 implementado directamente a nivel compuertas lógicas",
-      "Respuesta inmediata y estabilidad milimétrica en el servomotor Futaba"
+      "Arquitectura 100% digital concurrente sintetizada en VHDL para FPGA Spartan-3E",
+      "Control angular suave y sin jitter para servomotor industrial Futaba 3000 accionado por potenciómetro",
+      "Driver para pantalla LCD 16x2 HD44780 gobernado por máquina de estados finitos (FSM)"
     ]
   },
   {
