@@ -1797,6 +1797,15 @@ body {
   gap: 2rem;
 }
 
+/* Modal Media Stage cuando se muestran certificados: sin recortes ni overflow */
+.modal-media-stage.cert-stage-active {
+  background: transparent;
+  border: none;
+  overflow: visible;
+  padding: 0;
+  min-height: unset;
+}
+
 /* 1. Panel de Imagen Oficial */
 .cert-image-pane {
   width: 100%;
@@ -1833,29 +1842,30 @@ body {
 
 .cert-image-viewport {
   width: 100%;
-  min-height: 380px;
-  max-height: 72vh;
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
+  padding: 1.5rem;
   background: radial-gradient(circle at center, #0b1220 0%, #020408 100%);
+  overflow: visible;
 }
 
 .cert-stacked-img {
   max-width: 100%;
-  max-height: calc(72vh - 40px);
+  max-height: 76vh;
   width: auto;
   height: auto;
   object-fit: contain !important;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.7);
+  border-radius: 2px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.75);
   cursor: zoom-in;
   transition: transform var(--transition-fast);
+  display: block;
 }
 
 .cert-stacked-img:hover {
-  transform: scale(1.012);
+  transform: scale(1.01);
 }
 
 .modal-bottom-pdf-stage {
@@ -2909,64 +2919,67 @@ body {
   box-shadow: var(--shadow-lg), 0 0 25px rgba(0, 242, 254, 0.15);
 }
 
-.cert-media {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  background: radial-gradient(circle at center, #0f192e 0%, #03060c 100%);
+.cert-card-topbar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(8, 13, 22, 0.95);
   border-bottom: 1px solid var(--border-subtle);
+  gap: 8px;
 }
 
-.cert-media img {
-  max-width: 90%;
-  max-height: 90%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 6px;
-  transition: transform var(--transition-slow);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-  display: block;
-}
-
-.cert-card:hover .cert-media img {
-  transform: scale(1.04);
-}
-
-.cert-issuer-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(6, 9, 14, 0.9);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 242, 254, 0.35);
-  padding: 4px 10px;
+.cert-card-topbar .cert-issuer-badge {
+  position: static;
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  padding: 3px 9px;
   border-radius: var(--radius-full);
   font-size: 0.72rem;
   font-family: var(--font-mono);
   color: var(--accent-cyan);
   font-weight: 600;
-  z-index: 2;
   letter-spacing: 0.03em;
 }
 
-.cert-hours-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(139, 92, 246, 0.25);
+.cert-card-topbar .cert-hours-badge {
+  position: static;
+  background: rgba(139, 92, 246, 0.2);
   border: 1px solid rgba(139, 92, 246, 0.4);
   color: #c4b5fd;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: var(--radius-full);
   font-size: 0.72rem;
   font-family: var(--font-mono);
-  z-index: 2;
-  backdrop-filter: blur(8px);
+}
+
+.cert-media {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: radial-gradient(circle at center, #0a1120 0%, #020408 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.cert-media img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain !important;
+  border-radius: 2px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.cert-card:hover .cert-media img {
+  transform: scale(1.02);
 }
 
 .cert-content {

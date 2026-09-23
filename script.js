@@ -1302,9 +1302,11 @@ class PortfolioView {
 
     this.certificatesGrid.innerHTML = certs.map(cert => `
       <article class="cert-card" data-action="open-cert-modal" data-cert-id="${cert.id}" title="Clic para abrir constancia y documento oficial">
+        <div class="cert-card-topbar">
+          <span class="cert-issuer-badge">${cert.issuerBadge}</span>
+          ${cert.hours ? `<span class="cert-hours-badge">${cert.hours}</span>` : ''}
+        </div>
         <div class="cert-media">
-          <div class="cert-issuer-badge">${cert.issuerBadge}</div>
-          ${cert.hours ? `<div class="cert-hours-badge">${cert.hours}</div>` : ''}
           <img src="${cert.previewUrl}" alt="${cert.title}" loading="lazy" />
         </div>
         <div class="cert-content">
@@ -1330,6 +1332,10 @@ class PortfolioView {
 
   renderCertificateModal(cert) {
     if (!this.modalOverlay || !cert) return;
+
+    if (this.modalMediaStage) {
+      this.modalMediaStage.classList.add("cert-stage-active");
+    }
 
     if (this.modalCategoryBadge) this.modalCategoryBadge.textContent = cert.categoryLabel;
     if (this.modalTagBadge) this.modalTagBadge.textContent = cert.issuerBadge;
@@ -1422,6 +1428,10 @@ class PortfolioView {
 
   renderModal(project, allMedia, initialIndex = 0) {
     if (!this.modalOverlay || !project) return;
+
+    if (this.modalMediaStage) {
+      this.modalMediaStage.classList.remove("cert-stage-active");
+    }
 
     if (this.modalBottomPdfStage) {
       this.modalBottomPdfStage.style.display = "none";
@@ -1718,6 +1728,10 @@ class PortfolioView {
       this.modalOverlay.classList.remove("open");
     }
     document.body.style.overflow = "auto";
+
+    if (this.modalMediaStage) {
+      this.modalMediaStage.classList.remove("cert-stage-active");
+    }
 
     if (this.modalBottomPdfStage) {
       this.modalBottomPdfStage.style.display = "none";
