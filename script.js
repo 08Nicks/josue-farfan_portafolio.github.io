@@ -213,13 +213,32 @@ const projectsData = [
     ]
   },
   {
+    id: "optica-difraccion-laser-grafito",
+    title: "Difracción y Dispersión de Haz Láser por Mina de Grafito en Cuarto Oscuro",
+    category: "vlsi",
+    categoryLabel: "Física Óptica & Láser",
+    tag: "Óptica Ondulatoria",
+    mediaType: "image",
+    mediaUrl: "WhatsApp Image 2026-09-22 at 4.32.30 PM.jpeg",
+    secondaryMedia: [],
+    tags: ["Difracción de Fraunhofer", "Haz Láser Rojo", "Mina de Grafito", "Cuarto Oscuro", "Óptica Ondulatoria", "Dispersión de Luz"],
+    shortDesc: "Demostración experimental del fenómeno de difracción y dispersión transversal de un haz láser al incidir sobre una mina cilíndrica de grafito en cuarto oscuro.",
+    whatIs: "Experimento de óptica física y ondulatoria que ilustra el principio de difracción electromagnética. Al hacer incidir un haz de luz láser monocromática sobre un obstáculo cilíndrico opaco y estrecho (una mina de lápiz de grafito), la luz se dispersa perpendicularmente formando un patrón lineal de difracción característico en un entorno de cuarto oscuro.",
+    whatIDid: "Montaje y alineación geométrica del emisor láser hacia la mina de grafito en una cámara oscura para eliminar cualquier ruido lumínico parásito. Calibración del ángulo de incidencia para maximizar la dispersión transversal del haz coherente y registro fotográfico de alta resolución del patrón de difracción proyectado a lo largo de la superficie de prueba.",
+    highlights: [
+      "Comprobación experimental del fenómeno de difracción luminosa en medio confinado",
+      "Montaje en cuarto oscuro para máxima nitidez del haz y franjas de dispersión",
+      "Demostración de óptica electromagnética utilizando una mina de grafito como elemento difractor"
+    ]
+  },
+  {
     id: "iot-esp32-mesh-ap",
     title: "Arquitectura IoT Distribuida Maestro-Esclavo con ESP32 (SoftAP & REST)",
     category: "embedded",
     categoryLabel: "Sistemas Embebidos & IoT",
     tag: "Redes Inalámbricas & IoT",
     mediaType: "image",
-    mediaUrl: "WhatsApp Image 2026-09-22 at 4.24.56 PM.jpeg",
+    mediaUrl: "WhatsApp Image 2026-09-22 at 4.43.02 PM.jpeg",
     secondaryMedia: [],
     tags: ["ESP32 SoftAP", "ESPAsyncWebServer", "HTTPClient REST", "C++", "Red Autónoma", "Firmware"],
     shortDesc: "Red inalámbrica punto a punto ad-hoc entre microcontroladores ESP32 sin requerir router externo, comunicando estados de sensores y actuadores.",
