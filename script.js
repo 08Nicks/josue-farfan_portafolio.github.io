@@ -530,8 +530,8 @@ function renderProjects() {
     const hasMultiple = allMedia.length > 1;
 
     return `
-      <article class="project-card" data-id="${project.id}" onclick="openProjectModal('${project.id}')">
-        <div class="card-media" id="card-media-${project.id}">
+      <article class="project-card" data-id="${project.id}">
+        <div class="card-media" id="card-media-${project.id}" onclick="openProjectModal('${project.id}')" title="Clic para abrir ficha técnica y evidencias">
           ${project.mediaType === 'video' ? `
             <img src="${project.posterUrl ? safeMediaUrl(project.posterUrl) : 'video_thumbs/VID-20241128-WA0026.jpg'}" alt="${project.title}" loading="lazy" />
             <div class="media-play-overlay">
@@ -557,7 +557,7 @@ function renderProjects() {
           </div>
 
           <div class="card-actions">
-            <button class="btn-details" onclick="event.stopPropagation(); openProjectModal('${project.id}')">
+            <button class="btn-details" onclick="openProjectModal('${project.id}')">
               Ver Ficha Técnica <span>→</span>
             </button>
             <div class="evidence-badge">
