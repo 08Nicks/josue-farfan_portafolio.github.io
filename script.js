@@ -768,25 +768,44 @@ void loop() {
   },
   {
     id: "robotica-3d-cad",
-    title: "Modelado Cinemático CAD 3D & Manufactura Aditiva de Gran Formato",
+    title: "Modelado CAD 3D de Brazo Robótico (3 GDL) & Actuador Lineal Piñón-Cremallera",
     category: "robotics",
     categoryLabel: "Robótica & CAD 3D",
-    tag: "Robótica & Manufactura",
+    tag: "Robótica & Diseño Mecatrónico",
     mediaType: "image",
     mediaUrl: "robot 3gdl.png",
     secondaryMedia: [
-      "robot catesiano.png",
-      "WhatsApp Image 2026-09-22 at 4.43.52 PM.jpeg",
+      "robot catesiano.png"
+    ],
+    tags: ["Brazo Robótico 3 GDL", "Mecanismo Cremallera-Piñón", "CAD 3D Paramétrico", "Servomotores", "Arduino", "Cinemática Directa", "Diseño Mecatrónico"],
+    shortDesc: "Modelado CAD 3D paramétrico y análisis cinemático de manipulador robótico de 3 GDL y actuador cartesiano de cremallera y piñón para servomotores.",
+    whatIs: "Diseño de sistemas mecánicos y robóticos articulados concebidos en software CAD 3D. Abarca la estructura de un brazo robótico de 3 Grados de Libertad (3 GDL) con base giratoria y eslabones de posicionamiento, así como un mecanismo lineal cartesiano impulsado por cremallera y piñón de precisión accionado por servomotores de alto torque.",
+    whatIDid: "Diseño de ensamble paramétrico 3D considerando tolerancias mecánicas, distribución de masas y centros de gravedad para minimizar esfuerzos en los servomotores. Integración de la base de control para placa Arduino y cálculo de la relación de transmisión en el módulo de piñón y cremallera para lograr desplazamiento lineal suave y repetible en los ejes de prueba.",
+    highlights: [
+      "Modelado paramétrico de brazo robótico articulado de 3 GDL con alojamientos precisos para servomotores",
+      "Diseño de mecanismo de piñón y cremallera para traslación lineal con alta rigidez estructural",
+      "Integración electromecánica con base para microcontrolador Arduino y cableado guiado"
+    ]
+  },
+  {
+    id: "impresion-3d-ender5-plus",
+    title: "Calibración Dimensional, Nivelación y Manufactura Aditiva con Creality Ender 5 Plus",
+    category: "robotics",
+    categoryLabel: "Manufactura Aditiva & CNC",
+    tag: "Impresión 3D Gran Formato",
+    mediaType: "image",
+    mediaUrl: "WhatsApp Image 2026-09-22 at 4.43.52 PM.jpeg",
+    secondaryMedia: [
       "WhatsApp Image 2026-09-22 at 4.46.07 PM.jpeg"
     ],
-    tags: ["Brazo Robótico 3 GDL", "Mecanismo Cremallera-Piñón", "CAD 3D", "Creality Ender", "Servomotores", "Calibración XYZ"],
-    shortDesc: "Diseño mecánico de robots manipuladores y ejes cartesianos impresos en 3D en máquinas Creality de gran formato.",
-    whatIs: "Desarrollo de sistemas mecánicos y robóticos desde la concepción en modelado 3D paramétrico, simulación cinemática, hasta la fabricación aditiva y calibración dimensional.",
-    whatIDid: "Modelado en CAD 3D de un brazo articulado de 3 Grados de Libertad (3 GDL) con soporte para servomotores y base de control Arduino, así como un actuador lineal de cremallera y piñón para eje cartesiano Z/X de alta rigidez. Puesta a punto y operación de impresora 3D Creality Ender de gran volumen de impresión y control de tolerancias micrométricas mediante cubos de calibración XYZ.",
+    tags: ["Creality Ender 5 Plus", "Calibración XYZ", "Mesh Bed Leveling", "BLTouch", "Cubo de Calibración 20mm", "Manufactura Aditiva", "Gran Formato 350mm"],
+    shortDesc: "Puesta a punto, nivelación de cama y calibración de pasos micrométricos en impresora 3D Creality Ender 5 Plus de gran formato (350x350x400 mm).",
+    whatIs: "Proyecto de ingeniería de manufactura aditiva enfocado en el ensamble, puesta a punto y calibración metrológica de la impresora 3D industrial de gran formato Creality Ender 5 Plus (volumen cúbico de 350 x 350 x 400 mm con doble husillo en eje Z). Su objetivo es garantizar tolerancias micrométricas y adhesión perfecta de primera capa en piezas mecánicas de gran escala.",
+    whatIDid: "Puesta en marcha y calibración física de la máquina: alineación y sincronización de doble eje Z, calibración de tensión de bandas en pórtico CoreXY / cartesiano, nivelación de cama caliente de vidrio templado mediante sensor BLTouch (mesh leveling multizona) y ajuste de Z-offset. Fabricación y medición con vernier digital de cubo de calibración XYZ de 20 mm para compensación de pasos por milímetro (steps/mm), afinación de retracción y control de flujo de extrusión libre de warping.",
     highlights: [
-      "Optimización estructural para máxima rigidez mecánica con mínimo peso",
-      "Compatibilidad de montaje con servomotores de alto torque estándar",
-      "Control fino de parámetros de impresión aditiva (altura de capa, retracción, temperatura)"
+      "Puesta a punto de impresora de gran formato Creality Ender 5 Plus con volumen de impresión de 350 x 350 x 400 mm",
+      "Calibración de malla de nivelación de cama (Mesh Leveling) con sensor BLTouch para primera capa homogénea",
+      "Verificación metrológica dimensional con cubo de calibración XYZ de 20 mm asegurando precisión dimensional y repetibilidad"
     ]
   },
   {
