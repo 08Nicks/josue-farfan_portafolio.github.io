@@ -254,6 +254,27 @@ const projectsData = [
     ]
   },
   {
+    id: "parrilla-electrica-thermal-blueprint",
+    title: "Parrilla Eléctrica Resistiva & Manual Técnico 'Thermal Blueprint'",
+    category: "power",
+    categoryLabel: "Electrónica de Potencia & Térmica",
+    tag: "Diseño Térmico & Educación",
+    mediaType: "image",
+    mediaUrl: "WhatsApp Image 2026-09-22 at 4.38.24 PM.jpeg",
+    pdfUrl: "Thermal_Blueprint.pdf",
+    pdfName: "Thermal_Blueprint.pdf (Manual del Curso)",
+    secondaryMedia: [],
+    tags: ["Parrilla Eléctrica", "Resistencia Nicrom", "Ladrillo Refractario", "Thermal Blueprint (PDF)", "Efecto Joule", "Cálculo de Potencia", "Ingeniería Práctica"],
+    shortDesc: "Diseño y construcción de parrilla eléctrica de alta temperatura con resistencia en ladrillo refractario, complementada con el manual técnico educativo 'Thermal Blueprint'.",
+    whatIs: "Proyecto integral de ingeniería térmica y contenido educativo. Consiste en la construcción de una parrilla eléctrica de alto rendimiento térmico con resistencia resistiva encauzada en ladrillo refractario, articulada con el manual técnico 'Thermal Blueprint' que fusiona la formulación teórica de calor con el montaje práctico en taller.",
+    whatIDid: "Mecanizado y ranurado manual del canal serpentino en ladrillo refractario para alojar y mantener aislada la resistencia calefactora de ferretería bajo régimen incandescente continuo. Cálculo de impedancia, disipación por efecto Joule y dimensionamiento de conexiones eléctricas seguras. Redacción y diagramación del manual didáctico 'Thermal Blueprint.pdf' estructurado para enseñar a estudiantes y entusiastas la ingeniería detrás de la construcción de parrillas eléctricas.",
+    highlights: [
+      "Canalización precisa de resistencia al rojo vivo en matriz de ladrillo refractario para alta inercia térmica",
+      "Cálculo de potencia eléctrica, corriente nominal y aislamiento térmico por efecto Joule",
+      "Publicación del manual técnico 'Thermal Blueprint.pdf' que acompaña el proyecto como curso práctico"
+    ]
+  },
+  {
     id: "trng-generador-ruido-rosa",
     title: "Generador de Números Aleatorios Verdaderos por Ruido Físico (TRNG)",
     category: "embedded",
@@ -483,6 +504,16 @@ function openProjectModal(projectId) {
 
   // Badges de tecnologías
   modalTagsBox.innerHTML = project.tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
+
+  if (project.pdfUrl) {
+    modalTagsBox.innerHTML += `
+      <div style="width: 100%; margin-top: 1.25rem;">
+        <a href="${encodeURI(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
+          <span>📄</span> Ver / Descargar Documento: ${project.pdfName || project.pdfUrl}
+        </a>
+      </div>
+    `;
+  }
 
   // Preparar lista de medios (principal + secundarios)
   const allMedia = [
