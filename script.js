@@ -864,6 +864,18 @@ class PortfolioView {
     return encodeURI(url);
   }
 
+  formatCodeWithLines(codeText) {
+    if (!codeText) return "";
+    const lines = codeText.split("\n");
+    return lines
+      .map((line, idx) => {
+        const lineNum = idx + 1;
+        const safeContent = this.escapeHtml(line) !== "" ? this.escapeHtml(line) : "&nbsp;";
+        return `<div class="code-line"><span class="line-num" aria-hidden="true">${lineNum}</span><span class="line-code">${safeContent}</span></div>`;
+      })
+      .join("");
+  }
+
   renderProjectsGrid(filteredProjects, totalCount, onResetFilters) {
     if (this.resultsCountBar) {
       this.resultsCountBar.textContent = `Mostrando ${filteredProjects.length} de ${totalCount} proyectos de ingeniería`;
@@ -963,7 +975,7 @@ class PortfolioView {
 
     // RENDERIZADO DEL ESCENARIO MULTIMEDIA
     if (project.pdfUrl) {
-      // 1. Vista dual interactiva: Fotografía + PDF embebido lado a lado
+      // 1. Vista dual interactiva: Fotografía + PDF embebido lado a lado / apilado
       this.modalMediaStage.classList.add("dual-showcase");
       this.modalMediaStage.innerHTML = `
         <div class="dual-stage-container">
@@ -971,9 +983,12 @@ class PortfolioView {
             <div class="modal-media-viewport">
               <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
             </div>
-            <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-              <span>📸 Ensamble Físico</span>
-              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(0,242,254,0.3); padding: 2px 8px; border-radius: 12px;" title="Ver imagen original en alta resolución">🔍 Ver completa</a>
+            <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
+              <span>🔍</span> Ver completa
+            </a>
+            <div class="dual-pane-footer">
+              <span class="dual-pane-tag">📸 Ensamble Físico</span>
+              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">🔍 Ver completa (100%)</a>
             </div>
           </div>
 
@@ -983,6 +998,9 @@ class PortfolioView {
                 <span>📄</span> ${project.pdfName || 'Thermal Blueprint.pdf'}
               </div>
               <div class="pdf-pane-actions">
+                <button class="code-action-btn layout-toggle-btn" data-action="toggle-dual-layout" title="Alternar entre ver al lado o abajo para ampliar la imagen y documento">
+                  <span class="layout-toggle-icon">⬍</span> <span class="layout-toggle-text">Ver Abajo</span>
+                </button>
                 <a href="${this.safeMediaUrl(project.pdfUrl)}" target="_blank" rel="noopener noreferrer" class="pdf-action-btn" title="Abrir en pestaña nueva">
                   <span>↗</span> Pantalla Completa
                 </a>
@@ -997,7 +1015,8 @@ class PortfolioView {
       `;
       if (this.modalGalleryStrip) this.modalGalleryStrip.style.display = "none";
     } else if (project.codeSnippet) {
-      // 2. Vista dual interactiva: Fotografía + Visor de Código embebido lado a lado (apilado en móvil)
+      // 2. Vista dual interactiva: Fotografía + Visor de Código embebido profesional con números de línea
+      const lineCount = project.codeSnippet.split('\n').length;
       this.modalMediaStage.classList.add("dual-showcase");
       this.modalMediaStage.innerHTML = `
         <div class="dual-stage-container">
@@ -1005,9 +1024,12 @@ class PortfolioView {
             <div class="modal-media-viewport">
               <img src="${this.safeMediaUrl(allMedia[initialIndex].url)}" alt="${project.title}" id="dualModalImg" onclick="window.open('${this.safeMediaUrl(allMedia[initialIndex].url)}', '_blank')" title="Clic para ver en tamaño original completo" />
             </div>
-            <div style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--accent-cyan); text-align: center; padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-              <span>📸 Evidencia de Hardware</span>
-              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.75rem; border: 1px solid rgba(0,242,254,0.3); padding: 2px 8px; border-radius: 12px;" title="Ver imagen original en alta resolución">🔍 Ver completa</a>
+            <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="modal-expand-btn" title="Abrir imagen en resolución original completa">
+              <span>🔍</span> Ver completa
+            </a>
+            <div class="dual-pane-footer">
+              <span class="dual-pane-tag">📸 Evidencia de Hardware</span>
+              <a href="${this.safeMediaUrl(allMedia[initialIndex].url)}" target="_blank" rel="noopener noreferrer" class="pane-action-link" title="Ver imagen original en alta resolución">🔍 Ver completa (100%)</a>
             </div>
           </div>
 
@@ -1022,8 +1044,12 @@ class PortfolioView {
                 <div class="code-pane-title">
                   <span>💻</span> ${project.codeFilename || 'script'}
                 </div>
+                <span class="code-line-count-badge">${lineCount} líneas</span>
               </div>
               <div class="code-pane-actions">
+                <button class="code-action-btn layout-toggle-btn" data-action="toggle-dual-layout" title="Alternar entre ver al lado o abajo para ampliar la imagen">
+                  <span class="layout-toggle-icon">⬍</span> <span class="layout-toggle-text">Ver Abajo</span>
+                </button>
                 <button class="code-action-btn" data-action="copy-code" title="Copiar código al portapapeles">
                   <span>📋</span> Copiar Código
                 </button>
@@ -1035,7 +1061,9 @@ class PortfolioView {
               </div>
             </div>
             <div class="code-viewer-container">
-              <pre><code>${this.escapeHtml(project.codeSnippet)}</code></pre>
+              <div class="code-editor-gutter">
+                ${this.formatCodeWithLines(project.codeSnippet)}
+              </div>
             </div>
           </div>
         </div>
@@ -1254,34 +1282,51 @@ class PortfolioController {
     // 7. Delegación de eventos en el escenario del modal (copiar código / flechas prev/next)
     if (this.view.modalMediaStage) {
       this.view.modalMediaStage.addEventListener("click", (e) => {
-        // Copiar código al portapapeles
+        // Alternar vista dual (lado a lado vs imagen completa ampliada + codigo abajo)
+        const toggleLayoutBtn = e.target.closest('[data-action="toggle-dual-layout"]');
+        if (toggleLayoutBtn) {
+          const dualStage = this.view.modalMediaStage.querySelector('.dual-stage-container');
+          if (dualStage) {
+            const isStacked = dualStage.classList.toggle('stacked-view');
+            const iconEl = toggleLayoutBtn.querySelector('.layout-toggle-icon');
+            const textEl = toggleLayoutBtn.querySelector('.layout-toggle-text');
+            if (isStacked) {
+              if (iconEl) iconEl.textContent = '◫';
+              if (textEl) textEl.textContent = 'Ver Lado a Lado';
+              toggleLayoutBtn.setAttribute('title', 'Cambiar a vista lado a lado');
+            } else {
+              if (iconEl) iconEl.textContent = '⬍';
+              if (textEl) textEl.textContent = 'Ver Abajo';
+              toggleLayoutBtn.setAttribute('title', 'Colocar código abajo y ampliar imagen al 100%');
+            }
+          }
+          return;
+        }
+
+        // Copiar código al portapapeles (copia el código limpio sin números de línea)
         const copyBtn = e.target.closest('[data-action="copy-code"]');
         if (copyBtn) {
-          const codeEl = this.view.modalMediaStage.querySelector('.code-viewer-container code');
-          if (codeEl) {
-            const copyText = codeEl.innerText;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(copyText).then(() => {
-                const prev = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<span>✓</span> ¡Copiado!';
-                copyBtn.style.color = '#27c93f';
-                copyBtn.style.borderColor = '#27c93f';
-                setTimeout(() => {
-                  copyBtn.innerHTML = prev;
-                  copyBtn.style.color = '';
-                  copyBtn.style.borderColor = '';
-                }, 2000);
-              }).catch(() => {});
-            } else {
-              const ta = document.createElement('textarea');
-              ta.value = copyText;
-              document.body.appendChild(ta);
-              ta.select();
-              document.execCommand('copy');
-              document.body.removeChild(ta);
+          const activeProj = this.model.activeProject;
+          const copyText = activeProj && activeProj.codeSnippet ? activeProj.codeSnippet : '';
+          if (copyText) {
+            const handleSuccess = () => {
               const prev = copyBtn.innerHTML;
               copyBtn.innerHTML = '<span>✓</span> ¡Copiado!';
-              setTimeout(() => { copyBtn.innerHTML = prev; }, 2000);
+              copyBtn.style.color = '#27c93f';
+              copyBtn.style.borderColor = '#27c93f';
+              setTimeout(() => {
+                copyBtn.innerHTML = prev;
+                copyBtn.style.color = '';
+                copyBtn.style.borderColor = '';
+              }, 2000);
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(copyText).then(handleSuccess).catch(() => {
+                this.fallbackCopyText(copyText, handleSuccess);
+              });
+            } else {
+              this.fallbackCopyText(copyText, handleSuccess);
             }
           }
           return;
@@ -1390,6 +1435,21 @@ class PortfolioController {
     this.view.updateFilterTabs("all");
     this.view.updateSearchInput("");
     this.refreshGrid();
+  }
+
+  fallbackCopyText(text, callback) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    ta.style.top = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      if (callback) callback();
+    } catch (err) {}
+    document.body.removeChild(ta);
   }
 }
 
