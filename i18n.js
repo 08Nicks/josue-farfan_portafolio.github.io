@@ -96,7 +96,7 @@
     "timeline_4_title": "Comunidad Estudiantil • IEEE Sección Puebla",
     "timeline_4_desc": "<strong>Miembro Estudiantil IEEE (Sección Puebla)</strong>. Me motiva conectar con la comunidad tecnológica, asistir a conferencias y aprender constantemente de los avances en el área.",
     "timeline_kutsari_title": "Taller Electro Tlalli • Kutsari (Cholula)",
-    "timeline_kutsari_desc": "Diseño digital y trazado físico de layers para circuitos integrados mediante herramientas y arquitecturas de silicio de código abierto (KLayout / Open EDA).",
+    "timeline_kutsari_desc": "Creación y trazado físico de layers para circuitos integrados mediante herramientas de silicio y diseño microelectrónico.",
     "pcb_layer_tag": "CONCEPT ART // IDENTIDAD VISUAL",
     "pcb_rev_tag": "BANNER DE LINKEDIN",
     "pcb_btn_hw": "Banner Estilo PCB",
@@ -235,7 +235,7 @@
     "timeline_4_title": "Student Community • IEEE Puebla Section",
     "timeline_4_desc": "<strong>IEEE Student Member (Puebla Section)</strong>. Passionate about connecting with the global engineering community, attending technical conferences, and staying updated with emerging hardware advancements.",
     "timeline_kutsari_title": "Electro Tlalli Workshop • Kutsari (Cholula)",
-    "timeline_kutsari_desc": "Digital design and physical layer drafting for integrated circuits using open-source silicon tools and open hardware architectures (KLayout / Open EDA).",
+    "timeline_kutsari_desc": "Physical layer creation and drafting for integrated circuits using silicon microelectronic design tools.",
     "pcb_layer_tag": "CONCEPT ART // VISUAL IDENTITY",
     "pcb_rev_tag": "LINKEDIN BANNER",
     "pcb_btn_hw": "PCB Style Banner",
@@ -342,26 +342,26 @@
     ]
   },
   "vlsi-electrotlalli-kutsari-open-silicon": {
-    "title": "Diseño Digital & Trazado de Layers en KLayout (Open-Source EDA) · Taller Electro Tlalli (Kutsari)",
+    "title": "Creación y Trazado de Layers para Circuitos Integrados · Taller Electro Tlalli (Kutsari)",
     "categoryLabel": "Diseño VLSI & Microelectrónica",
-    "tag": "Open-Source Silicon & Layout",
-    "shortDesc": "Diseño digital y trazado físico de capas (layers) de celdas estándar en KLayout usando herramientas y arquitecturas de código abierto en el Centro Kutsari (Cholula).",
-    "whatIs": "Práctica intensiva de diseño digital y trazado físico de circuitos integrados (ASIC) desarrollada en el taller Electro Tlalli, impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en San Andrés Cholula, Puebla. La capacitación abordó la concepción y diseño de microcircuitos utilizando suites EDA de código abierto (Open-Source Silicon) y arquitecturas libres para impulsar la soberanía tecnológica en semiconductores.",
-    "whatIDid": "Diseño y trazado nanométrico de capas físicas (layers) de celdas lógicas estándar (inversores y bloques secuenciales/contadores) en el editor de código abierto KLayout: dibujo e inspección de máscaras de difusión activa (Active), compuertas de polisilicio (GatePoly), dopados nSD/pSD, contactos óhmicos a sustrato y pozo, ruteo en niveles de interconexión metálica (Metal 1, Metal 2, Vías intermedias y Top Metal) y definición de fronteras de celda (prBoundary) cumpliendo reglas de diseño geométrico (DRC).",
+    "tag": "Creación de Layers & Silicio",
+    "shortDesc": "Creación y trazado físico de capas (layers) de celdas estándar usando flujos de diseño de circuitos integrados en el Centro Kutsari (Cholula).",
+    "whatIs": "Práctica intensiva de diseño y creación de capas (layers) de circuitos integrados (ASIC) desarrollada en el taller Electro Tlalli, impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en San Andrés Cholula, Puebla. La capacitación abordó la concepción y diseño de microcircuitos para impulsar el desarrollo tecnológico en semiconductores.",
+    "whatIDid": "Creación y trazado nanométrico de capas físicas (layers) de celdas lógicas estándar (inversores y bloques secuenciales/contadores): dibujo e inspección de máscaras de difusión activa (Active), compuertas de polisilicio (GatePoly), dopados nSD/pSD, contactos óhmicos a sustrato y pozo, ruteo en niveles de interconexión metálica (Metal 1, Metal 2, Vías intermedias y Top Metal) y definición de fronteras de celda (prBoundary) cumpliendo reglas de diseño geométrico (DRC).",
     "highlights": [
       "Entrenamiento intensivo en el Taller Electro Tlalli impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en Cholula, Puebla",
-      "Trazado y edición física de layers en KLayout: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2 y Top Metal",
-      "Diseño y verificación de celdas estándar digitales (inversores CMOS y contadores) sobre flujos de silicio y herramientas EDA de código abierto",
-      "Aplicación de arquitecturas digitales abiertas e inspección de reglas de diseño geométrico (DRC) para manufactura de microcircuitos"
+      "Creación, trazado y edición física de layers: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2 y Top Metal",
+      "Diseño y verificación de celdas estándar digitales (inversores CMOS y contadores) sobre flujos de silicio",
+      "Aplicación de arquitecturas digitales e inspección de reglas de diseño geométrico (DRC) para manufactura de microcircuitos"
     ],
     "tags": [
       "Kutsari",
       "Electro Tlalli",
-      "KLayout",
-      "Open-Source Silicon",
+      "Creación de Layers",
+      "Trazado de Layers",
       "Diseño Digital",
       "Layout VLSI",
-      "Trazado de Layers",
+      "Celdas Estándar CMOS",
       "Semiconductores México",
       "San Andrés Cholula"
     ]
@@ -838,26 +838,26 @@
     ]
   },
   "vlsi-electrotlalli-kutsari-open-silicon": {
-    "title": "Digital Design & Physical Layers Layout in KLayout (Open-Source EDA) · Electro Tlalli Workshop (Kutsari)",
+    "title": "Layer Creation & Physical Drafting for Integrated Circuits · Electro Tlalli Workshop (Kutsari)",
     "categoryLabel": "Microelectronics & VLSI Design",
-    "tag": "Open-Source Silicon & Layout",
-    "shortDesc": "Digital design and physical standard-cell layer layout in KLayout using open-source tools and architectures at Kutsari National Center (Cholula).",
-    "whatIs": "Intensive hands-on training in digital design and physical layout of integrated circuits (ASIC) within the Electro Tlalli workshop, hosted by Kutsari (National Semiconductor Design Center) in San Andrés Cholula, Puebla. The workshop focused on microchip conception using open-source EDA toolchains and open hardware architectures to advance national semiconductor sovereignty.",
-    "whatIDid": "Physical mask layout and layer drafting for standard logic cells (CMOS inverters and digital counter blocks) using open-source KLayout: drafting and inspecting active diffusion (Active), polysilicon gates (GatePoly), pSD/nSD diffusions, substrate/well ohmic contacts, metal interconnect routing (Metal 1, Metal 2, intermediate Vias, and Top Metal), and cell boundary definitions (prBoundary) adhering to geometric Design Rule Checking (DRC).",
+    "tag": "Layer Creation & Silicon",
+    "shortDesc": "Creation and physical drafting of standard cell layers using integrated circuit design flows at Kutsari National Center (Cholula).",
+    "whatIs": "Intensive hands-on training in integrated circuit (ASIC) layer creation and design within the Electro Tlalli workshop, hosted by Kutsari (National Semiconductor Design Center) in San Andrés Cholula, Puebla. The workshop focused on microchip conception and physical design to advance semiconductor development.",
+    "whatIDid": "Physical mask layout and layer drafting for standard logic cells (CMOS inverters and digital counter blocks): drafting and inspecting active diffusion (Active), polysilicon gates (GatePoly), pSD/nSD diffusions, substrate/well ohmic contacts, metal interconnect routing (Metal 1, Metal 2, intermediate Vias, and Top Metal), and cell boundary definitions (prBoundary) adhering to geometric Design Rule Checking (DRC).",
     "highlights": [
       "Hands-on training at the Electro Tlalli Workshop hosted by Kutsari (National Semiconductor Design Center) in Cholula, Puebla",
-      "Physical layer drafting and mask verification in KLayout: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2, and Top Metal",
-      "Design and layout verification of digital standard cells (CMOS inverters and counters) with open-source silicon toolchains",
-      "Exploration of open-source digital architectures and DRC validation for integrated circuit fabrication"
+      "Physical layer drafting, creation, and mask verification: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2, and Top Metal",
+      "Design and layout verification of digital standard cells (CMOS inverters and counters) with silicon toolchains",
+      "Exploration of digital architectures and DRC validation for integrated circuit fabrication"
     ],
     "tags": [
       "Kutsari",
       "Electro Tlalli",
-      "KLayout",
-      "Open-Source Silicon",
+      "Layer Creation",
+      "Physical Layers",
       "Digital Design",
       "VLSI Layout",
-      "Physical Layers",
+      "CMOS Standard Cells",
       "Semiconductors Mexico",
       "San Andrés Cholula"
     ]

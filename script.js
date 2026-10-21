@@ -198,32 +198,32 @@ dc_sim   dc   param=vdd_val start=0 stop=0.9 step=0.005
   },
   {
     id: "vlsi-electrotlalli-kutsari-open-silicon",
-    title: "Diseño Digital & Trazado de Layers en KLayout (Open-Source EDA) · Taller Electro Tlalli (Kutsari)",
+    title: "Creación y Trazado de Layers para Circuitos Integrados · Taller Electro Tlalli (Kutsari)",
     category: "vlsi",
     categoryLabel: "Diseño VLSI & Microelectrónica",
-    tag: "Open-Source Silicon & Layout",
+    tag: "Creación de Layers & Silicio",
     mediaType: "image",
-    mediaUrl: "electrotlalli_kutsari_klayout_layers.jpg",
+    mediaUrl: "electrotlalli_kutsari_layers.jpg",
     secondaryMedia: [],
     tags: [
       "Kutsari",
       "Electro Tlalli",
-      "KLayout",
-      "Open-Source Silicon",
+      "Creación de Layers",
+      "Trazado de Layers",
       "Diseño Digital",
       "Layout VLSI",
-      "Trazado de Layers",
+      "Celdas Estándar CMOS",
       "Semiconductores México",
       "San Andrés Cholula"
     ],
-    shortDesc: "Diseño digital y trazado físico de capas (layers) de celdas estándar en KLayout usando herramientas y arquitecturas de código abierto en el Centro Kutsari (Cholula).",
-    whatIs: "Práctica intensiva de diseño digital y trazado físico de circuitos integrados (ASIC) desarrollada en el taller Electro Tlalli, impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en San Andrés Cholula, Puebla. La capacitación abordó la concepción y diseño de microcircuitos utilizando suites EDA de código abierto (Open-Source Silicon) y arquitecturas libres para impulsar la soberanía tecnológica en semiconductores.",
-    whatIDid: "Diseño y trazado nanométrico de capas físicas (layers) de celdas lógicas estándar (inversores y bloques secuenciales/contadores) en el editor de código abierto KLayout: dibujo e inspección de máscaras de difusión activa (Active), compuertas de polisilicio (GatePoly), dopados nSD/pSD, contactos óhmicos a sustrato y pozo, ruteo en niveles de interconexión metálica (Metal 1, Metal 2, Vías intermedias y Top Metal) y definición de fronteras de celda (prBoundary) cumpliendo reglas de diseño geométrico (DRC).",
+    shortDesc: "Creación y trazado físico de capas (layers) de celdas estándar usando flujos de diseño de circuitos integrados en el Centro Kutsari (Cholula).",
+    whatIs: "Práctica intensiva de diseño y creación de capas (layers) de circuitos integrados (ASIC) desarrollada en el taller Electro Tlalli, impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en San Andrés Cholula, Puebla. La capacitación abordó la concepción y diseño de microcircuitos para impulsar el desarrollo tecnológico en semiconductores.",
+    whatIDid: "Creación y trazado nanométrico de capas físicas (layers) de celdas lógicas estándar (inversores y bloques secuenciales/contadores): dibujo e inspección de máscaras de difusión activa (Active), compuertas de polisilicio (GatePoly), dopados nSD/pSD, contactos óhmicos a sustrato y pozo, ruteo en niveles de interconexión metálica (Metal 1, Metal 2, Vías intermedias y Top Metal) y definición de fronteras de celda (prBoundary) cumpliendo reglas de diseño geométrico (DRC).",
     highlights: [
       "Entrenamiento intensivo en el Taller Electro Tlalli impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en Cholula, Puebla",
-      "Trazado y edición física de layers en KLayout: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2 y Top Metal",
-      "Diseño y verificación de celdas estándar digitales (inversores CMOS y contadores) sobre flujos de silicio y herramientas EDA de código abierto",
-      "Aplicación de arquitecturas digitales abiertas e inspección de reglas de diseño geométrico (DRC) para manufactura de microcircuitos"
+      "Creación, trazado y edición física de layers: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2 y Top Metal",
+      "Diseño y verificación de celdas estándar digitales (inversores CMOS y contadores) sobre flujos de silicio",
+      "Aplicación de arquitecturas digitales e inspección de reglas de diseño geométrico (DRC) para manufactura de microcircuitos"
     ]
   },
   {
