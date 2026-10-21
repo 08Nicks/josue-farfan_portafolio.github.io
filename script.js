@@ -197,6 +197,36 @@ dc_sim   dc   param=vdd_val start=0 stop=0.9 step=0.005
     ]
   },
   {
+    id: "vlsi-electrotlalli-kutsari-open-silicon",
+    title: "Diseño Digital & Trazado de Layers en KLayout (Open-Source EDA) · Taller Electro Tlalli (Kutsari)",
+    category: "vlsi",
+    categoryLabel: "Diseño VLSI & Microelectrónica",
+    tag: "Open-Source Silicon & Layout",
+    mediaType: "image",
+    mediaUrl: "electrotlalli_kutsari_klayout_layers.jpg",
+    secondaryMedia: [],
+    tags: [
+      "Kutsari",
+      "Electro Tlalli",
+      "KLayout",
+      "Open-Source Silicon",
+      "Diseño Digital",
+      "Layout VLSI",
+      "Trazado de Layers",
+      "Semiconductores México",
+      "San Andrés Cholula"
+    ],
+    shortDesc: "Diseño digital y trazado físico de capas (layers) de celdas estándar en KLayout usando herramientas y arquitecturas de código abierto en el Centro Kutsari (Cholula).",
+    whatIs: "Práctica intensiva de diseño digital y trazado físico de circuitos integrados (ASIC) desarrollada en el taller Electro Tlalli, impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en San Andrés Cholula, Puebla. La capacitación abordó la concepción y diseño de microcircuitos utilizando suites EDA de código abierto (Open-Source Silicon) y arquitecturas libres para impulsar la soberanía tecnológica en semiconductores.",
+    whatIDid: "Diseño y trazado nanométrico de capas físicas (layers) de celdas lógicas estándar (inversores y bloques secuenciales/contadores) en el editor de código abierto KLayout: dibujo e inspección de máscaras de difusión activa (Active), compuertas de polisilicio (GatePoly), dopados nSD/pSD, contactos óhmicos a sustrato y pozo, ruteo en niveles de interconexión metálica (Metal 1, Metal 2, Vías intermedias y Top Metal) y definición de fronteras de celda (prBoundary) cumpliendo reglas de diseño geométrico (DRC).",
+    highlights: [
+      "Entrenamiento intensivo en el Taller Electro Tlalli impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en Cholula, Puebla",
+      "Trazado y edición física de layers en KLayout: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2 y Top Metal",
+      "Diseño y verificación de celdas estándar digitales (inversores CMOS y contadores) sobre flujos de silicio y herramientas EDA de código abierto",
+      "Aplicación de arquitecturas digitales abiertas e inspección de reglas de diseño geométrico (DRC) para manufactura de microcircuitos"
+    ]
+  },
+  {
     id: "esp32-pizarra-interfaz-tft",
     title: "Creación de Interfaces Gráficas Táctiles (GUI) en Pantallas TFT con ESP32",
     category: "embedded",
@@ -619,6 +649,35 @@ finally:
     ]
   },
   {
+    id: "its-sumo-simulacion-trafico-urbano",
+    title: "Simulación y Modelado de Tráfico Urbano en Tiempo Real con SUMO 1.27.1",
+    category: "ai",
+    categoryLabel: "Sistemas Inteligentes & Movilidad Urbana",
+    tag: "SUMO & Tráfico Inteligente",
+    mediaType: "image",
+    mediaUrl: "inaoe_sumo_traffic_simulation.jpg",
+    secondaryMedia: [],
+    tags: [
+      "Eclipse SUMO",
+      "SUMO 1.27.1",
+      "Simulación de Tráfico",
+      "Movilidad Urbana",
+      "Sistemas Inteligentes de Transporte (ITS)",
+      "Redes Viales",
+      "Flujo Vehicular",
+      "Puebla / Cholula"
+    ],
+    shortDesc: "Modelado microscópico y simulación dinámica del flujo vehicular de la red vial local con Eclipse SUMO 1.27.1, analizando intersecciones, rutas y densidad de tráfico.",
+    whatIs: "Práctica de modelado microscópico y simulación dinámica de tráfico multimodal empleando Eclipse SUMO (Simulation of Urban MObility) 1.27.1 (mapa.sumocfg). El proyecto recrea digitalmente la topología de calles e intersecciones de la zona residencial local (lat: 19.0459, lon: -98.2602), analizando el comportamiento de los vehículos, prioridades en cruceros y patrones de movilidad en tiempo real.",
+    whatIDid: "Configuración de la red vial urbana con geometría real de calles y avenidas, definición de nodos, aristas y carriles de circulación; parametrización de flujos vehiculares con escala de tráfico dinámica, generación incremental de rutas y control temporal de simulación (paso 166.600 s a 50 ms de retardo). Ejecución del motor SUMO GUI evaluando tiempos de espera, densidad de flujo en crucero y sincronización vehicular.",
+    highlights: [
+      "Modelado de red vial real con Eclipse SUMO 1.27.1 en vista fotorrealista ('real world')",
+      "Simulación microscópica y dinámica de vehículos con asignación incremental de rutas",
+      "Análisis de capacidad en intersecciones urbanas, tiempos de demora y comportamiento de colas vehiculares",
+      "Base metodológica para integración de algoritmos de optimización de semáforos y ciudades inteligentes (ITS)"
+    ]
+  },
+  {
     id: "optica-difraccion-laser-grafito",
     title: "Difracción y Dispersión de Haz Láser por Mina de Grafito en Cuarto Oscuro",
     category: "vlsi",
@@ -900,6 +959,26 @@ const certificatesData = [
     previewUrl: "certificados/thumbs/inaoe-semana-semiconductores-2026.jpg",
     mediaType: "pdf",
     tags: ["INAOE", "Semiconductores", "Microelectrónica", "Sala Limpia", "Investigación"]
+  },
+  {
+    id: "cert-inaoe-sistemas-distribuidos",
+    title: "8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación",
+    issuer: "Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE) & Red Temática SyRPG",
+    issuerBadge: "INAOE • SyRPG",
+    category: "tech",
+    categoryLabel: "Industria & Sistemas Embebidos",
+    date: "26 al 28 de Noviembre de 2025",
+    hours: "Escuela Nacional Especializada",
+    description: "Participación oficial acreditada en la 8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain y retos de Inteligencia Artificial Distribuida.",
+    signatories: "Dr. Saúl E. Pomares Hernández (Coordinador General, INAOE), Dr. Julio C. Pérez Sansalvador, M.C. Miguel A. Valencia Serrano & Red Temática SyRPG",
+    fileUrl: "certificados/inaoe-escuela-sistemas-distribuidos-2025.pdf",
+    previewUrl: "certificados/thumbs/inaoe-escuela-sistemas-distribuidos-2025.jpg",
+    mediaType: "pdf",
+    secondaryMedia: [
+      "inaoe_camara_schmidt_tonantzintla.jpg",
+      "inaoe_sumo_traffic_simulation.jpg"
+    ],
+    tags: ["INAOE", "Sistemas Distribuidos", "Red SyRPG", "Cómputo Paralelo", "Simulación SUMO", "Transporte Inteligente", "Blockchain", "IA Distribuida", "Tonantzintla"]
   },
   {
     id: "cert-electrohack-electromovilidad",
@@ -1496,8 +1575,38 @@ class PortfolioView {
     }
 
     if (this.modalGalleryStrip) {
-      this.modalGalleryStrip.style.display = "none";
-      this.modalGalleryStrip.innerHTML = "";
+      if (cert.secondaryMedia && cert.secondaryMedia.length > 0) {
+        const allMedia = [
+          { url: cert.previewUrl, caption: "Gafete Oficial de Asistente" },
+          ...cert.secondaryMedia.map((m, i) => ({
+            url: typeof m === "string" ? m : m.url,
+            caption: i === 0 ? "Cámara Schmidt del OANTON • INAOE" : "Simulación de Tráfico en SUMO (Taller INAOE)"
+          }))
+        ];
+        this.modalGalleryStrip.style.display = "flex";
+        this.modalGalleryStrip.innerHTML = allMedia.map((m, idx) => `
+          <button class="gallery-thumb-btn ${idx === 0 ? 'active' : ''}" data-idx="${idx}" type="button" title="${m.caption}">
+            <img src="${m.url}" alt="${m.caption}" />
+          </button>
+        `).join("");
+
+        const thumbBtns = this.modalGalleryStrip.querySelectorAll(".gallery-thumb-btn");
+        thumbBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            thumbBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const idx = parseInt(btn.getAttribute("data-idx"), 10);
+            const targetMedia = allMedia[idx];
+            const certImg = this.modalMediaStage.querySelector(".cert-stacked-img");
+            if (certImg && targetMedia) {
+              certImg.src = targetMedia.url;
+            }
+          });
+        });
+      } else {
+        this.modalGalleryStrip.style.display = "none";
+        this.modalGalleryStrip.innerHTML = "";
+      }
     }
 
     this.modalOverlay.classList.add("open");

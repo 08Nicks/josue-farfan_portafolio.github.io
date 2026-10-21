@@ -2,7 +2,7 @@
  * ==============================================================================
  * INTERNATIONALIZATION (i18n) ENGINE - JOSUÉ FARFÁN GONZÁLEZ PORTFOLIO
  * Automatic Regional Language Detection (ES/EN) + Persistent Toggle Switch
- * Full Spanish and English dictionaries for UI, 20 Projects, and 9 Certificates.
+ * Full Spanish and English dictionaries for UI, 22 Projects, and 10 Certificates.
  * ==============================================================================
  */
 
@@ -95,6 +95,8 @@
     "timeline_3_desc": "Práctica formativa conociendo el proceso de fotolitografía en obleas de silicio y exploración introductoria del flujo de diseño VLSI con Cadence.",
     "timeline_4_title": "Comunidad Estudiantil • IEEE Sección Puebla",
     "timeline_4_desc": "<strong>Miembro Estudiantil IEEE (Sección Puebla)</strong>. Me motiva conectar con la comunidad tecnológica, asistir a conferencias y aprender constantemente de los avances en el área.",
+    "timeline_kutsari_title": "Taller Electro Tlalli • Kutsari (Cholula)",
+    "timeline_kutsari_desc": "Diseño digital y trazado físico de layers para circuitos integrados mediante herramientas y arquitecturas de silicio de código abierto (KLayout / Open EDA).",
     "pcb_layer_tag": "CONCEPT ART // IDENTIDAD VISUAL",
     "pcb_rev_tag": "BANNER DE LINKEDIN",
     "pcb_btn_hw": "Banner Estilo PCB",
@@ -232,6 +234,8 @@
     "timeline_3_desc": "Hands-on training in silicon wafer photolithography processes and foundational VLSI design methodology using Cadence Virtuoso.",
     "timeline_4_title": "Student Community • IEEE Puebla Section",
     "timeline_4_desc": "<strong>IEEE Student Member (Puebla Section)</strong>. Passionate about connecting with the global engineering community, attending technical conferences, and staying updated with emerging hardware advancements.",
+    "timeline_kutsari_title": "Electro Tlalli Workshop • Kutsari (Cholula)",
+    "timeline_kutsari_desc": "Digital design and physical layer drafting for integrated circuits using open-source silicon tools and open hardware architectures (KLayout / Open EDA).",
     "pcb_layer_tag": "CONCEPT ART // VISUAL IDENTITY",
     "pcb_rev_tag": "LINKEDIN BANNER",
     "pcb_btn_hw": "PCB Style Banner",
@@ -335,6 +339,31 @@
       "Reglas DRC / LVS",
       "Power Mesh & PDN",
       "Floorplanning ASIC"
+    ]
+  },
+  "vlsi-electrotlalli-kutsari-open-silicon": {
+    "title": "Diseño Digital & Trazado de Layers en KLayout (Open-Source EDA) · Taller Electro Tlalli (Kutsari)",
+    "categoryLabel": "Diseño VLSI & Microelectrónica",
+    "tag": "Open-Source Silicon & Layout",
+    "shortDesc": "Diseño digital y trazado físico de capas (layers) de celdas estándar en KLayout usando herramientas y arquitecturas de código abierto en el Centro Kutsari (Cholula).",
+    "whatIs": "Práctica intensiva de diseño digital y trazado físico de circuitos integrados (ASIC) desarrollada en el taller Electro Tlalli, impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en San Andrés Cholula, Puebla. La capacitación abordó la concepción y diseño de microcircuitos utilizando suites EDA de código abierto (Open-Source Silicon) y arquitecturas libres para impulsar la soberanía tecnológica en semiconductores.",
+    "whatIDid": "Diseño y trazado nanométrico de capas físicas (layers) de celdas lógicas estándar (inversores y bloques secuenciales/contadores) en el editor de código abierto KLayout: dibujo e inspección de máscaras de difusión activa (Active), compuertas de polisilicio (GatePoly), dopados nSD/pSD, contactos óhmicos a sustrato y pozo, ruteo en niveles de interconexión metálica (Metal 1, Metal 2, Vías intermedias y Top Metal) y definición de fronteras de celda (prBoundary) cumpliendo reglas de diseño geométrico (DRC).",
+    "highlights": [
+      "Entrenamiento intensivo en el Taller Electro Tlalli impartido por Kutsari (Centro Nacional de Diseño de Semiconductores) en Cholula, Puebla",
+      "Trazado y edición física de layers en KLayout: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2 y Top Metal",
+      "Diseño y verificación de celdas estándar digitales (inversores CMOS y contadores) sobre flujos de silicio y herramientas EDA de código abierto",
+      "Aplicación de arquitecturas digitales abiertas e inspección de reglas de diseño geométrico (DRC) para manufactura de microcircuitos"
+    ],
+    "tags": [
+      "Kutsari",
+      "Electro Tlalli",
+      "KLayout",
+      "Open-Source Silicon",
+      "Diseño Digital",
+      "Layout VLSI",
+      "Trazado de Layers",
+      "Semiconductores México",
+      "San Andrés Cholula"
     ]
   },
   "esp32-pizarra-interfaz-tft": {
@@ -538,6 +567,30 @@
       "FastAPI",
       "Inferencia en Tiempo Real",
       "Detección de Objetos"
+    ]
+  },
+  "its-sumo-simulacion-trafico-urbano": {
+    "title": "Simulación y Modelado de Tráfico Urbano en Tiempo Real con SUMO 1.27.1",
+    "categoryLabel": "Sistemas Inteligentes & Movilidad Urbana",
+    "tag": "SUMO & Tráfico Inteligente",
+    "shortDesc": "Modelado microscópico y simulación dinámica del flujo vehicular de la red vial local con Eclipse SUMO 1.27.1, analizando intersecciones, rutas y densidad de tráfico.",
+    "whatIs": "Práctica de modelado microscópico y simulación dinámica de tráfico multimodal empleando Eclipse SUMO (Simulation of Urban MObility) 1.27.1 (mapa.sumocfg). El proyecto recrea digitalmente la topología de calles e intersecciones de la zona residencial local (lat: 19.0459, lon: -98.2602), analizando el comportamiento de los vehículos, prioridades en cruceros y patrones de movilidad en tiempo real.",
+    "whatIDid": "Configuración de la red vial urbana con geometría real de calles y avenidas, definición de nodos, aristas y carriles de circulación; parametrización de flujos vehiculares con escala de tráfico dinámica, generación incremental de rutas y control temporal de simulación (paso 166.600 s a 50 ms de retardo). Ejecución del motor SUMO GUI evaluando tiempos de espera, densidad de flujo en crucero y sincronización vehicular.",
+    "highlights": [
+      "Modelado de red vial real con Eclipse SUMO 1.27.1 en vista fotorrealista ('real world')",
+      "Simulación microscópica y dinámica de vehículos con asignación incremental de rutas",
+      "Análisis de capacidad en intersecciones urbanas, tiempos de demora y comportamiento de colas vehiculares",
+      "Base metodológica para integración de algoritmos de optimización de semáforos y ciudades inteligentes (ITS)"
+    ],
+    "tags": [
+      "Eclipse SUMO",
+      "SUMO 1.27.1",
+      "Simulación de Tráfico",
+      "Movilidad Urbana",
+      "Sistemas Inteligentes de Transporte (ITS)",
+      "Redes Viales",
+      "Flujo Vehicular",
+      "Puebla / Cholula"
     ]
   },
   "optica-difraccion-laser-grafito": {
@@ -784,6 +837,31 @@
       "Spectre SPICE"
     ]
   },
+  "vlsi-electrotlalli-kutsari-open-silicon": {
+    "title": "Digital Design & Physical Layers Layout in KLayout (Open-Source EDA) · Electro Tlalli Workshop (Kutsari)",
+    "categoryLabel": "Microelectronics & VLSI Design",
+    "tag": "Open-Source Silicon & Layout",
+    "shortDesc": "Digital design and physical standard-cell layer layout in KLayout using open-source tools and architectures at Kutsari National Center (Cholula).",
+    "whatIs": "Intensive hands-on training in digital design and physical layout of integrated circuits (ASIC) within the Electro Tlalli workshop, hosted by Kutsari (National Semiconductor Design Center) in San Andrés Cholula, Puebla. The workshop focused on microchip conception using open-source EDA toolchains and open hardware architectures to advance national semiconductor sovereignty.",
+    "whatIDid": "Physical mask layout and layer drafting for standard logic cells (CMOS inverters and digital counter blocks) using open-source KLayout: drafting and inspecting active diffusion (Active), polysilicon gates (GatePoly), pSD/nSD diffusions, substrate/well ohmic contacts, metal interconnect routing (Metal 1, Metal 2, intermediate Vias, and Top Metal), and cell boundary definitions (prBoundary) adhering to geometric Design Rule Checking (DRC).",
+    "highlights": [
+      "Hands-on training at the Electro Tlalli Workshop hosted by Kutsari (National Semiconductor Design Center) in Cholula, Puebla",
+      "Physical layer drafting and mask verification in KLayout: Active, GatePoly, pSD, nSD, Contact, Metal1, Via1, Metal2, and Top Metal",
+      "Design and layout verification of digital standard cells (CMOS inverters and counters) with open-source silicon toolchains",
+      "Exploration of open-source digital architectures and DRC validation for integrated circuit fabrication"
+    ],
+    "tags": [
+      "Kutsari",
+      "Electro Tlalli",
+      "KLayout",
+      "Open-Source Silicon",
+      "Digital Design",
+      "VLSI Layout",
+      "Physical Layers",
+      "Semiconductors Mexico",
+      "San Andrés Cholula"
+    ]
+  },
   "esp32-pizarra-interfaz-tft": {
     "title": "Interactive Touchscreen GUI (TFT ILI9341 + XPT2046) on ESP32",
     "categoryLabel": "Embedded Systems & IoT",
@@ -987,6 +1065,30 @@
       "Convolutional Neural Networks",
       "Edge Tracking",
       "Visual Telemetry"
+    ]
+  },
+  "its-sumo-simulacion-trafico-urbano": {
+    "title": "Real-Time Urban Traffic Modeling & Simulation with SUMO 1.27.1",
+    "categoryLabel": "Intelligent Transportation & Simulation",
+    "tag": "SUMO & Smart Traffic",
+    "shortDesc": "Microscopic modeling and dynamic vehicular traffic simulation of local residential street networks using Eclipse SUMO 1.27.1, analyzing intersections, routes, and traffic density in real-time.",
+    "whatIs": "Transportation engineering and intelligent systems project focused on microscopic multimodal traffic simulation using Eclipse SUMO 1.27.1 (mapa.sumocfg). Digitally reconstructs real-world street network topologies (coordinates lat: 19.0459, lon: -98.2602) to evaluate vehicular flow, right-of-way rules, and intersection dynamics.",
+    "whatIDid": "Built and configured digital road network topology (nodes, edges, lanes, and turns); set up vehicle route generation, traffic scaling factors, and step-by-step simulation parameters (time step 166.600 s, 50 ms delay). Executed the SUMO GUI engine to analyze congestion hotspots, vehicle density, and intersection queues in real-time.",
+    "highlights": [
+      "Microscopic road network modeling using Eclipse SUMO 1.27.1 in real-world map view",
+      "Dynamic vehicular simulation with incremental route assignments and traffic scaling",
+      "Capacity analysis at urban intersections, queue lengths, and travel time delays",
+      "Foundation for adaptive traffic signal control algorithms and Smart City mobility (ITS)"
+    ],
+    "tags": [
+      "Eclipse SUMO",
+      "SUMO 1.27.1",
+      "Traffic Simulation",
+      "Urban Mobility",
+      "Intelligent Transportation Systems (ITS)",
+      "Road Networks",
+      "Vehicular Flow",
+      "Puebla / Cholula"
     ]
   },
   "optica-difraccion-laser-grafito": {
@@ -1241,6 +1343,27 @@
       "Investigación"
     ]
   },
+  "cert-inaoe-sistemas-distribuidos": {
+    "title": "8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación",
+    "issuer": "Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE) & Red Temática SyRPG",
+    "issuerBadge": "INAOE • SyRPG",
+    "categoryLabel": "Industria & Sistemas Embebidos",
+    "date": "26 al 28 de Noviembre de 2025",
+    "hours": "Escuela Nacional Especializada",
+    "description": "Participación oficial acreditada en la 8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain y retos de Inteligencia Artificial Distribuida.",
+    "signatories": "Dr. Saúl E. Pomares Hernández (Coordinador General, INAOE), Dr. Julio C. Pérez Sansalvador, M.C. Miguel A. Valencia Serrano & Red Temática SyRPG",
+    "tags": [
+      "INAOE",
+      "Sistemas Distribuidos",
+      "Red SyRPG",
+      "Cómputo Paralelo",
+      "Simulación SUMO",
+      "Transporte Inteligente",
+      "Blockchain",
+      "IA Distribuida",
+      "Tonantzintla"
+    ]
+  },
   "cert-electrohack-electromovilidad": {
     "title": "Segunda Edición Electrohack: Categoría Electromovilidad",
     "issuer": "Secretaría de Economía & Agencia de Energía del Estado de Puebla",
@@ -1392,6 +1515,27 @@
       "Microelectronics",
       "Cleanroom",
       "Research"
+    ]
+  },
+  "cert-inaoe-sistemas-distribuidos": {
+    "title": "8th Autumn School on Distributed Systems and Next-Generation Networks",
+    "issuer": "National Institute of Astrophysics, Optics and Electronics (INAOE) & SyRPG Network",
+    "issuerBadge": "INAOE • SyRPG",
+    "categoryLabel": "Industry & Embedded Systems",
+    "date": "November 26–28, 2025",
+    "hours": "Specialized National School",
+    "description": "Accredited attendee participation in the 8th Autumn School on Distributed Systems and Next-Generation Networks (SyRPG) at INAOE: hands-on intensive workshops in Parallel Computing, Intelligent Transportation Systems simulation in SUMO, Complex Networks, Blockchain, and Distributed AI challenges.",
+    "signatories": "Dr. Saúl E. Pomares Hernández (General Coordinator, INAOE), Dr. Julio C. Pérez Sansalvador, M.C. Miguel A. Valencia Serrano & SyRPG Thematic Network",
+    "tags": [
+      "INAOE",
+      "Distributed Systems",
+      "SyRPG Network",
+      "Parallel Computing",
+      "SUMO Simulation",
+      "Intelligent Transportation",
+      "Blockchain",
+      "Distributed AI",
+      "Tonantzintla"
     ]
   },
   "cert-electrohack-electromovilidad": {
