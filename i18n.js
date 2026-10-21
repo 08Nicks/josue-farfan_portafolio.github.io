@@ -1398,6 +1398,26 @@
       "Innovación Universitaria"
     ]
   },
+  "cert-tech-puebla-capital-2026": {
+    "title": "Tech Puebla 2026 Capital & 2da Edición FICTI",
+    "issuer": "Tech Puebla Capital, FICTI & Gobierno del Estado de Puebla",
+    "issuerBadge": "Tech Capital • FICTI",
+    "categoryLabel": "Innovación & Hackathones",
+    "date": "2026",
+    "hours": "Acreditación Oficial de Asistente (Estudiante)",
+    "description": "Gafete oficial de participante y acreditación como estudiante en Tech Puebla Capital 2026 y la 2da Edición de la Feria de Industrias Creativas, Tecnología e Impresión (FICTI). Encuentro especializado en tecnologías emergentes, innovación industrial y vinculación con cámaras empresariales y ecosistemas tecnológicos de Puebla.",
+    "signatories": "Comité Organizador Tech Puebla Capital, FICTI, Gobierno del Estado de Puebla (Ciencia y Tecnología), CANACINTRA & COPARMEX",
+    "tags": [
+      "Tech Puebla Capital",
+      "FICTI",
+      "Innovación Tecnológica",
+      "Industrias Creativas",
+      "CANACINTRA",
+      "COPARMEX",
+      "Puebla 2026",
+      "Networking Tecnológico"
+    ]
+  },
   "cert-intel-embedded": {
     "title": "Sistemas Embebidos y su uso en plataformas de validación",
     "issuer": "Intel México",
@@ -1570,6 +1590,26 @@
       "Prototyping",
       "Energy Transition",
       "University Innovation"
+    ]
+  },
+  "cert-tech-puebla-capital-2026": {
+    "title": "Tech Puebla 2026 Capital & 2nd Edition FICTI",
+    "issuer": "Tech Puebla Capital, FICTI & Government of Puebla State",
+    "issuerBadge": "Tech Capital • FICTI",
+    "categoryLabel": "Innovation & Hackathons",
+    "date": "2026",
+    "hours": "Official Student Attendee Credential",
+    "description": "Official attendee credential and student badge at Tech Puebla Capital 2026 and the 2nd Edition of the Creative Industries, Technology and Printing Fair (FICTI). Summit focusing on emerging technologies, industrial innovation, and connection with business chambers and technology ecosystems across Puebla.",
+    "signatories": "Organizing Committee Tech Puebla Capital, FICTI, Government of Puebla State (Science & Tech), CANACINTRA & COPARMEX",
+    "tags": [
+      "Tech Puebla Capital",
+      "FICTI",
+      "Technological Innovation",
+      "Creative Industries",
+      "CANACINTRA",
+      "COPARMEX",
+      "Puebla 2026",
+      "Tech Networking"
     ]
   },
   "cert-intel-embedded": {
