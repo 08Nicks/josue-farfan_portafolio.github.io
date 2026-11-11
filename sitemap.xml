@@ -17,9 +17,21 @@
 
     <!-- Indexación de Imágenes Destacadas en Google Images -->
     <image:image>
+      <image:loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/certificados/thumbs/electrohack-kuche-2026.jpg</image:loc>
+      <image:title>Reconocimiento ElectroHack 26 Quinta Edición - Josué Farfán González (Equipo Finalista KUCHE)</image:title>
+      <image:caption>Reconocimiento oficial otorgado por la Agencia de Energía del Estado de Puebla a Josué Farfán González por su participación en ElectroHack 26 dirigiendo al equipo finalista KUCHE</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/certificados/thumbs/inaoe-escuela-sistemas-distribuidos-2026.jpg</image:loc>
+      <image:title>Constancia Oficial 8va Edición Escuela de Otoño SyRPG INAOE Octubre 2026 - Josué Farfán</image:title>
+      <image:caption>Constancia oficial de Josué Farfán González por su participación en la 8va Edición de la Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE</image:caption>
+    </image:image>
+
+    <image:image>
       <image:loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/certificados/inaoe-gafete-escuela-sistemas-distribuidos-2025.jpg</image:loc>
       <image:title>Gafete Oficial de Asistente - 8va Escuela de Otoño en Sistemas Distribuidos INAOE</image:title>
-      <image:caption>Acreditación de Josué Farfán González en la 8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE</image:caption>
+      <image:caption>Gafete oficial de Josué Farfán González en la 8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE</image:caption>
     </image:image>
 
     <image:image>

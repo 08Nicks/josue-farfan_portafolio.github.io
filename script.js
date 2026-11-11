@@ -956,6 +956,22 @@ void loop() {
 // ==========================================================================
 const certificatesData = [
   {
+    id: "cert-electrohack-kuche-2026",
+    title: "Quinta Edición ElectroHack 26 · Director de Equipo Finalista (KUCHE)",
+    issuer: "Agencia de Energía del Estado de Puebla · Secretaría de Desarrollo Económico y Trabajo",
+    issuerBadge: "ElectroHack 26",
+    category: "innovation",
+    categoryLabel: "Innovación & Hackathones",
+    date: "06 de Noviembre de 2026",
+    hours: "Equipo Finalista · Concurso Universitario",
+    description: "Reconocimiento otorgado por la Agencia de Energía del Estado de Puebla por la destacada participación en la Quinta Edición del Concurso Universitario de Innovación ElectroHack 26, dirigiendo al equipo finalista multidisciplinario KUCHE (plataforma PWA con IA YOLOv8 y dashboard GIS para monitoreo de alumbrado público).",
+    signatories: "Héctor Rodolfo Camacho Hernández (Director General de la Agencia de Energía del Estado de Puebla)",
+    fileUrl: "certificados/electrohack-kuche-2026.pdf",
+    previewUrl: "certificados/thumbs/electrohack-kuche-2026.jpg",
+    mediaType: "pdf",
+    tags: ["ElectroHack 26", "Equipo Finalista", "KUCHE", "Dirección de Proyecto", "Innovación Universitaria", "Agencia de Energía Puebla"]
+  },
+  {
     id: "cert-cadence-virtuoso",
     title: "Virtuoso Schematic Editor S1: Creating Design Schematics vIC25.1",
     issuer: "Cadence Design Systems",
@@ -1014,12 +1030,13 @@ const certificatesData = [
     hours: "Constancia Oficial de Participación",
     description: "Constancia oficial otorgada por la Red Temática en Sistemas y Redes de Próxima Generación (SyRPG) por participación en la 8va. Edición de la Escuela de Otoño en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain e Inteligencia Artificial Distribuida.",
     signatories: "Dr. Saúl Eduardo Pomares Hernández (Coordinador de la Red Temática SyRPG) · Secretaría de Ciencia, Humanidades, Tecnología e Innovación (SECIHTI) & INAOE",
-    fileUrl: "certificados/inaoe-escuela-sistemas-distribuidos-2025.pdf",
-    previewUrl: "certificados/thumbs/inaoe-escuela-sistemas-distribuidos-2025.jpg",
+    fileUrl: "certificados/inaoe-escuela-sistemas-distribuidos-2026.pdf",
+    previewUrl: "certificados/thumbs/inaoe-escuela-sistemas-distribuidos-2026.jpg",
     mediaType: "pdf",
     secondaryMedia: [
-      "inaoe_camara_schmidt_tonantzintla.jpg",
-      "inaoe_sumo_traffic_simulation.jpg"
+      { url: "certificados/inaoe-gafete-escuela-sistemas-distribuidos-2025.jpg", caption: "Gafete Oficial de Asistente" },
+      { url: "inaoe_camara_schmidt_tonantzintla.jpg", caption: "Cámara Schmidt del OANTON • INAOE" },
+      { url: "inaoe_sumo_traffic_simulation.jpg", caption: "Simulación de Tráfico en SUMO (Taller INAOE)" }
     ],
     tags: ["INAOE", "Sistemas Distribuidos", "Red SyRPG", "SECIHTI", "Cómputo Paralelo", "Simulación SUMO", "Transporte Inteligente", "Blockchain", "IA Distribuida", "Tonantzintla"]
   },
@@ -1645,10 +1662,10 @@ class PortfolioView {
     if (this.modalGalleryStrip) {
       if (cert.secondaryMedia && cert.secondaryMedia.length > 0) {
         const allMedia = [
-          { url: cert.previewUrl, caption: "Gafete Oficial de Asistente" },
+          { url: cert.previewUrl, caption: "Constancia Oficial" },
           ...cert.secondaryMedia.map((m, i) => ({
             url: typeof m === "string" ? m : m.url,
-            caption: i === 0 ? "Cámara Schmidt del OANTON • INAOE" : "Simulación de Tráfico en SUMO (Taller INAOE)"
+            caption: (typeof m === "object" && m.caption) ? m.caption : (i === 0 ? "Cámara Schmidt del OANTON • INAOE" : "Simulación de Tráfico en SUMO (Taller INAOE)")
           }))
         ];
         this.modalGalleryStrip.style.display = "flex";

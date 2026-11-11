@@ -2,7 +2,7 @@
  * ==============================================================================
  * INTERNATIONALIZATION (i18n) ENGINE - JOSUÉ FARFÁN GONZÁLEZ PORTFOLIO
  * Automatic Regional Language Detection (ES/EN) + Persistent Toggle Switch
- * Full Spanish and English dictionaries for UI, 23 Projects, and 11 Certificates.
+ * Full Spanish and English dictionaries for UI, 23 Projects, and 12 Certificates.
  * ==============================================================================
  */
 
@@ -1366,6 +1366,24 @@
   }
 };
   const CERTS_ES = {
+  "cert-electrohack-kuche-2026": {
+    "title": "Quinta Edición ElectroHack 26 · Director de Equipo Finalista (KUCHE)",
+    "issuer": "Agencia de Energía del Estado de Puebla · Secretaría de Desarrollo Económico y Trabajo",
+    "issuerBadge": "ElectroHack 26",
+    "categoryLabel": "Innovación & Hackathones",
+    "date": "06 de Noviembre de 2026",
+    "hours": "Equipo Finalista · Concurso Universitario",
+    "description": "Reconocimiento otorgado por la Agencia de Energía del Estado de Puebla por la destacada participación en la Quinta Edición del Concurso Universitario de Innovación ElectroHack 26, dirigiendo al equipo finalista multidisciplinario KUCHE (plataforma PWA con IA YOLOv8 y dashboard GIS para monitoreo de alumbrado público).",
+    "signatories": "Héctor Rodolfo Camacho Hernández (Director General de la Agencia de Energía del Estado de Puebla)",
+    "tags": [
+      "ElectroHack 26",
+      "Equipo Finalista",
+      "KUCHE",
+      "Dirección de Proyecto",
+      "Innovación Universitaria",
+      "Agencia de Energía Puebla"
+    ]
+  },
   "cert-cadence-virtuoso": {
     "title": "Virtuoso Schematic Editor S1: Creating Design Schematics vIC25.1",
     "issuer": "Cadence Design Systems",
@@ -1561,6 +1579,24 @@
   }
 };
   const CERTS_EN = {
+  "cert-electrohack-kuche-2026": {
+    "title": "ElectroHack 26 (5th Edition) · Finalist Team Director (KUCHE)",
+    "issuer": "Puebla State Energy Agency · Ministry of Economic Development and Labor",
+    "issuerBadge": "ElectroHack 26",
+    "categoryLabel": "Innovation & Hackathons",
+    "date": "November 6, 2026",
+    "hours": "Finalist Team · University Contest",
+    "description": "Recognition awarded by the Puebla State Energy Agency for outstanding participation in the 5th Edition of the ElectroHack 26 University Innovation Contest, directing the multidisciplinary finalist team KUCHE (PWA platform with YOLOv8 AI and GIS dashboard for public streetlight monitoring).",
+    "signatories": "Héctor Rodolfo Camacho Hernández (General Director, Puebla State Energy Agency)",
+    "tags": [
+      "ElectroHack 26",
+      "Finalist Team",
+      "KUCHE",
+      "Project Leadership",
+      "University Innovation",
+      "Puebla Energy Agency"
+    ]
+  },
   "cert-cadence-virtuoso": {
     "title": "Virtuoso Schematic Editor S1: Creating Design Schematics vIC25.1",
     "issuer": "Cadence Design Systems",
