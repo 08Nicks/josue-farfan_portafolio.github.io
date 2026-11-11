@@ -1168,8 +1168,16 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-subtle);
+}
+
+.card-actions-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 
 .btn-details {
@@ -1188,6 +1196,27 @@ body::before {
 
 .btn-details:hover {
   gap: 10px;
+  color: var(--text-white);
+}
+
+.card-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  color: var(--accent-cyan);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.card-ext-link:hover {
+  background: rgba(0, 242, 254, 0.16);
+  border-color: var(--accent-cyan);
   color: var(--text-white);
 }
 
@@ -2845,11 +2874,23 @@ body::before {
     align-items: stretch;
     gap: 0.65rem;
   }
+  .card-actions-left {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
   .btn-details {
     width: 100%;
     justify-content: center;
     padding: 10px 18px;
     font-size: 0.88rem;
+  }
+  .card-ext-link {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 14px;
+    font-size: 0.82rem;
   }
   .evidence-badge {
     justify-content: center;

@@ -6,7 +6,7 @@
   <!-- Página Principal / Main Portfolio Landing -->
   <url>
     <loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     
@@ -47,9 +47,21 @@
     </image:image>
 
     <image:image>
+      <image:loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/assets/kuche/kuche_dashboard_gis.png</image:loc>
+      <image:title>KUCHE Dashboard Municipal GIS - Equipo Finalista ElectroHack 26</image:title>
+      <image:caption>Plataforma de monitoreo de alumbrado publico con IA (YOLOv8) y despacho GIS de cuadrillas dirigida por Josue Farfan Gonzalez en ElectroHack 26</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/assets/kuche/kuche_demo_yolov8.jpg</image:loc>
+      <image:title>KUCHE Deteccion de Luminarias con YOLOv8 en Tiempo Real</image:title>
+      <image:caption>Inferencia de vision artificial en PWA para clasificacion y deteccion de fallas en alumbrado publico</image:caption>
+    </image:image>
+
+    <image:image>
       <image:loc>https://08nicks.github.io/josue-farfan_portafolio.github.io/WhatsApp%20Image%202026-09-22%20at%204.38.59%20PM.jpeg</image:loc>
       <image:title>Josué Farfán González en Sala Limpia de Semiconductores con Oblea de Silicio</image:title>
-      <image:caption>Josué Farfán González - Estudiante de Licenciatura en Electrónica BUAP y Estancia de Investigación en INAOE</image:caption>
+      <image:caption>Josué Farfán González - Licenciado en Electrónica Titulado BUAP y Estancia de Investigación en INAOE</image:caption>
     </image:image>
 
     <image:image>

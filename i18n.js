@@ -2,7 +2,7 @@
  * ==============================================================================
  * INTERNATIONALIZATION (i18n) ENGINE - JOSUÉ FARFÁN GONZÁLEZ PORTFOLIO
  * Automatic Regional Language Detection (ES/EN) + Persistent Toggle Switch
- * Full Spanish and English dictionaries for UI, 22 Projects, and 10 Certificates.
+ * Full Spanish and English dictionaries for UI, 23 Projects, and 11 Certificates.
  * ==============================================================================
  */
 
@@ -22,7 +22,7 @@
     "nav_trayectoria": "Trayectoria",
     "nav_instrumentacion": "Instrumentación",
     "nav_contacto": "Contacto",
-    "hero_badge": "Estudiante de Electrónica (BUAP) • Estancia en INAOE",
+    "hero_badge": "Licenciado en Electrónica (BUAP) • Estancia en INAOE",
     "hero_motto": "Forging the Digital Reality",
     "hero_title": "De una idea <span class=\"gradient-text\">a la realidad</span>",
     "hero_desc": "¡Hola! Soy <strong>Josué Farfán González</strong>, alguien curioso y apasionado por cómo funcionan las cosas, con determinación y ganas de mejorar siempre, explorando cómo se mueven las personas, las cosas y todo lo que nos rodea.",
@@ -51,6 +51,7 @@
     "no_projects_sub": "Intenta con otra palabra clave como \"ESP32\", \"FPGA\", \"Tiristor\", \"Cadence\" o \"Antena\".",
     "btn_reset_filters": "Restablecer filtros",
     "card_view_details": "Ver Ficha Técnica",
+    "card_live_site": "Ver Web ↗",
     "card_media_video": "Video Demostrativo",
     "card_media_photos": "{0} Fotos",
     "card_media_evidence": "Evidencia",
@@ -85,18 +86,20 @@
     "about_tag": "Conóceme Más",
     "about_caption": "Josué Farfán González • Estancia en Sala Limpia & Obleas de Silicio",
     "about_lead": "Curiosidad por entender cómo funciona el mundo, gusto por ensuciarme las manos con hardware y muchas horas disfrutando el laboratorio.",
-    "about_p1": "Siempre he creído que la mejor manera de aprender electrónica no es quedándose solo en la teoría, sino atreviéndose a armar el circuito, medirlo y entender por qué no funcionó a la primera hasta que quede perfecto. Estoy en mi último semestre de la <strong>Licenciatura en Electrónica en la BUAP</strong> y viví una etapa clave durante mi <strong>estancia de investigación en el INAOE</strong>, donde aprendí de cerca la rigurosidad científica, el trabajo en salas limpias y el manejo de instrumentación avanzada.",
-    "about_p2": "No pretendo presentarme como un experto que se las sabe todas; me considero un estudiante apasionado, disciplinado y con muchas ganas de seguir aprendiendo de personas con más experiencia. Cada proyecto en esta página representa desvelos, dudas resueltas, notas de laboratorio y la satisfacción genuina de ver un diseño funcionar en la vida real.",
+    "about_p1": "Siempre he creído que la mejor manera de aprender electrónica no es quedándose solo en la teoría, sino atreviéndose a armar el circuito, medirlo y entender por qué no funcionó a la primera hasta que quede perfecto. Soy <strong>Licenciado en Electrónica titulado por la BUAP</strong> y viví una etapa clave durante mi <strong>estancia de investigación en el INAOE</strong>, donde aprendí de cerca la rigurosidad científica, el trabajo en salas limpias y el manejo de instrumentación avanzada.",
+    "about_p2": "No pretendo presentarme como un experto que se las sabe todas; me considero un profesional apasionado, disciplinado y con muchas ganas de seguir aprendiendo de personas con más experiencia. Cada proyecto en esta página representa desvelos, dudas resueltas, notas de laboratorio y la satisfacción genuina de ver un diseño funcionar en la vida real.",
     "timeline_1_title": "Estancia de Investigación • INAOE",
     "timeline_1_desc": "Una experiencia formativa invaluable en el INAOE, colaborando con investigadores en instrumentación, pruebas de laboratorio y primeros acercamientos a entornos de cuarto limpio.",
-    "timeline_2_title": "Último Semestre de Electrónica • BUAP",
-    "timeline_2_desc": "Facultad de Ciencias de la Electrónica. Fortaleciendo bases en circuitos analógicos, diseño digital en FPGAs, electrónica de potencia y programación de sistemas embebidos.",
+    "timeline_2_title": "Licenciado en Electrónica (Titulado) • BUAP",
+    "timeline_2_desc": "Facultad de Ciencias de la Electrónica. Formación y titulación con sólidas bases en circuitos analógicos, diseño digital en FPGAs, electrónica de potencia y programación de sistemas embebidos.",
     "timeline_3_title": "Laboratorio & Sala Limpia",
     "timeline_3_desc": "Práctica formativa conociendo el proceso de fotolitografía en obleas de silicio y exploración introductoria del flujo de diseño VLSI con Cadence.",
     "timeline_4_title": "Comunidad Estudiantil • IEEE Sección Puebla",
     "timeline_4_desc": "<strong>Miembro Estudiantil IEEE (Sección Puebla)</strong>. Me motiva conectar con la comunidad tecnológica, asistir a conferencias y aprender constantemente de los avances en el área.",
     "timeline_kutsari_title": "Taller Electro Tlalli • Kutsari (Cholula)",
     "timeline_kutsari_desc": "Creación y trazado físico de layers para circuitos integrados mediante herramientas de silicio y diseño microelectrónico.",
+    "timeline_electrohack26_title": "ElectroHack 26 (5ta Edición) • Director de Equipo Finalista (KUCHE)",
+    "timeline_electrohack26_desc": "Participación en la Quinta Edición del Concurso Universitario de Innovación <strong>ElectroHack 26</strong> (Agencia de Energía del Estado de Puebla), dirigiendo como Director de Proyecto y Arquitecto de Software al equipo finalista multidisciplinario <strong>KUCHE</strong> (BUAP & UTP, con mentoría del INAOE).",
     "pcb_layer_tag": "CONCEPT ART // IDENTIDAD VISUAL",
     "pcb_rev_tag": "BANNER DE LINKEDIN",
     "pcb_btn_hw": "Banner Estilo PCB",
@@ -133,6 +136,7 @@
     "modal_copy_code": "Copiar Código",
     "modal_copied": "¡Copiado!",
     "modal_download": "Descargar",
+    "modal_visit_project": "Visitar Sitio del Proyecto",
     "modal_view_below": "Ver Abajo",
     "modal_view_side": "Ver Lado a Lado",
     "modal_lines_count": "{0} líneas",
@@ -161,7 +165,7 @@
     "nav_trayectoria": "Journey",
     "nav_instrumentacion": "Instrumentation",
     "nav_contacto": "Contact",
-    "hero_badge": "Electronics Engineering Senior (BUAP) • Research at INAOE",
+    "hero_badge": "B.S. in Electronics Graduate (BUAP) • Research at INAOE",
     "hero_motto": "Forging the Digital Reality",
     "hero_title": "From an idea <span class=\"gradient-text\">to reality</span>",
     "hero_desc": "Hello! I am <strong>Josué Farfán González</strong>, curious and deeply passionate about how things work, driven by determination to constantly improve and understand how people, things, and the world around us move.",
@@ -190,6 +194,7 @@
     "no_projects_sub": "Try searching another keyword such as \"ESP32\", \"FPGA\", \"Thyristor\", \"Cadence\", or \"Antenna\".",
     "btn_reset_filters": "Reset filters",
     "card_view_details": "View Technical Sheet",
+    "card_live_site": "Live Site ↗",
     "card_media_video": "Demo Video",
     "card_media_photos": "{0} Photos",
     "card_media_evidence": "Evidence",
@@ -224,18 +229,20 @@
     "about_tag": "About Me",
     "about_caption": "Josué Farfán González • Cleanroom Research & Silicon Wafers",
     "about_lead": "Driven by curiosity to uncover how physical technology works, a passion for hands-on hardware prototyping, and countless hours in the lab.",
-    "about_p1": "I have always believed that the true way to master electronics is not merely staying inside theoretical textbooks, but having the initiative to build circuits, take measurements, and troubleshoot why they didn't work on the first try until they run reliably. I am in the final semester of my <strong>B.S. in Electronics Sciences at BUAP</strong> and experienced a pivotal chapter during my <strong>research stay at INAOE</strong>, where I experienced first-hand scientific rigor, cleanroom microfabrication, and advanced bench instrumentation.",
+    "about_p1": "I have always believed that the true way to master electronics is not merely staying inside theoretical textbooks, but having the initiative to build circuits, take measurements, and troubleshoot why they didn't work on the first try until they run reliably. I hold a <strong>B.S. in Electronics from BUAP</strong> (graduated) and experienced a pivotal chapter during my <strong>research stay at INAOE</strong>, where I experienced first-hand scientific rigor, cleanroom microfabrication, and advanced bench instrumentation.",
     "about_p2": "I do not claim to know everything; I consider myself a passionate, disciplined engineer eager to learn from experienced mentors. Every project in this portfolio represents late nights, solved technical challenges, laboratory notebooks, and the genuine thrill of bringing physical hardware designs to life.",
     "timeline_1_title": "Research Stay • INAOE",
     "timeline_1_desc": "An invaluable research experience at INAOE, collaborating with researchers on laboratory instrumentation, characterization, and cleanroom environments.",
-    "timeline_2_title": "Senior Year in Electronics • BUAP",
-    "timeline_2_desc": "Faculty of Electronics Sciences. Strengthening core foundations in analog integrated circuits, FPGA digital design, power electronics, and embedded firmware.",
+    "timeline_2_title": "B.S. in Electronics (Graduated) • BUAP",
+    "timeline_2_desc": "Faculty of Electronics Sciences. Graduated with strong foundations in analog integrated circuits, FPGA digital design, power electronics, and embedded firmware.",
     "timeline_3_title": "Hardware Lab & Cleanroom",
     "timeline_3_desc": "Hands-on training in silicon wafer photolithography processes and foundational VLSI design methodology using Cadence Virtuoso.",
     "timeline_4_title": "Student Community • IEEE Puebla Section",
     "timeline_4_desc": "<strong>IEEE Student Member (Puebla Section)</strong>. Passionate about connecting with the global engineering community, attending technical conferences, and staying updated with emerging hardware advancements.",
     "timeline_kutsari_title": "Electro Tlalli Workshop • Kutsari (Cholula)",
     "timeline_kutsari_desc": "Physical layer creation and drafting for integrated circuits using silicon microelectronic design tools.",
+    "timeline_electrohack26_title": "ElectroHack 26 (5th Edition) • Finalist Team Director (KUCHE)",
+    "timeline_electrohack26_desc": "Participated in the 5th Edition of the <strong>ElectroHack 26</strong> University Innovation Contest (Puebla State Energy Agency), leading the multidisciplinary finalist team <strong>KUCHE</strong> (BUAP & UTP, mentored by INAOE) as Project Director and Software Architect.",
     "pcb_layer_tag": "CONCEPT ART // VISUAL IDENTITY",
     "pcb_rev_tag": "LINKEDIN BANNER",
     "pcb_btn_hw": "PCB Style Banner",
@@ -272,6 +279,7 @@
     "modal_copy_code": "Copy Code",
     "modal_copied": "Copied!",
     "modal_download": "Download",
+    "modal_visit_project": "Visit Project Website",
     "modal_view_below": "View Below",
     "modal_view_side": "View Side by Side",
     "modal_lines_count": "{0} lines",
@@ -546,6 +554,39 @@
       "Conector SMA Edge-Mount",
       "Grabado Químico FeCl3",
       "MATLAB"
+    ]
+  },
+  "kuche-alumbrado-publico-ia-electrohack26": {
+    "title": "KUCHE · Plataforma de Monitoreo de Alumbrado Público con IA (Finalista ElectroHack 26)",
+    "categoryLabel": "IA & Visión Artificial",
+    "tag": "Finalista ElectroHack 26",
+    "institution": "ElectroHack 26 (5ta Edición) · BUAP / UTP / INAOE",
+    "externalLabel": "Visitar Sitio del Proyecto KUCHE",
+    "team": [
+      "Josué Farfán González (Director de Proyecto & Arquitecto de Software — BUAP)",
+      "Keyla Zoe Hernández Fortis (Desarrollo Full-Stack — BUAP)",
+      "Magali Trujillo Tobón (Inteligencia de Negocios & Viabilidad Financiera — BUAP)",
+      "Styveen Emiliano Rizo Hernández (Diseño UI/UX & Prototipado — UTP)",
+      "Dr. Alfredo Benítez Lara (Asesor Científico & Mentor Metodológico — INAOE)"
+    ],
+    "shortDesc": "Dirección de proyecto y arquitectura de software del equipo finalista KUCHE en ElectroHack 26: plataforma PWA + visión artificial (YOLOv8) y dashboard GIS para monitoreo de alumbrado público y erradicación de consumo parásito.",
+    "whatIs": "KUCHE (vocablo Ngiigua/Popoloca de San Marcos Tlacoyalco que significa 'piojo', en analogía a erradicar el consumo parásito) es una plataforma inteligente de participación ciudadana y monitoreo de alumbrado público desarrollada para la Quinta Edición del Concurso Universitario de Innovación ElectroHack 26 (Agencia de Energía del Estado de Puebla), donde lideré al equipo finalista multidisciplinario BUAP–UTP con mentoría científica del INAOE. Combina una Progressive Web App (PWA) accesible sin descargas mediante código QR, inferencia de visión artificial con YOLOv8, trazabilidad ciudadana con CURP cifrada y un centro de mando geoespacial GIS para cuadrillas municipales, validado en polígono piloto en San Pedro Cholula (11,781 luminarias) y diseñado con arquitectura multi-tenant escalable a los 217 municipios de Puebla.",
+    "whatIDid": "Desempeñé el rol de Director de Proyecto y Arquitecto de Software coordinando al equipo multidisciplinario de ingeniería, diseño UI/UX y viabilidad financiera entre la BUAP, la UTP y asesoría del INAOE hasta alcanzar la etapa finalista de ElectroHack 26. Definí la arquitectura modular (PWA sin fricción de instalación, motor de visión computacional YOLOv8 con generación de cédula técnica en < 2s y difuminado automático de rostros y placas conforme a LGPDPPSO/LPDPPSOEP, colas asíncronas Redis/Pub-Sub y dashboard municipal GIS en Leaflet para despacho de cuadrillas K-01). El sistema audita fallas críticas y luminarias encendidas de día por fotoceldas dañadas (consumo parásito) bajo cumplimiento normativo NOM-013-ENER-2013 y NOM-031-ENER-2019.",
+    "highlights": [
+      "Equipo finalista en la Quinta Edición de ElectroHack 26 (Agencia de Energía del Estado de Puebla), bajo dirección de proyecto y arquitectura de software",
+      "Detección automatizada con YOLOv8 para identificar tipo de luminaria (vapor de sodio/LED), fallas y consumo parásito diurno con difuminado automático de rostros y placas",
+      "Acceso ciudadano inmediato mediante PWA web (cero descargas vía QR) con autenticación y trazabilidad de folios por CURP cifrada",
+      "Dashboard GIS municipal en Leaflet con enrutamiento de cuadrillas, geocercas y escalabilidad cloud multi-tenant para los 217 municipios de Puebla (piloto en San Pedro Cholula)"
+    ],
+    "tags": [
+      "KUCHE",
+      "ElectroHack 26",
+      "Equipo Finalista",
+      "YOLOv8",
+      "Visión Artificial",
+      "PWA",
+      "GIS / Leaflet",
+      "Dirección de Proyecto"
     ]
   },
   "ai-vision-detection": {
@@ -1044,6 +1085,39 @@
       "Microwaves"
     ]
   },
+  "kuche-alumbrado-publico-ia-electrohack26": {
+    "title": "KUCHE · AI Public Streetlight Monitoring Platform (ElectroHack 26 Finalist)",
+    "categoryLabel": "AI & Computer Vision",
+    "tag": "ElectroHack 26 Finalist",
+    "institution": "ElectroHack 26 (5th Edition) · BUAP / UTP / INAOE",
+    "externalLabel": "Visit KUCHE Project Website",
+    "team": [
+      "Josué Farfán González (Project Director & Software Architect — BUAP)",
+      "Keyla Zoe Hernández Fortis (Full-Stack Developer — BUAP)",
+      "Magali Trujillo Tobón (Business Intelligence & Financial Viability — BUAP)",
+      "Styveen Emiliano Rizo Hernández (UI/UX Design & Prototyping — UTP)",
+      "Dr. Alfredo Benítez Lara (Scientific Advisor & Methodological Mentor — INAOE)"
+    ],
+    "shortDesc": "Project direction and software architecture for ElectroHack 26 finalist team KUCHE: zero-download PWA + YOLOv8 computer vision and GIS dashboard for public streetlight monitoring and parasitic power elimination.",
+    "whatIs": "KUCHE (from the Ngiigua/Popoloca language meaning 'louse' / parasite, reflecting the goal of eradicating parasitic energy waste) is a smart citizen-reporting and public streetlight monitoring platform built for the 5th Edition of the ElectroHack 26 University Innovation Contest (Puebla State Energy Agency), where I led the multidisciplinary BUAP–UTP finalist team with scientific mentorship from INAOE. It combines a zero-download Progressive Web App (PWA) accessed via QR codes, YOLOv8 computer vision inference, encrypted CURP civic traceability, and a Leaflet GIS command dashboard for municipal crews, validated on a San Pedro Cholula pilot polygon (11,781 streetlights) and designed with multi-tenant cloud architecture scalable to all 217 municipalities of Puebla.",
+    "whatIDid": "Served as Project Director and Software Architect leading the multidisciplinary engineering, UI/UX design, and business viability team across BUAP, UTP, and INAOE mentorship to reach the ElectroHack 26 finals. Architected the modular platform: zero-install web PWA, YOLOv8 inference engine generating technical tickets in < 2s with automated face and license-plate blurring (LGPDPPSO/LPDPPSOEP compliance), Redis/Pub-Sub async queues, and a Leaflet GIS municipal crew dispatch dashboard. The platform audits critical failures and daytime parasitic consumption from faulty photocells under NOM-013-ENER-2013 and NOM-031-ENER-2019 standards.",
+    "highlights": [
+      "Finalist team at the 5th Edition of ElectroHack 26 (Puebla State Energy Agency), under my project direction and software architecture",
+      "YOLOv8 computer vision pipeline identifying fixture type (HPS/LED), failures, and daytime parasitic loads with automated face/plate blurring",
+      "Zero-download citizen reporting PWA (QR or link) with encrypted CURP authentication and real-time ticket tracking",
+      "Municipal Leaflet GIS dispatch dashboard with crew routing, geofencing, and multi-tenant cloud scalability for Puebla's 217 municipalities"
+    ],
+    "tags": [
+      "KUCHE",
+      "ElectroHack 26",
+      "Finalist Team",
+      "YOLOv8",
+      "Computer Vision",
+      "PWA",
+      "GIS / Leaflet",
+      "Project Leadership"
+    ]
+  },
   "ai-vision-detection": {
     "title": "Computer Vision Pipeline & Multi-Object Neural Detection",
     "categoryLabel": "AI & Computer Vision",
@@ -1344,18 +1418,19 @@
     ]
   },
   "cert-inaoe-sistemas-distribuidos": {
-    "title": "8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación",
-    "issuer": "Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE) & Red Temática SyRPG",
+    "title": "8va. Edición de la Escuela de Otoño de Sistemas Distribuidos y Redes de Próxima Generación",
+    "issuer": "Red Temática en Sistemas y Redes de Próxima Generación (SyRPG) & INAOE · SECIHTI",
     "issuerBadge": "INAOE • SyRPG",
     "categoryLabel": "Industria & Sistemas Embebidos",
-    "date": "26 al 28 de Noviembre de 2025",
-    "hours": "Escuela Nacional Especializada",
-    "description": "Participación oficial acreditada en la 8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain y retos de Inteligencia Artificial Distribuida.",
-    "signatories": "Dr. Saúl E. Pomares Hernández (Coordinador General, INAOE), Dr. Julio C. Pérez Sansalvador, M.C. Miguel A. Valencia Serrano & Red Temática SyRPG",
+    "date": "13 al 15 de Octubre de 2026",
+    "hours": "Constancia Oficial de Participación",
+    "description": "Constancia oficial otorgada por la Red Temática en Sistemas y Redes de Próxima Generación (SyRPG) por participación en la 8va. Edición de la Escuela de Otoño en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain e Inteligencia Artificial Distribuida.",
+    "signatories": "Dr. Saúl Eduardo Pomares Hernández (Coordinador de la Red Temática SyRPG) · Secretaría de Ciencia, Humanidades, Tecnología e Innovación (SECIHTI) & INAOE",
     "tags": [
       "INAOE",
       "Sistemas Distribuidos",
       "Red SyRPG",
+      "SECIHTI",
       "Cómputo Paralelo",
       "Simulación SUMO",
       "Transporte Inteligente",
@@ -1539,17 +1614,18 @@
   },
   "cert-inaoe-sistemas-distribuidos": {
     "title": "8th Autumn School on Distributed Systems and Next-Generation Networks",
-    "issuer": "National Institute of Astrophysics, Optics and Electronics (INAOE) & SyRPG Network",
+    "issuer": "Thematic Network on Distributed Systems and Next-Generation Networks (SyRPG) & INAOE · SECIHTI",
     "issuerBadge": "INAOE • SyRPG",
     "categoryLabel": "Industry & Embedded Systems",
-    "date": "November 26–28, 2025",
-    "hours": "Specialized National School",
-    "description": "Accredited attendee participation in the 8th Autumn School on Distributed Systems and Next-Generation Networks (SyRPG) at INAOE: hands-on intensive workshops in Parallel Computing, Intelligent Transportation Systems simulation in SUMO, Complex Networks, Blockchain, and Distributed AI challenges.",
-    "signatories": "Dr. Saúl E. Pomares Hernández (General Coordinator, INAOE), Dr. Julio C. Pérez Sansalvador, M.C. Miguel A. Valencia Serrano & SyRPG Thematic Network",
+    "date": "October 13–15, 2026",
+    "hours": "Official Certificate of Participation",
+    "description": "Official certificate awarded by the SyRPG Thematic Network for participating in the 8th Edition of the Autumn School at INAOE: intensive workshops in Parallel Computing, Intelligent Transportation Systems simulation in SUMO, Complex Networks, Blockchain, and Distributed AI.",
+    "signatories": "Dr. Saúl Eduardo Pomares Hernández (Coordinator, SyRPG Thematic Network) · SECIHTI & INAOE",
     "tags": [
       "INAOE",
       "Distributed Systems",
       "SyRPG Network",
+      "SECIHTI",
       "Parallel Computing",
       "SUMO Simulation",
       "Intelligent Transportation",

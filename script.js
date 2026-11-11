@@ -575,6 +575,49 @@ fprintf('Punto optimo de alimentacion desde el borde (X0): %.4f mm\\n', X0 * 100
     ]
   },
   {
+    id: "kuche-alumbrado-publico-ia-electrohack26",
+    title: "KUCHE · Plataforma de Monitoreo de Alumbrado Público con IA (Finalista ElectroHack 26)",
+    category: "ai",
+    categoryLabel: "IA & Visión Artificial",
+    tag: "Finalista ElectroHack 26",
+    institution: "ElectroHack 26 (5ta Edición) · BUAP / UTP / INAOE",
+    team: [
+      "Josué Farfán González (Director de Proyecto & Arquitecto de Software — BUAP)",
+      "Keyla Zoe Hernández Fortis (Desarrollo Full-Stack — BUAP)",
+      "Magali Trujillo Tobón (Inteligencia de Negocios & Viabilidad Financiera — BUAP)",
+      "Styveen Emiliano Rizo Hernández (Diseño UI/UX & Prototipado — UTP)",
+      "Dr. Alfredo Benítez Lara (Asesor Científico & Mentor Metodológico — INAOE)"
+    ],
+    externalUrl: "https://08nicks.github.io/dise-o_kuche/landing.html#inicio",
+    externalLabel: "Visitar Sitio del Proyecto KUCHE",
+    mediaType: "image",
+    mediaUrl: "assets/kuche/kuche_dashboard_gis.png",
+    secondaryMedia: [
+      "assets/kuche/kuche_demo_yolov8.jpg",
+      "assets/kuche/kuche_login_curp.jpg",
+      "assets/kuche/kuche_consumo_parasito.jpg"
+    ],
+    tags: [
+      "KUCHE",
+      "ElectroHack 26",
+      "Equipo Finalista",
+      "YOLOv8",
+      "Visión Artificial",
+      "PWA",
+      "GIS / Leaflet",
+      "Dirección de Proyecto"
+    ],
+    shortDesc: "Dirección de proyecto y arquitectura de software del equipo finalista KUCHE en ElectroHack 26: plataforma PWA + visión artificial (YOLOv8) y dashboard GIS para monitoreo de alumbrado público y erradicación de consumo parásito.",
+    whatIs: "KUCHE (vocablo Ngiigua/Popoloca de San Marcos Tlacoyalco que significa 'piojo', en analogía a erradicar el consumo parásito) es una plataforma inteligente de participación ciudadana y monitoreo de alumbrado público desarrollada para la Quinta Edición del Concurso Universitario de Innovación ElectroHack 26 (Agencia de Energía del Estado de Puebla), donde lideré al equipo finalista multidisciplinario BUAP–UTP con mentoría científica del INAOE. Combina una Progressive Web App (PWA) accesible sin descargas mediante código QR, inferencia de visión artificial con YOLOv8, trazabilidad ciudadana con CURP cifrada y un centro de mando geoespacial GIS para cuadrillas municipales, validado en polígono piloto en San Pedro Cholula (11,781 luminarias) y diseñado con arquitectura multi-tenant escalable a los 217 municipios de Puebla.",
+    whatIDid: "Desempeñé el rol de Director de Proyecto y Arquitecto de Software coordinando al equipo multidisciplinario de ingeniería, diseño UI/UX y viabilidad financiera entre la BUAP, la UTP y asesoría del INAOE hasta alcanzar la etapa finalista de ElectroHack 26. Definí la arquitectura modular (PWA sin fricción de instalación, motor de visión computacional YOLOv8 con generación de cédula técnica en < 2s y difuminado automático de rostros y placas conforme a LGPDPPSO/LPDPPSOEP, colas asíncronas Redis/Pub-Sub y dashboard municipal GIS en Leaflet para despacho de cuadrillas K-01). El sistema audita fallas críticas y luminarias encendidas de día por fotoceldas dañadas (consumo parásito) bajo cumplimiento normativo NOM-013-ENER-2013 y NOM-031-ENER-2019.",
+    highlights: [
+      "Equipo finalista en la Quinta Edición de ElectroHack 26 (Agencia de Energía del Estado de Puebla), bajo dirección de proyecto y arquitectura de software",
+      "Detección automatizada con YOLOv8 para identificar tipo de luminaria (vapor de sodio/LED), fallas y consumo parásito diurno con difuminado automático de rostros y placas",
+      "Acceso ciudadano inmediato mediante PWA web (cero descargas vía QR) con autenticación y trazabilidad de folios por CURP cifrada",
+      "Dashboard GIS municipal en Leaflet con enrutamiento de cuadrillas, geocercas y escalabilidad cloud multi-tenant para los 217 municipios de Puebla (piloto en San Pedro Cholula)"
+    ]
+  },
+  {
     id: "ai-vision-detection",
     title: "Pipeline de Visión por Computadora & Detección de Patrones con IA",
     category: "ai",
@@ -962,15 +1005,15 @@ const certificatesData = [
   },
   {
     id: "cert-inaoe-sistemas-distribuidos",
-    title: "8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación",
-    issuer: "Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE) & Red Temática SyRPG",
+    title: "8va. Edición de la Escuela de Otoño de Sistemas Distribuidos y Redes de Próxima Generación",
+    issuer: "Red Temática en Sistemas y Redes de Próxima Generación (SyRPG) & INAOE · SECIHTI",
     issuerBadge: "INAOE • SyRPG",
     category: "tech",
     categoryLabel: "Industria & Sistemas Embebidos",
-    date: "26 al 28 de Noviembre de 2025",
-    hours: "Escuela Nacional Especializada",
-    description: "Participación oficial acreditada en la 8va Escuela de Otoño en Sistemas Distribuidos y Redes de Próxima Generación (SyRPG) en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain y retos de Inteligencia Artificial Distribuida.",
-    signatories: "Dr. Saúl E. Pomares Hernández (Coordinador General, INAOE), Dr. Julio C. Pérez Sansalvador, M.C. Miguel A. Valencia Serrano & Red Temática SyRPG",
+    date: "13 al 15 de Octubre de 2026",
+    hours: "Constancia Oficial de Participación",
+    description: "Constancia oficial otorgada por la Red Temática en Sistemas y Redes de Próxima Generación (SyRPG) por participación en la 8va. Edición de la Escuela de Otoño en el INAOE: talleres intensivos de Cómputo Paralelo, Simulación de Sistemas Inteligentes de Transporte en SUMO, Redes Complejas, Blockchain e Inteligencia Artificial Distribuida.",
+    signatories: "Dr. Saúl Eduardo Pomares Hernández (Coordinador de la Red Temática SyRPG) · Secretaría de Ciencia, Humanidades, Tecnología e Innovación (SECIHTI) & INAOE",
     fileUrl: "certificados/inaoe-escuela-sistemas-distribuidos-2025.pdf",
     previewUrl: "certificados/thumbs/inaoe-escuela-sistemas-distribuidos-2025.jpg",
     mediaType: "pdf",
@@ -978,7 +1021,7 @@ const certificatesData = [
       "inaoe_camara_schmidt_tonantzintla.jpg",
       "inaoe_sumo_traffic_simulation.jpg"
     ],
-    tags: ["INAOE", "Sistemas Distribuidos", "Red SyRPG", "Cómputo Paralelo", "Simulación SUMO", "Transporte Inteligente", "Blockchain", "IA Distribuida", "Tonantzintla"]
+    tags: ["INAOE", "Sistemas Distribuidos", "Red SyRPG", "SECIHTI", "Cómputo Paralelo", "Simulación SUMO", "Transporte Inteligente", "Blockchain", "IA Distribuida", "Tonantzintla"]
   },
   {
     id: "cert-electrohack-electromovilidad",
@@ -1350,6 +1393,8 @@ class PortfolioView {
         : (hasMultiple ? (window.i18n ? window.i18n.t("card_media_photos", allMedia.length) : `${allMedia.length} Fotos`) : (window.i18n ? window.i18n.t("card_media_evidence") : 'Evidencia'));
 
       const detailsBtnText = window.i18n ? window.i18n.t("card_view_details") : 'Ver Ficha Técnica';
+      const liveSiteBtnText = window.i18n ? window.i18n.t("card_live_site") : 'Ver Web ↗';
+      const hasExternalUrl = typeof project.externalUrl === "string" && /^https?:\/\//i.test(project.externalUrl);
       const evidenceCountText = hasMultiple
         ? (window.i18n ? window.i18n.t("card_evidences_count", allMedia.length) : `${allMedia.length} evidencias`)
         : (window.i18n ? window.i18n.t("card_file_count") : '1 archivo');
@@ -1405,9 +1450,16 @@ class PortfolioView {
             </div>
 
             <div class="card-actions">
-              <button class="btn-details" data-action="open-modal" data-id="${project.id}">
-                ${detailsBtnText} <span>→</span>
-              </button>
+              <div class="card-actions-left">
+                <button class="btn-details" data-action="open-modal" data-id="${project.id}">
+                  ${detailsBtnText} <span>→</span>
+                </button>
+                ${hasExternalUrl ? `
+                  <a href="${this.safeMediaUrl(project.externalUrl)}" target="_blank" rel="noopener noreferrer" class="card-ext-link" title="${this.escapeHtml(locProj.externalLabel || project.externalLabel || title)}">
+                    ${liveSiteBtnText}
+                  </a>
+                ` : ''}
+              </div>
               <div class="evidence-badge">
                 <span>●</span> ${evidenceCountText}
               </div>
@@ -1652,17 +1704,19 @@ class PortfolioView {
 
     // Puntos destacados
     const highlights = locProj.highlights || project.highlights || [];
+    const team = locProj.team || project.team;
+    const institution = locProj.institution || project.institution || 'BUAP';
     if (this.modalHighlights) {
       let highlightsHtml = highlights.map(h => `<li>${h}</li>`).join('');
-      if (project.team && project.team.length > 0) {
-        const teamLabel = window.i18n ? window.i18n.t("modal_team_label", project.institution || 'BUAP') : `Coautoría & Equipo de Proyecto (${project.institution || 'BUAP'}):`;
+      if (team && team.length > 0) {
+        const teamLabel = window.i18n ? window.i18n.t("modal_team_label", institution) : `Coautoría & Equipo de Proyecto (${institution}):`;
         highlightsHtml += `
           <li class="team-credit-item">
             <div style="font-weight: 700; color: var(--accent-cyan); font-family: var(--font-heading); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
               ${teamLabel}
             </div>
             <div style="font-size: 0.85rem; line-height: 1.6; color: #f1f5f9;">
-              ${project.team.map(member => `<span style="display: inline-block; background: rgba(255,255,255,0.06); padding: 2px 10px; border-radius: 12px; margin: 3px 4px 3px 0; border: 1px solid rgba(255,255,255,0.1);">${member}</span>`).join('')}
+              ${team.map(member => `<span style="display: inline-block; background: rgba(255,255,255,0.06); padding: 2px 10px; border-radius: 12px; margin: 3px 4px 3px 0; border: 1px solid rgba(255,255,255,0.1);">${member}</span>`).join('')}
             </div>
           </li>
         `;
@@ -1670,17 +1724,26 @@ class PortfolioView {
       this.modalHighlights.innerHTML = highlightsHtml;
     }
 
-    // Badges de tecnologías y botón de descarga condicional
+    // Badges de tecnologías y botones de descarga / enlace externo condicionales
     const tags = locProj.tags || project.tags || [];
+    const hasExternalUrl = typeof project.externalUrl === "string" && /^https?:\/\//i.test(project.externalUrl);
     if (this.modalTagsBox) {
       this.modalTagsBox.innerHTML = tags.map(t => `<span class="tech-tag" style="padding: 5px 12px; font-size: 0.8rem;">${t}</span>`).join('');
-      if (project.downloadUrl && !project.codeSnippet) {
+      if (hasExternalUrl || (project.downloadUrl && !project.codeSnippet)) {
+        const externalBtnLabel = locProj.externalLabel || project.externalLabel || (window.i18n ? window.i18n.t("modal_visit_project") : "Visitar Sitio del Proyecto");
         const downloadLabel = window.i18n ? window.i18n.t("modal_download") : "Descargar";
         this.modalTagsBox.innerHTML += `
-          <div style="width: 100%; margin-top: 1.25rem;">
-            <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
-              <span>${downloadLabel}: ${project.downloadName || project.downloadUrl}</span>
-            </a>
+          <div class="modal-extra-actions" style="width: 100%; margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            ${hasExternalUrl ? `
+              <a href="${this.safeMediaUrl(project.externalUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
+                <span>${this.escapeHtml(externalBtnLabel)} ↗</span>
+              </a>
+            ` : ''}
+            ${project.downloadUrl && !project.codeSnippet ? `
+              <a href="${encodeURI(project.downloadUrl)}" download="${project.downloadName || project.downloadUrl}" class="btn-primary" style="padding: 10px 22px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
+                <span>${downloadLabel}: ${project.downloadName || project.downloadUrl}</span>
+              </a>
+            ` : ''}
           </div>
         `;
       }
