@@ -989,19 +989,19 @@ const certificatesData = [
   },
   {
     id: "cert-bootcamp-eda-buap",
-    title: "Bootcamp EDA, call from industry: Reclutamiento y entrenamiento hacia la industria del diseño electrónico",
-    issuer: "BUAP • Facultad de Ciencias de la Electrónica",
-    issuerBadge: "BUAP FCE",
+    title: "Bootcamp EDA, call from industry: Formación hacia la industria del diseño electrónico",
+    issuer: "BUAP • Facultad de Ciencias de la Electrónica & DGEC",
+    issuerBadge: "BUAP · DGEC",
     category: "eda",
     categoryLabel: "Semiconductores & EDA",
-    date: "15 de Junio al 17 de Julio de 2026",
-    hours: "100 Horas Curriculares",
-    description: "Formación profesional intensiva de 100 horas acreditada ante la FCE-BUAP, enfocada en la formación de talento técnico para la industria de semiconductores, herramientas EDA y diseño de circuitos integrados.",
-    signatories: "Dr. Víctor Rodolfo González Díaz (Lab. de Diseño y Caracterización FCE-BUAP) & M.C. José Francisco Portillo Robledo (Director FCE-BUAP)",
+    date: "15 de Junio al 17 de Julio de 2026 (Emitida 25 de Septiembre de 2026)",
+    hours: "100 Horas · Registro DGEC-BUAP",
+    description: "Constancia oficial con registro institucional DGEC-BUAP (Registro P/C-345/26, Folio 11, Foja 874, Libro 01/26) por concluir satisfactoriamente el curso intensivo de 100 horas 'Bootcamp EDA, call from industry' en la Facultad de Ciencias de la Electrónica BUAP, enfocado en talento técnico para la industria de semiconductores, herramientas EDA y diseño de circuitos integrados.",
+    signatories: "Dr. Carlos Contreras Cruz (Director General de Educación Continua BUAP) · Reg. DGEC-BUAP-F.Cs.Electron.-P/C-345/26",
     fileUrl: "certificados/bootcamp-eda-buap-100h-2026.pdf",
     previewUrl: "certificados/thumbs/bootcamp-eda-buap-100h-2026.jpg",
     mediaType: "pdf",
-    tags: ["Bootcamp EDA", "Industria Semiconductores", "100 Horas", "FCE-BUAP", "Diseño Electrónico"]
+    tags: ["Bootcamp EDA", "DGEC-BUAP", "Industria Semiconductores", "100 Horas", "FCE-BUAP", "Diseño Electrónico"]
   },
   {
     id: "cert-inaoe-semiconductores",
